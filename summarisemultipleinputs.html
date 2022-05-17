@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>r4Casal2</title>
+  <title>Chapter 5 Comparing multiple MPD runs | r4Casal2</title>
   <meta name="description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="r4Casal2" />
+  <meta property="og:title" content="Chapter 5 Comparing multiple MPD runs | r4Casal2" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   <meta name="github-repo" content="https://github.com/NIWAFisheriesModelling/r4Casal2" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="r4Casal2" />
+  <meta name="twitter:title" content="Chapter 5 Comparing multiple MPD runs | r4Casal2" />
   
   <meta name="twitter:description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="welcolme-to-r4casal2.html"/>
+<link rel="prev" href="mpd-summaries.html"/>
+<link rel="next" href="mcmc.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -223,22 +223,74 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">r4Casal2</h1>
-<p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2022-05-17</em></p>
+<div id="summarisemultipleinputs" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Comparing multiple MPD runs<a href="summarisemultipleinputs.html#summarisemultipleinputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="read-in-models" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Read in models<a href="summarisemultipleinputs.html#read-in-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="summarisemultipleinputs.html#cb25-1" aria-hidden="true" tabindex="-1"></a>file_name_low_m <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;low_m.log&quot;</span>, <span class="at">package =</span> <span class="st">&quot;r4Casal2&quot;</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-2"><a href="summarisemultipleinputs.html#cb25-2" aria-hidden="true" tabindex="-1"></a>low_m_mpd <span class="ot">=</span> <span class="fu">extract.mpd</span>(<span class="at">file =</span> file_name_low_m)</span></code></pre></div>
+<pre><code>## WARNING: The output file was generated with a different version than the R libray being used to read the output.
+## This may cause compatibility issues. Please update the R package to be consistent with the version of Casal2 used to generate the output.
+## The output was generated with Casal2 v(c) 2
+## The Casal2 R package is compatible with Casal2 v22.05</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="summarisemultipleinputs.html#cb27-1" aria-hidden="true" tabindex="-1"></a>file_name_high_m <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;high_m.log&quot;</span>, <span class="at">package =</span> <span class="st">&quot;r4Casal2&quot;</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-2"><a href="summarisemultipleinputs.html#cb27-2" aria-hidden="true" tabindex="-1"></a>high_m_mpd <span class="ot">=</span> <span class="fu">extract.mpd</span>(<span class="at">file =</span> file_name_high_m)</span></code></pre></div>
+<pre><code>## WARNING: The output file was generated with a different version than the R libray being used to read the output.
+## This may cause compatibility issues. Please update the R package to be consistent with the version of Casal2 used to generate the output.
+## The output was generated with Casal2 v(c) 2
+## The Casal2 R package is compatible with Casal2 v22.05</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="summarisemultipleinputs.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## create a named list</span></span>
+<span id="cb29-2"><a href="summarisemultipleinputs.html#cb29-2" aria-hidden="true" tabindex="-1"></a>models <span class="ot">=</span> <span class="fu">list</span>(<span class="st">&quot;M = 0.22&quot;</span> <span class="ot">=</span> low_m_mpd, <span class="st">&quot;M = 0.44&quot;</span> <span class="ot">=</span> high_m_mpd)</span></code></pre></div>
 </div>
-<div id="about" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="compare-model-outputs" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Compare model outputs<a href="summarisemultipleinputs.html#compare-model-outputs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="selectivities" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> selectivities<a href="summarisemultipleinputs.html#selectivities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="summarisemultipleinputs.html#cb30-1" aria-hidden="true" tabindex="-1"></a>selectivity_df <span class="ot">=</span> <span class="fu">get_selectivities</span>(models)</span>
+<span id="cb30-2"><a href="summarisemultipleinputs.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin, <span class="at">y =</span> selectivity, <span class="at">col =</span> model_label, <span class="at">linetype =</span> model_label)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="summarisemultipleinputs.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="summarisemultipleinputs.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>label) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="summarisemultipleinputs.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Ogive&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Model&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;Model&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/compare_selectivities-1.png" width="576" /></p>
+</div>
+<div id="derived-quantities" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Derived quantities<a href="summarisemultipleinputs.html#derived-quantities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="summarisemultipleinputs.html#cb31-1" aria-hidden="true" tabindex="-1"></a>dq_df <span class="ot">=</span> <span class="fu">get_dqs</span>(models)</span>
+<span id="cb31-2"><a href="summarisemultipleinputs.html#cb31-2" aria-hidden="true" tabindex="-1"></a>dq_df<span class="sc">$</span>years <span class="ot">=</span> <span class="fu">as.numeric</span>(dq_df<span class="sc">$</span>years)</span>
+<span id="cb31-3"><a href="summarisemultipleinputs.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dq_df, <span class="fu">aes</span>(<span class="at">x =</span> years, <span class="at">y =</span> values, <span class="at">col =</span> model_label, <span class="at">linetype =</span> model_label)) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="summarisemultipleinputs.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="summarisemultipleinputs.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>dq_label) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="summarisemultipleinputs.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;SSB&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Model&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;Model&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/compare_dqs-1.png" width="576" /></p>
+</div>
+<div id="recruitment" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Recruitment<a href="summarisemultipleinputs.html#recruitment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="summarisemultipleinputs.html#cb32-1" aria-hidden="true" tabindex="-1"></a>recruit_df <span class="ot">=</span> <span class="fu">get_BH_recruitment</span>(models)</span>
+<span id="cb32-2"><a href="summarisemultipleinputs.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(recruit_df, <span class="fu">aes</span>(<span class="at">x =</span> ycs_years, <span class="at">y =</span> standardised_ycs, <span class="at">col =</span> model_label, <span class="at">linetype =</span> model_label)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="summarisemultipleinputs.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="summarisemultipleinputs.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;YCS year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;standardised ycs&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Model&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;Model&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/compare_recruit-1.png" width="576" /></p>
+</div>
+<div id="abundance-fits" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Abundance fits<a href="summarisemultipleinputs.html#abundance-fits" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="summarisemultipleinputs.html#cb33-1" aria-hidden="true" tabindex="-1"></a>abundance_obs_df <span class="ot">=</span> <span class="fu">get_abundance_observations</span>(models)</span>
+<span id="cb33-2"><a href="summarisemultipleinputs.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(abundance_obs_df, <span class="fu">aes</span>(<span class="at">x =</span> year)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="summarisemultipleinputs.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> observed), <span class="at">size =</span> <span class="fl">1.4</span>) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="summarisemultipleinputs.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> expected, <span class="at">col =</span> model_label)) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="summarisemultipleinputs.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Abundance&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Model&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;Model&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="summarisemultipleinputs.html#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>observation_label, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/compare_abundance-1.png" width="576" /></p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="welcolme-to-r4casal2.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mpd-summaries.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mcmc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -269,7 +321,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/NIWAFisheriesModelling/r4Casal2/edit/main/index.Rmd",
+"link": "https://github.com/NIWAFisheriesModelling/r4Casal2/edit/main/04-CompareMultipleMPDs.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>r4Casal2</title>
+  <title>Chapter 4 MPD summaries | r4Casal2</title>
   <meta name="description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="r4Casal2" />
+  <meta property="og:title" content="Chapter 4 MPD summaries | r4Casal2" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   <meta name="github-repo" content="https://github.com/NIWAFisheriesModelling/r4Casal2" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="r4Casal2" />
+  <meta name="twitter:title" content="Chapter 4 MPD summaries | r4Casal2" />
   
   <meta name="twitter:description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="welcolme-to-r4casal2.html"/>
+<link rel="prev" href="summariseinputs.html"/>
+<link rel="next" href="summarisemultipleinputs.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -223,22 +223,87 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">r4Casal2</h1>
-<p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2022-05-17</em></p>
+<div id="mpd-summaries" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> MPD summaries<a href="mpd-summaries.html#mpd-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="plotting-pressures" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Plotting pressures<a href="mpd-summaries.html#plotting-pressures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="mpd-summaries.html#cb10-1" aria-hidden="true" tabindex="-1"></a>file_name <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;estimate.out&quot;</span>, <span class="at">package =</span> <span class="st">&quot;r4Casal2&quot;</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="mpd-summaries.html#cb10-2" aria-hidden="true" tabindex="-1"></a>mpd <span class="ot">=</span> <span class="fu">extract.mpd</span>(<span class="at">file =</span> file_name)</span></code></pre></div>
+<pre><code>## WARNING: The output file was generated with a different version than the R libray being used to read the output.
+## This may cause compatibility issues. Please update the R package to be consistent with the version of Casal2 used to generate the output.
+## The output was generated with Casal2 v(c) 2
+## The Casal2 R package is compatible with Casal2 v22.05</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="mpd-summaries.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Report labels</span></span>
+<span id="cb12-2"><a href="mpd-summaries.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># names(mpd) </span></span>
+<span id="cb12-3"><a href="mpd-summaries.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fishing pressures</span></span>
+<span id="cb12-4"><a href="mpd-summaries.html#cb12-4" aria-hidden="true" tabindex="-1"></a>my_plot <span class="ot">=</span> <span class="fu">plot.pressure</span>(<span class="at">model =</span> mpd, <span class="at">report_label =</span> <span class="st">&quot;Instantaneous_Mortality&quot;</span>)</span>
+<span id="cb12-5"><a href="mpd-summaries.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># this will generate a generic ggplot</span></span>
+<span id="cb12-6"><a href="mpd-summaries.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_plot)</span></code></pre></div>
+<p><img src="_main_files/figure-html/pressures-1.png" width="576" /></p>
+<p>Flexibility using standard ggplot functions</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="mpd-summaries.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can add adjust it as you please, for example if you want 3 panels for each fishery</span></span>
+<span id="cb13-2"><a href="mpd-summaries.html#cb13-2" aria-hidden="true" tabindex="-1"></a>my_plot <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="mpd-summaries.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>fishery) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="mpd-summaries.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/pressures_alt-1.png" width="576" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="mpd-summaries.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust ylim and add a reference limit</span></span>
+<span id="cb14-2"><a href="mpd-summaries.html#cb14-2" aria-hidden="true" tabindex="-1"></a>my_plot <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.05</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.03</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/pressures_alt_again-1.png" width="576" /></p>
 </div>
-<div id="about" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="plotting-selectivities" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Plotting selectivities<a href="mpd-summaries.html#plotting-selectivities" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="mpd-summaries.html#cb15-1" aria-hidden="true" tabindex="-1"></a>selectivity_df <span class="ot">=</span> <span class="fu">get_selectivities</span>(<span class="at">model =</span> mpd)</span>
+<span id="cb15-2"><a href="mpd-summaries.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin, <span class="at">y =</span> selectivity, <span class="at">col =</span> label)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="mpd-summaries.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="mpd-summaries.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>label)</span></code></pre></div>
+<p><img src="_main_files/figure-html/selectivities_mpd-1.png" width="576" /></p>
+</div>
+<div id="multiple-runs-with--i-casal2-formulation" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Multiple runs with -i Casal2 formulation<a href="mpd-summaries.html#multiple-runs-with--i-casal2-formulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="mpd-summaries.html#cb16-1" aria-hidden="true" tabindex="-1"></a>file_name <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;multi_run.out&quot;</span>, <span class="at">package =</span> <span class="st">&quot;r4Casal2&quot;</span>, <span class="at">mustWork =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="mpd-summaries.html#cb16-2" aria-hidden="true" tabindex="-1"></a>mpd <span class="ot">=</span> <span class="fu">extract.mpd</span>(<span class="at">file =</span> file_name)</span></code></pre></div>
+<pre><code>## WARNING: The output file was generated with a different version than the R libray being used to read the output.
+## This may cause compatibility issues. Please update the R package to be consistent with the version of Casal2 used to generate the output.
+## The output was generated with Casal2 v(c) 2
+## The Casal2 R package is compatible with Casal2 v22.05
+## 
+## loading a Casal2 output from a multi parameter input format</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="mpd-summaries.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Report labels</span></span>
+<span id="cb18-2"><a href="mpd-summaries.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># names(mpd) </span></span>
+<span id="cb18-3"><a href="mpd-summaries.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot fishing pressures</span></span>
+<span id="cb18-4"><a href="mpd-summaries.html#cb18-4" aria-hidden="true" tabindex="-1"></a>my_plot <span class="ot">=</span> r4Casal2<span class="sc">::</span><span class="fu">plot.pressure</span>(<span class="at">model =</span> mpd, <span class="at">report_label =</span> <span class="st">&quot;Instantaneous_Mortality&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;multi iteration report found&quot;</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="mpd-summaries.html#cb20-1" aria-hidden="true" tabindex="-1"></a>my_plot <span class="ot">=</span> my_plot <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span>
+<span id="cb20-2"><a href="mpd-summaries.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this will generate a generic ggplot</span></span>
+<span id="cb20-3"><a href="mpd-summaries.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_plot)</span></code></pre></div>
+<p><img src="_main_files/figure-html/pressures_multi-1.png" width="576" /></p>
+</div>
+<div id="plotting-selectivities-from--i" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Plotting selectivities from -i<a href="mpd-summaries.html#plotting-selectivities-from--i" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="mpd-summaries.html#cb21-1" aria-hidden="true" tabindex="-1"></a>selectivity_df <span class="ot">=</span> <span class="fu">get_selectivities</span>(mpd)</span>
+<span id="cb21-2"><a href="mpd-summaries.html#cb21-2" aria-hidden="true" tabindex="-1"></a>selectivity_df<span class="sc">$</span>par_set <span class="ot">=</span> <span class="fu">factor</span>(selectivity_df<span class="sc">$</span>par_set, <span class="at">ordered =</span> T)</span>
+<span id="cb21-3"><a href="mpd-summaries.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin, <span class="at">y =</span> selectivity, <span class="at">col =</span> report_label, <span class="at">line_type =</span> par_set)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="mpd-summaries.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="mpd-summaries.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(par_set<span class="sc">~</span>report_label)</span></code></pre></div>
+<p><img src="_main_files/figure-html/selectivities_multi-1.png" width="576" /></p>
+</div>
+<div id="plotting-fits" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Plotting Fits<a href="mpd-summaries.html#plotting-fits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="mpd-summaries.html#cb22-1" aria-hidden="true" tabindex="-1"></a>my_plot <span class="ot">=</span> <span class="fu">plot.relative_index</span>(<span class="at">model =</span> mpd, <span class="at">report_labels =</span> <span class="fu">c</span>(<span class="st">&quot;autumnTANbiomass&quot;</span>, <span class="st">&quot;summerTANbiomass&quot;</span>), <span class="at">plot.it =</span> T, <span class="at">plot_type =</span> <span class="st">&quot;classic&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;multi iteration report found&quot;
+## [1] &quot;multi iteration report found&quot;</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="mpd-summaries.html#cb24-1" aria-hidden="true" tabindex="-1"></a>my_plot</span></code></pre></div>
+<p><img src="_main_files/figure-html/plot_relative_index-1.png" width="768" /></p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="welcolme-to-r4casal2.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summariseinputs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summarisemultipleinputs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -269,7 +334,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/NIWAFisheriesModelling/r4Casal2/edit/main/index.Rmd",
+"link": "https://github.com/NIWAFisheriesModelling/r4Casal2/edit/main/03-MPD.Rmd",
 "text": "Edit"
 },
 "history": {

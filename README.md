@@ -19,10 +19,7 @@ install.packages(c("reshape2", "dplyr", "ggplot2", "mvtnorm", "DHARMa","MASS", "
 ```
 
 Once you have successfully installed the above packages, run the following code below. ***Tips*** you will get prompted to update packages, I usually enter the value `2` update only CRAN packages or `3` which wont update any packages.
-```r
-devtools::install_github("NIWAFisheriesModelling/Casal2_contrib/r4Casal2", build_vignettes  = TRUE)
-```
-We have found for users with old R versions and R package versions, that the install may fail due to the `vignettes`. If this happens try installing without the vignettes
+
 ```r
 devtools::install_github("NIWAFisheriesModelling/r4Casal2")
 ```

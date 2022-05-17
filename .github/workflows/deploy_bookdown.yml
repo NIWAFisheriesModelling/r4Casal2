@@ -17,6 +17,7 @@ jobs:
         with:
           extra-packages: |
             any::rmarkdown
+            any::devtools
             any::knitr
             any::bookdown
             any::bayesplot

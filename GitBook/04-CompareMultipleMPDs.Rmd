@@ -1,4 +1,4 @@
-# Comparing multiple MPD runs {#summariseinputs}
+# Comparing multiple MPD runs {#summarisemultipleinputs}
 
 
 

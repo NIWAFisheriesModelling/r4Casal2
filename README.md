@@ -1,4 +1,4 @@
-![Pass Test](https://github.com/NIWAFisheriesModelling/r4Casal2/actions/workflows/CheckDocumentation.yml/badge.svg)
+![DeployBook](https://github.com/NIWAFisheriesModelling/r4Casal2/actions/workflows/deploy_bookdown.yml/badge.svg)
 
 # r4Casal2
 An R package that extends the functionality of the base [Casal2](https://github.com/NIWAFisheriesModelling/CASAL2) R package. The purpose of `r4Casal2` is to aid in visualising, intepreting and diagnosing Casal2 models. It depends on the `Casal2` base R package which is not on CRAN you can download the latest package from [here](https://github.com/NIWAFisheriesModelling/CASAL2/tree/master/R-libraries) but it is advised to use the version that is bundled with your Casal2 binary. The Casal2 base package is used to read and write Casal2 output and configuration files, where as `r4Casal2` is more visualising and summarising. We seperated these packages in the hope users will feel more comfortable contribute to the package source code with out messing about with the Casal2 source code.

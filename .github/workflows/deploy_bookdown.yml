@@ -24,6 +24,7 @@ jobs:
             any::purrr
             any::DHARMa
             any::mvtnorm
+          dependencies: '"hard"'
       - name: Install Casal2 and r4Casal2
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens

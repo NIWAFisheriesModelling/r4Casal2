@@ -1,7 +1,7 @@
 # MCMC
 
 ## Read in models
-```{r run_models, echo = F}
+```{r run_models, results = 'hide', message=FALSE, warning=FALSE}
 ## extra packages
 library(purrr)
 library(bayesplot)

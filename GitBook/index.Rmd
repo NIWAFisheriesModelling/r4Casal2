@@ -13,7 +13,30 @@ link-citations: yes
 github-repo: https://github.com/NIWAFisheriesModelling/r4Casal2
 ---
 
-# About
+# Welcolme to **r4Casal2**
+
+This book demonstrates functionality of the `r4Casal2` R package. This is an R package that works with the `Casal2` base R-library [found here](https://github.com/NIWAFisheriesModelling/CASAL2/tree/master/R-libraries), although it is advised to use the R-library that comes with you Casal2 executable and manual. The `Casal2` base R-library is responsible for reading in output and interacting with config files. The `r4Casal2` R package has been built for summarising and visualising objects read in from the base R-library.
+
+All functions in this package should be documented and available with the `?` query. For example `?get_fisheries`
+
+
+```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}
+library(r4Casal2)
+library(Casal2)
+library(knitr)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+```
+
+
+
+The core functionality of `r4Casal2` are its accessor functions. These are functions that will return a specific object from a range of Casal2 objects in long format that are `ggplot`, `dplyr` friendly. Most accessors start with `get_` and should be self explanatory. There are some plotting functions, but I have found that I often want to custom ggplots and so mainly have custom plots. The accessors are coded to deal with three types of outpus. These are;
+
+* `extract.mpd()` where Casal2 has been run with default report style. These objects are of class `casal2MPD` which are set by the Casal2 base function
+* `extract.mpd()` where Casal2 has been run with tabular reports `casal2 --tabular` or `casal2 -t`. These objects are of class `casal2TAB` which are set by the Casal2 base function
+* `list` this is a list of `casal2MPD` which is a useful format for comparing MPD runs see Section \@ref(summarisemultipleinputs)
+
 
 
 ```{r include=FALSE}

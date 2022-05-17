@@ -1,17 +1,70 @@
 # MPD summaries
-## Plotting pressures
-```{r pressures, fig.width=6, fig.height=4}
+
+
+
+## Single Model Output
+```{r read_single_model, fig.width=6, fig.height=4}
 file_name = system.file("extdata", "estimate.out", package = "r4Casal2", mustWork = TRUE)
+mpd = extract.mpd(file = file_name)
+```
+
+### Model Convergence 
+There are a range of appproaches for checking your model has converged. The approaches we will be working through include checking the hessian is positive definite, checking parameters are not running to bounds and reestimate with random starting locations.
+
+When estimating models in Casal2, it is recommended to have the following report included 
+```{bash covar_report, eval = F}
+@report covariance_matrix
+type covariance_matrix
+## or the Hessian
+@report hessian_matrix
+type hessian_matrix
+```
+
+
+When estimation is complete and you have read in the Casal2 output using `Casal2::extract.mpd()`. 
+
+```{r check covariance, fig.width=6, fig.height=4}
+# file name
+mpd_file_name = system.file("extdata", "PosteriorPredictiveChecks","estimate.log", 
+                            package = "r4Casal2", mustWork = TRUE)
+# read in output
+mpd = extract.mpd(file = mpd_file_name)
+# is covariance symetric
+isSymmetric(mpd$covar$covariance_matrix)
+# is hessian invertable
+is_matrix_invertable(mpd$hess$hessian_matrix)
+```
+
+Once these are satisfied you will have more confidence in your standard errors, in addition to being able to run MCMC run mode.
+
+Another useful convergence diagnostic is re-estimating Casal2 at difference starting locations. The function used for this is `?generate.starting.pars`. This will read a Casal2 config file that contains all the `@estimate` definitions are generate a bunch of random starting values in the format of useable for `-i` in Casal2.
+
+
+
+
+### Model quantities 
+
+#### Fishing Pressures {-}
+Below illustrates code to plot fishing pressure, but you can also easily adapt the code to plot catches. One thing to note, is Casal2 will report both `exploitation_rate` and `fishing_pressures`. For models that only have a single fishery per time-step or area these will be the same. If there are multiple fisheries interacting with the partition then they will differ. Fishing pressure is the maximum exploitation applied to the partition for that time-step and area. See the user manual for more detail on the difference. `exploitation_rate` reported is just
+\[
+\frac{catch}{vunerable}
+\]
+
+Some R-code used to summarise fishing pressures.
+
+```{r pressures, fig.width=6, fig.height=4}
+file_name = system.file("extdata", "estimate.log", package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
 # Report labels
 # names(mpd) 
 # plot fishing pressures
-my_plot = plot.pressure(model = mpd, report_label = "Instantaneous_Mortality")
-# this will generate a generic ggplot
-print(my_plot)
-
+fishery_info = get_fisheries(mpd)
+head(fishery_info)
+# Note this will print both fishing pressure and exploitation
+my_plot = ggplot(fishery_info, aes(x = year, y = exploitation, col = fishery, linetype = fishery)) +
+                   geom_line(size =2)
+my_plot
 ```
-
 Flexibility using standard ggplot functions
 
 ```{r pressures_alt, fig.width=6, fig.height=4}
@@ -23,10 +76,10 @@ my_plot +
 
 ```{r pressures_alt_again, fig.width=6, fig.height=4}
 # Adjust ylim and add a reference limit
-my_plot + ylim(0,0.05) + geom_hline(yintercept = 0.03, linetype = "dashed")
+my_plot + ylim(0,0.09) + geom_hline(yintercept = 0.05, linetype = "dashed")
 ```
 
-## Plotting selectivities
+#### Plotting selectivities
 ```{r selectivities_mpd, fig.width=6, fig.height=4}
 selectivity_df = get_selectivities(model = mpd)
 ggplot(selectivity_df, aes(x = bin, y = selectivity, col = label)) +
@@ -35,7 +88,7 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = label)) +
 
 ```
 
-## Multiple runs with -i Casal2 formulation
+## Multiple Casal2 runs with -i or -s 
 ```{r pressures_multi, fig.width=6, fig.height=4}
 file_name = system.file("extdata", "multi_run.out", package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
@@ -48,7 +101,7 @@ my_plot = my_plot + theme(axis.text.x = element_text(angle = 90))
 print(my_plot)
 ```
 
-## Plotting selectivities from -i
+### Plotting selectivities {-}
 ```{r selectivities_multi, fig.width=6, fig.height=4}
 selectivity_df = get_selectivities(mpd)
 selectivity_df$par_set = factor(selectivity_df$par_set, ordered = T)
@@ -58,7 +111,7 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = report_label, line_ty
 
 ```
 
-## Plotting Fits
+### Plotting Fits {-}
 ```{r plot_relative_index, fig.width=8, fig.height=6}
 my_plot = plot.relative_index(model = mpd, report_labels = c("autumnTANbiomass", "summerTANbiomass"), plot.it = T, plot_type = "classic")
 my_plot

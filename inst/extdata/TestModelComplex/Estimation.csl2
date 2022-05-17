@@ -63,7 +63,9 @@ upper_bound 0.51
 
 @estimate CR_process_error
 parameter observation[CRsumbio].process_error
-type uniform
+type lognormal
+mu 0.1
+cv 0.2
 lower_bound 0.0
 upper_bound 1
 

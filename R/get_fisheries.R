@@ -39,7 +39,7 @@
         next;
       ## only a single trajectory
       f_ndx = grepl(pattern = "fishing_pressure\\[", names(this_report))
-      f_in_isolation_ndx = grepl(pattern = "fishing_pressure_in_isolation", names(this_report))
+      exploitation_ndx = grepl(pattern = "exploitation_rate", names(this_report))
       catch_ndx = grepl(pattern = "catch", substring(names(this_report), first = 1, last = 5))
       actual_catch_ndx = grepl(pattern = "actual_catch", names(this_report))
 
@@ -50,8 +50,8 @@
       full_df = NULL
       for (f in 1:length(fisheries)) {
         temp_df = data.frame(year =this_report$year,
-                             exploitation = this_report[[which(f_ndx)[f]]],
-                             exploitation_in_isolation = this_report[[which(f_in_isolation_ndx)[f]]],
+                             fishing_pressure = this_report[[which(f_ndx)[f]]],
+                             exploitation = this_report[[which(exploitation_ndx)[f]]],
                              catch = this_report[[which(catch_ndx)[f]]],
                              actual_catch = this_report[[which(actual_catch_ndx)[f]]],
                              fishery = fisheries[f],
@@ -71,7 +71,7 @@
       for(dash_i in 1:n_runs) {
         ## only a single trajectory
         f_ndx = grepl(pattern = "fishing_pressure\\[", names(this_report))
-        f_in_isolation_ndx = grepl(pattern = "fishing_pressure_in_isolation", names(this_report))
+        exploitation_ndx = grepl(pattern = "exploitation_rate", names(this_report))
         catch_ndx = grepl(pattern = "catch", substring(names(this_report), first = 1, last = 5))
         actual_catch_ndx = grepl(pattern = "actual_catch", names(this_report))
         start_index = as.numeric(regexpr(pattern = "\\[", text = names(this_report[[dash_i]])[f_ndx])) + 1
@@ -81,8 +81,8 @@
         full_df = NULL
         for (f in 1:length(fisheries)) {
           temp_df = data.frame(year =years,
-                               exploitation = this_report[[dash_i]][[which(f_ndx)[f]]],
-                               exploitation_in_isolation = this_report[[dash_i]][[which(f_in_isolation_ndx)[f]]],
+                               fishing_pressure = this_report[[dash_i]][[which(f_ndx)[f]]],
+                               exploitation = this_report[[dash_i]][[which(exploitation_ndx)[f]]],
                                catch = this_report[[dash_i]][[which(catch_ndx)[f]]],
                                actual_catch = this_report[[dash_i]][[which(actual_catch_ndx)[f]]],
                                fishery = fisheries[f],

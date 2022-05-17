@@ -26,6 +26,9 @@
   complete_df = NULL
   reports_labels = reformat_default_labels(names(model))
   for(i in 1:length(model)) {
+    ## skip the header
+    if (reports_labels[i] == "header")
+      next;
     this_report = model[[i]]
     if(any(names(this_report) == "type")) {
       if(this_report$type != "selectivity") {

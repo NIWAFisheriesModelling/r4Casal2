@@ -24,6 +24,8 @@
   reports_labels = reformat_default_labels(names(model))
   complete_df = NULL
   for(i in 1:length(model)) {
+    if (reports_labels[i] == "header")
+      next;
     this_report = model[[i]]
     if(this_report$type != "project") {
       next;

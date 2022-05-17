@@ -15,9 +15,9 @@ github-repo: https://github.com/NIWAFisheriesModelling/r4Casal2
 
 # Welcolme to **r4Casal2**
 
-This book demonstrates functionality of the `r4Casal2` R package. This is an R package that works with the `Casal2` base R-library [found here](https://github.com/NIWAFisheriesModelling/CASAL2/tree/master/R-libraries), although it is advised to use the R-library that comes with you Casal2 executable and manual. The `Casal2` base R-library is responsible for reading in output and interacting with config files. The `r4Casal2` R package has been built for summarising and visualising objects read in from the base R-library.
+This book demonstrates functionality of the `r4Casal2` R package. This is an R package that works with the `Casal2` base R-library [found here](https://github.com/NIWAFisheriesModelling/CASAL2/tree/master/R-libraries), although it is advised to use the R-library that is included with the Casal2 binary and usermanual you acquired. The `Casal2` base R-library is responsible for reading in output and interacting with Casal2 configuration files. The `r4Casal2` R package has been built for summarising and visualising objects read in from the base `Casal2` R-library.
 
-All functions in this package should be documented and available with the `?` query. For example `?get_fisheries`
+All functions in this package should be documented using the `roxygen` format input parameters available with the `?` query. For example `?get_fisheries`. To get a list of functions and general info on the package you can use `library(help="r4Casal2")`
 
 
 ```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}

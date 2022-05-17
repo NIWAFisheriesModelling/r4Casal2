@@ -1,0 +1,51 @@
+# A list of key functions in the `r4Casal2` package {#functionlist}
+
+
+
+## Accessor functions
+
+* `get_derived_quanitites()` or for lazy people (like my self) `get_dqs()`. These will return all the derived quantities for a model output.
+
+* `get_selectivities` will return a data frame with all the selectivity reports for a model output.
+
+* `get_selectivities_by_year` will return a data frame with all the reports of type `selectivity_by_year` from a model output.
+
+
+
+* `get_catchabilities` will return a data frame with all the catchability reports for a model output.
+
+* `get_fisheries` will return a data frame with information from an `instantaneous_mortality` process for a model output.
+
+* `get_BH_recruitment` will return a data frame with information from a `recruitment_beverton_holt` process for a model output.
+
+* `get_abundance_observations` will return a data frame with information from an `abundance` or `biomass` observation for a model output.
+
+* `get_composition_observations` will return a data frame with information from an `proportion_at_length`, `proportion_at_age`, `process_removals_by_age` and `process_removals_by_length` observation for a model output.
+
+* `get_tag_recapture_observations` will return a data frame with information from an `tag_recapture_by_length_for_growth`, `tag_recapture_by_length` and `tag_recapture_by_age` observation for a model output.
+
+* `get_projections` will return a data frame of all `projection` reports from a model output.
+
+
+* `get_partition` will return a data frame with partition data from `partition` report.
+
+
+* `get_inital_partition` will return a data frame with initial partition `initialisation_partition` report.
+
+
+* `get_simulated_age_resids` Will reformat simulated data read in by the `read.simulated.data` function.
+
+
+## Other useful functions
+
+* `aggregate_objective_report` This trys and reformats the an objective function report to be "similar" to CASALs output.
+
+* `create_simulation_reports` This will create a range of `@report.type=simulated_observation` Casal2 reports that can help set up simulations. See Section \@ref(PPC) on why you want to do this.
+
+* `summarise_config` Will summaris input files see Section \@ref(summariseinputs)
+
+
+
+
+
+

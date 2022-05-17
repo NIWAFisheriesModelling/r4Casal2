@@ -1,4 +1,4 @@
-# Posterior Predictive Checks
+# Posterior Predictive Checks {#PPC}
 
 ## Introduction
 This vignette demonstrates how to use Casal2s simulation mode with `r4Casal2` R functions to generate posterior predictive checks for goodness of fit measures. In terms of assessment workflow, this falls in the Diagnostic component.

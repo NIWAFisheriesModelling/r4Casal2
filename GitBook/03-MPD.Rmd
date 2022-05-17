@@ -1,0 +1,66 @@
+# MPD summaries
+## Plotting pressures
+```{r pressures, fig.width=6, fig.height=4}
+file_name = system.file("extdata", "estimate.out", package = "r4Casal2", mustWork = TRUE)
+mpd = extract.mpd(file = file_name)
+# Report labels
+# names(mpd) 
+# plot fishing pressures
+my_plot = plot.pressure(model = mpd, report_label = "Instantaneous_Mortality")
+# this will generate a generic ggplot
+print(my_plot)
+
+```
+
+Flexibility using standard ggplot functions
+
+```{r pressures_alt, fig.width=6, fig.height=4}
+# you can add adjust it as you please, for example if you want 3 panels for each fishery
+my_plot + 
+  facet_wrap(~fishery) + 
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+```{r pressures_alt_again, fig.width=6, fig.height=4}
+# Adjust ylim and add a reference limit
+my_plot + ylim(0,0.05) + geom_hline(yintercept = 0.03, linetype = "dashed")
+```
+
+## Plotting selectivities
+```{r selectivities_mpd, fig.width=6, fig.height=4}
+selectivity_df = get_selectivities(model = mpd)
+ggplot(selectivity_df, aes(x = bin, y = selectivity, col = label)) +
+  geom_line(size = 1.5) +
+  facet_wrap(~label)
+
+```
+
+## Multiple runs with -i Casal2 formulation
+```{r pressures_multi, fig.width=6, fig.height=4}
+file_name = system.file("extdata", "multi_run.out", package = "r4Casal2", mustWork = TRUE)
+mpd = extract.mpd(file = file_name)
+# Report labels
+# names(mpd) 
+# plot fishing pressures
+my_plot = r4Casal2::plot.pressure(model = mpd, report_label = "Instantaneous_Mortality")
+my_plot = my_plot + theme(axis.text.x = element_text(angle = 90))
+# this will generate a generic ggplot
+print(my_plot)
+```
+
+## Plotting selectivities from -i
+```{r selectivities_multi, fig.width=6, fig.height=4}
+selectivity_df = get_selectivities(mpd)
+selectivity_df$par_set = factor(selectivity_df$par_set, ordered = T)
+ggplot(selectivity_df, aes(x = bin, y = selectivity, col = report_label, line_type = par_set)) +
+  geom_line(size = 1.5) +
+  facet_grid(par_set~report_label)
+
+```
+
+## Plotting Fits
+```{r plot_relative_index, fig.width=8, fig.height=6}
+my_plot = plot.relative_index(model = mpd, report_labels = c("autumnTANbiomass", "summerTANbiomass"), plot.it = T, plot_type = "classic")
+my_plot
+
+```

@@ -1,17 +1,16 @@
-# Hello bookdown 
+# Welcolme to **r4Casal2**
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+This book demonstrates functionality of the `r4Casal2` R package. All functions in this package should be documented and available with the `?` query. For example `?get_fisheries`
 
-## A section
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
-
-### An unnumbered section {-}
-
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
-
-```{r install_packages}
+```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}
 library(r4Casal2)
 library(Casal2)
-
+library(knitr)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
 ```
+
+
+

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | r4Casal2</title>
+  <title>Chapter 2 A list of key functions in the r4Casal2 package | r4Casal2</title>
   <meta name="description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | r4Casal2" />
+  <meta property="og:title" content="Chapter 2 A list of key functions in the r4Casal2 package | r4Casal2" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   <meta name="github-repo" content="https://github.com/NIWAFisheriesModelling/r4Casal2" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | r4Casal2" />
+  <meta name="twitter:title" content="Chapter 2 A list of key functions in the r4Casal2 package | r4Casal2" />
   
   <meta name="twitter:description" content="This book demonstrates how to use r4Casal2 to make your Casal2 experience better." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="PPC.html"/>
-
+<link rel="prev" href="index.html"/>
+<link rel="next" href="summariseinputs.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -232,19 +232,34 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered hasAnchor">
-<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="functionlist" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> A list of key functions in the <code>r4Casal2</code> package<a href="functionlist.html#functionlist" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="accessor-functions" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Accessor functions<a href="functionlist.html#accessor-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><code>get_derived_quanitites()</code> or for lazy people (like my self) <code>get_dqs()</code>. These will return all the derived quantities for a model output.</p></li>
+<li><p><code>get_selectivities</code> will return a data frame with all the selectivity reports for a model output.</p></li>
+<li><p><code>get_selectivities_by_year</code> will return a data frame with all the reports of type <code>selectivity_by_year</code> from a model output.</p></li>
+<li><p><code>get_catchabilities</code> will return a data frame with all the catchability reports for a model output.</p></li>
+<li><p><code>get_fisheries</code> will return a data frame with information from an <code>instantaneous_mortality</code> process for a model output.</p></li>
+<li><p><code>get_BH_recruitment</code> will return a data frame with information from a <code>recruitment_beverton_holt</code> process for a model output.</p></li>
+<li><p><code>get_abundance_observations</code> will return a data frame with information from an <code>abundance</code> or <code>biomass</code> observation for a model output.</p></li>
+<li><p><code>get_composition_observations</code> will return a data frame with information from an <code>proportion_at_length</code>, <code>proportion_at_age</code>, <code>process_removals_by_age</code> and <code>process_removals_by_length</code> observation for a model output.</p></li>
+<li><p><code>get_tag_recapture_observations</code> will return a data frame with information from an <code>tag_recapture_by_length_for_growth</code>, <code>tag_recapture_by_length</code> and <code>tag_recapture_by_age</code> observation for a model output.</p></li>
+<li><p><code>get_projections</code> will return a data frame of all <code>projection</code> reports from a model output.</p></li>
+<li><p><code>get_partition</code> will return a data frame with partition data from <code>partition</code> report.</p></li>
+<li><p><code>get_inital_partition</code> will return a data frame with initial partition <code>initialisation_partition</code> report.</p></li>
+<li><p><code>get_simulated_age_resids</code> Will reformat simulated data read in by the <code>read.simulated.data</code> function.</p></li>
+</ul>
+</div>
+<div id="other-useful-functions" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Other useful functions<a href="functionlist.html#other-useful-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><code>aggregate_objective_report</code> This trys and reformats the an objective function report to be “similar” to CASALs output.</p></li>
+<li><p><code>create_simulation_reports</code> This will create a range of <code>@report.type=simulated_observation</code> Casal2 reports that can help set up simulations. See Section <a href="PPC.html#PPC">7</a> on why you want to do this.</p></li>
+<li><p><code>summarise_config</code> Will summaris input files see Section <a href="summariseinputs.html#summariseinputs">3</a></p></li>
+</ul>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Dunn, Peter K, and Gordon K Smyth. 1996. <span>“Randomized Quantile Residuals.”</span> <em>Journal of Computational and Graphical Statistics</em> 5 (3): 236–44.
-</div>
-<div class="csl-entry">
-Francis, RIC Chris. 2011. <span>“Data Weighting in Statistical Fisheries Stock Assessment Models.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 68 (6): 1124–38.
-</div>
-<div class="csl-entry">
-Warton, David I, Loı̈c Thibaut, and Yi Alice Wang. 2017. <span>“The PIT-Trap—a <span>‘Model-Free’</span> Bootstrap Procedure for Inference about Regression Models with Discrete, Multivariate Responses.”</span> <em>PloS One</em> 12 (7): e0181790.
-</div>
 </div>
 </div>
             </section>
@@ -252,8 +267,8 @@ Warton, David I, Loı̈c Thibaut, and Yi Alice Wang. 2017. <span>“The PIT-Trap
           </div>
         </div>
       </div>
-<a href="PPC.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summariseinputs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -284,7 +299,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/NIWAFisheriesModelling/r4Casal2/edit/main/07-references.Rmd",
+"link": "https://github.com/NIWAFisheriesModelling/r4Casal2/edit/main/01-ListOfKeyFunctionsWithDescription.Rmd",
 "text": "Edit"
 },
 "history": {

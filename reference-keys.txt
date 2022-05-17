@@ -1,6 +1,9 @@
 tab:categories
 tab:estimates
 welcolme-to-r4casal2
+functionlist
+accessor-functions
+other-useful-functions
 summariseinputs
 example-files
 mpd-summaries
@@ -22,10 +25,10 @@ compare-model-outputs-1
 better-ssb-plot-with-transparient-ribbons
 selectivities-1
 derived-quantities-1
-posterior-predictive-checks
+PPC
 introduction
 estimation
 simulations
 summarising-simulated-data-in-r
-posterior-predictive-checks-1
+posterior-predictive-checks
 pit-residuals

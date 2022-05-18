@@ -22,6 +22,17 @@ is_matrix_invertable <- function(m) {
   any("matrix" %in% class(try(solve(m),silent=TRUE)))
 }
 
+#' is_constant
+#' is a vector constant
+is_constant <- function (x, tol = .Machine$double.eps) {
+  abs(max(x) - min(x)) < tol
+}
+
+# should NA be returned by a convergence diagnostic?
+should_return_NA <- function(x) {
+  anyNA(x) || any(!is.finite(x)) || is_constant(x)
+}
+
 #' unpaste
 #' @export
 #' @return

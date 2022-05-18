@@ -3,7 +3,7 @@
 
 
 ## Read in models
-```{r read_multiple_models, fig.width=6, fig.height=4}
+```{r read_multiple_models, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
 file_name_low_m = system.file("extdata", "low_m.log", package = "r4Casal2", mustWork = TRUE)
 low_m_mpd = extract.mpd(file = file_name_low_m)
 file_name_high_m = system.file("extdata", "high_m.log", package = "r4Casal2", mustWork = TRUE)
@@ -15,7 +15,7 @@ models = list("M = 0.22" = low_m_mpd, "M = 0.44" = high_m_mpd)
 
 ## Compare model outputs
 ### selectivities
-```{r compare_selectivities, fig.width=6, fig.height=4}
+```{r compare_selectivities, fig.width=6, fig.height=6}
 selectivity_df = get_selectivities(models)
 ggplot(selectivity_df, aes(x = bin, y = selectivity, col = model_label, linetype = model_label)) +
   geom_line(size = 1.5) +
@@ -24,7 +24,7 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = model_label, linetype
 ```
 
 ### Derived quantities
-```{r compare_dqs, fig.width=6, fig.height=4}
+```{r compare_dqs, fig.width=6, fig.height=6}
 dq_df = get_dqs(models)
 dq_df$years = as.numeric(dq_df$years)
 ggplot(dq_df, aes(x = years, y = values, col = model_label, linetype = model_label)) +
@@ -35,7 +35,7 @@ ggplot(dq_df, aes(x = years, y = values, col = model_label, linetype = model_lab
 ```
 
 ### Recruitment
-```{r compare_recruit, fig.width=6, fig.height=4}
+```{r compare_recruit, fig.width=6, fig.height=6}
 recruit_df = get_BH_recruitment(models)
 ggplot(recruit_df, aes(x = ycs_years, y = standardised_ycs, col = model_label, linetype = model_label)) +
   geom_line(size = 1.3) +
@@ -45,7 +45,7 @@ ggplot(recruit_df, aes(x = ycs_years, y = standardised_ycs, col = model_label, l
 
 
 ### Abundance fits
-```{r compare_abundance, fig.width=6, fig.height=4}
+```{r compare_abundance, fig.width=6, fig.height=6}
 abundance_obs_df = get_abundance_observations(models)
 ggplot(abundance_obs_df, aes(x = year)) +
   geom_point(aes(y = observed), size = 1.4) +

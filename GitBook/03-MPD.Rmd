@@ -3,7 +3,7 @@
 
 
 ## Single Model Output
-```{r read_single_model, fig.width=6, fig.height=4}
+```{r read_single_model, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
 file_name = system.file("extdata", "estimate.out", package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
 ```
@@ -23,7 +23,7 @@ type hessian_matrix
 
 When estimation is complete and you have read in the Casal2 output using `Casal2::extract.mpd()`. 
 
-```{r check covariance, fig.width=6, fig.height=4}
+```{r check covariance, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
 # file name
 mpd_file_name = system.file("extdata", "PosteriorPredictiveChecks","estimate.log", 
                             package = "r4Casal2", mustWork = TRUE)
@@ -52,7 +52,7 @@ Below illustrates code to plot fishing pressure, but you can also easily adapt t
 
 Some R-code used to summarise fishing pressures.
 
-```{r pressures, fig.width=6, fig.height=4}
+```{r pressures, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
 file_name = system.file("extdata", "estimate.log", package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
 # Report labels
@@ -89,7 +89,7 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = label)) +
 ```
 
 ## Multiple Casal2 runs with -i or -s 
-```{r pressures_multi, fig.width=6, fig.height=4}
+```{r pressures_multi, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
 file_name = system.file("extdata", "multi_run.out", package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
 # Report labels
@@ -102,7 +102,7 @@ print(my_plot)
 ```
 
 ### Plotting selectivities {-}
-```{r selectivities_multi, fig.width=6, fig.height=4}
+```{r selectivities_multi, fig.width=8, fig.height=8}
 selectivity_df = get_selectivities(mpd)
 selectivity_df$par_set = factor(selectivity_df$par_set, ordered = T)
 ggplot(selectivity_df, aes(x = bin, y = selectivity, col = report_label, line_type = par_set)) +

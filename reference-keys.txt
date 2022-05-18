@@ -21,8 +21,8 @@ recruitment
 abundance-fits
 mcmc
 read-in-models-1
-compare-model-outputs-1
-better-ssb-plot-with-transparient-ribbons
+diagnostics
+plotting-quantities
 selectivities-1
 derived-quantities-1
 PPC

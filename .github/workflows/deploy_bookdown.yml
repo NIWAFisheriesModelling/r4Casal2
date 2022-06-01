@@ -33,7 +33,7 @@ jobs:
       - name: Build r4Casal2
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e 'devtools::build(path = getwd())'
+        run: Rscript -e "devtools::install_github('NIWAFisheriesModelling/r4Casal2', build_vignettes  = F,dependencies = F)"
 
       - name: artifact r4Casal2
         uses: actions/upload-artifact@v1

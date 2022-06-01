@@ -9,6 +9,7 @@ example-files
 mpd-summaries
 single-model-output
 model-convergence
+data-weighting
 model-quantities
 plotting-selectivities
 multiple-casal2-runs-with--i-or--s

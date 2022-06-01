@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-05-18" />
+<meta name="date" content="2022-06-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,92 +300,50 @@ div.csl-indent {
 <span id="cb32-10"><a href="mcmc.html#cb32-10" aria-hidden="true" tabindex="-1"></a>cas2_tab <span class="ot">=</span> <span class="fu">extract.tabular</span>(<span class="at">file =</span> cas2_file_name, <span class="at">quiet =</span> T)</span>
 <span id="cb32-11"><a href="mcmc.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="do">## cut off burn-in the first 50 samples</span></span>
 <span id="cb32-12"><a href="mcmc.html#cb32-12" aria-hidden="true" tabindex="-1"></a>cas2_tab <span class="ot">=</span> <span class="fu">burn.in.tabular</span>(cas2_tab, <span class="at">Row =</span> <span class="dv">50</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;
-## [1] &quot;rows remaining after burn-in = 200&quot;</code></pre>
 <div id="selectivities-1" class="section level3 hasAnchor" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> selectivities<a href="mcmc.html#selectivities-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="mcmc.html#cb34-1" aria-hidden="true" tabindex="-1"></a>selectivity_df <span class="ot">=</span> <span class="fu">get_selectivities</span>(cas2_tab)</span>
-<span id="cb34-2"><a href="mcmc.html#cb34-2" aria-hidden="true" tabindex="-1"></a>quantile_selectivity_df <span class="ot">=</span> selectivity_df <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a href="mcmc.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bin, selectivity_label) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-4"><a href="mcmc.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="fu">vars</span>(selectivity), p_funs)</span>
-<span id="cb34-5"><a href="mcmc.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="mcmc.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(quantile_selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin)) <span class="sc">+</span></span>
-<span id="cb34-7"><a href="mcmc.html#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymax  =</span> low, <span class="at">ymin =</span> upp, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">col =</span> selectivity_label, <span class="at">fill =</span> selectivity_label), <span class="at">lwd=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb34-8"><a href="mcmc.html#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mid, <span class="at">col =</span> selectivity_label, <span class="at">group =</span> selectivity_label), <span class="at">size =</span><span class="dv">2</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb34-9"><a href="mcmc.html#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>selectivity_label) <span class="sc">+</span></span>
-<span id="cb34-10"><a href="mcmc.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Ogive&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Model&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;Model&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="mcmc.html#cb33-1" aria-hidden="true" tabindex="-1"></a>selectivity_df <span class="ot">=</span> <span class="fu">get_selectivities</span>(cas2_tab)</span>
+<span id="cb33-2"><a href="mcmc.html#cb33-2" aria-hidden="true" tabindex="-1"></a>quantile_selectivity_df <span class="ot">=</span> selectivity_df <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="mcmc.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bin, selectivity_label) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="mcmc.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="fu">vars</span>(selectivity), p_funs)</span>
+<span id="cb33-5"><a href="mcmc.html#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="mcmc.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(quantile_selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin)) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="mcmc.html#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymax  =</span> low, <span class="at">ymin =</span> upp, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">col =</span> selectivity_label, <span class="at">fill =</span> selectivity_label), <span class="at">lwd=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="mcmc.html#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mid, <span class="at">col =</span> selectivity_label, <span class="at">group =</span> selectivity_label), <span class="at">size =</span><span class="dv">2</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="mcmc.html#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>selectivity_label) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="mcmc.html#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Ogive&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Model&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;Model&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/selectivities-1.png" width="576" /></p>
 </div>
 <div id="derived-quantities-1" class="section level3 hasAnchor" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Derived quantities<a href="mcmc.html#derived-quantities-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="mcmc.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Ssbs</span></span>
-<span id="cb35-2"><a href="mcmc.html#cb35-2" aria-hidden="true" tabindex="-1"></a>ssbs <span class="ot">=</span> <span class="fu">get_derived_quanitites</span>(<span class="at">model =</span> cas2_tab)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="mcmc.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Ssbs</span></span>
+<span id="cb34-2"><a href="mcmc.html#cb34-2" aria-hidden="true" tabindex="-1"></a>ssbs <span class="ot">=</span> <span class="fu">get_derived_quanitites</span>(<span class="at">model =</span> cas2_tab)</span></code></pre></div>
 <pre><code>## getting values for  SSB_E 
 ## getting values for  SSB_W</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="mcmc.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ssbs_mpd = get_derived_quanitites(model = mpd)</span></span>
-<span id="cb37-2"><a href="mcmc.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#head(ssbs)</span></span>
-<span id="cb37-3"><a href="mcmc.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ssbs_mpd$years = as.numeric(ssbs_mpd$years)</span></span>
-<span id="cb37-4"><a href="mcmc.html#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="mcmc.html#cb37-5" aria-hidden="true" tabindex="-1"></a>ssbs<span class="sc">$</span>years[ssbs<span class="sc">$</span>years <span class="sc">==</span> <span class="st">&quot;initialisation_phase_1&quot;</span>] <span class="ot">=</span> <span class="dv">1971</span></span>
-<span id="cb37-6"><a href="mcmc.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="mcmc.html#cb37-7" aria-hidden="true" tabindex="-1"></a>quantile_ssb_df <span class="ot">=</span> ssbs <span class="sc">%&gt;%</span> </span>
-<span id="cb37-8"><a href="mcmc.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(years, dq_label) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-9"><a href="mcmc.html#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="fu">vars</span>(values), p_funs)</span>
-<span id="cb37-10"><a href="mcmc.html#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-11"><a href="mcmc.html#cb37-11" aria-hidden="true" tabindex="-1"></a>quantile_ssb_df<span class="sc">$</span>years <span class="ot">=</span> <span class="fu">as.numeric</span>(quantile_ssb_df<span class="sc">$</span>years)</span>
-<span id="cb37-12"><a href="mcmc.html#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb37-13"><a href="mcmc.html#cb37-13" aria-hidden="true" tabindex="-1"></a>quant_ssb_plot <span class="ot">=</span> <span class="fu">ggplot</span>(quantile_ssb_df, <span class="fu">aes</span>(<span class="at">x =</span> years)) <span class="sc">+</span> </span>
-<span id="cb37-14"><a href="mcmc.html#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymax  =</span> low, <span class="at">ymin =</span> upp, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">col =</span> dq_label, <span class="at">fill =</span> dq_label), <span class="at">lwd=</span><span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb37-15"><a href="mcmc.html#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb37-16"><a href="mcmc.html#cb37-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mid, <span class="at">col =</span> dq_label, <span class="at">group =</span> dq_label), <span class="at">size =</span><span class="dv">2</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb37-17"><a href="mcmc.html#cb37-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Years&quot;</span>) <span class="sc">+</span></span>
-<span id="cb37-18"><a href="mcmc.html#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;SSB&quot;</span>) <span class="sc">+</span></span>
-<span id="cb37-19"><a href="mcmc.html#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">2500000</span>) <span class="sc">+</span></span>
-<span id="cb37-20"><a href="mcmc.html#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">1970</span>, <span class="dv">2020</span>) <span class="sc">+</span> </span>
-<span id="cb37-21"><a href="mcmc.html#cb37-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_alpha</span>(<span class="at">guide =</span> <span class="st">&#39;none&#39;</span>) <span class="sc">+</span></span>
-<span id="cb37-22"><a href="mcmc.html#cb37-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(data = ssbs_mpd, aes(x = years, y = values), inherit.aes = F, col = &quot;black&quot;, size = 1.5) +</span></span>
-<span id="cb37-23"><a href="mcmc.html#cb37-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>dq_label)</span>
-<span id="cb37-24"><a href="mcmc.html#cb37-24" aria-hidden="true" tabindex="-1"></a>quant_ssb_plot</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="mcmc.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ssbs_mpd = get_derived_quanitites(model = mpd)</span></span>
+<span id="cb36-2"><a href="mcmc.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#head(ssbs)</span></span>
+<span id="cb36-3"><a href="mcmc.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ssbs_mpd$years = as.numeric(ssbs_mpd$years)</span></span>
+<span id="cb36-4"><a href="mcmc.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="mcmc.html#cb36-5" aria-hidden="true" tabindex="-1"></a>ssbs<span class="sc">$</span>years[ssbs<span class="sc">$</span>years <span class="sc">==</span> <span class="st">&quot;initialisation_phase_1&quot;</span>] <span class="ot">=</span> <span class="dv">1971</span></span>
+<span id="cb36-6"><a href="mcmc.html#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="mcmc.html#cb36-7" aria-hidden="true" tabindex="-1"></a>quantile_ssb_df <span class="ot">=</span> ssbs <span class="sc">%&gt;%</span> </span>
+<span id="cb36-8"><a href="mcmc.html#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(years, dq_label) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-9"><a href="mcmc.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="fu">vars</span>(values), p_funs)</span>
+<span id="cb36-10"><a href="mcmc.html#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="mcmc.html#cb36-11" aria-hidden="true" tabindex="-1"></a>quantile_ssb_df<span class="sc">$</span>years <span class="ot">=</span> <span class="fu">as.numeric</span>(quantile_ssb_df<span class="sc">$</span>years)</span>
+<span id="cb36-12"><a href="mcmc.html#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb36-13"><a href="mcmc.html#cb36-13" aria-hidden="true" tabindex="-1"></a>quant_ssb_plot <span class="ot">=</span> <span class="fu">ggplot</span>(quantile_ssb_df, <span class="fu">aes</span>(<span class="at">x =</span> years)) <span class="sc">+</span> </span>
+<span id="cb36-14"><a href="mcmc.html#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymax  =</span> low, <span class="at">ymin =</span> upp, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">col =</span> dq_label, <span class="at">fill =</span> dq_label), <span class="at">lwd=</span><span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb36-15"><a href="mcmc.html#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb36-16"><a href="mcmc.html#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mid, <span class="at">col =</span> dq_label, <span class="at">group =</span> dq_label), <span class="at">size =</span><span class="dv">2</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb36-17"><a href="mcmc.html#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Years&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-18"><a href="mcmc.html#cb36-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;SSB&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-19"><a href="mcmc.html#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">2500000</span>) <span class="sc">+</span></span>
+<span id="cb36-20"><a href="mcmc.html#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">1970</span>, <span class="dv">2020</span>) <span class="sc">+</span> </span>
+<span id="cb36-21"><a href="mcmc.html#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_alpha</span>(<span class="at">guide =</span> <span class="st">&#39;none&#39;</span>) <span class="sc">+</span></span>
+<span id="cb36-22"><a href="mcmc.html#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(data = ssbs_mpd, aes(x = years, y = values), inherit.aes = F, col = &quot;black&quot;, size = 1.5) +</span></span>
+<span id="cb36-23"><a href="mcmc.html#cb36-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>dq_label)</span>
+<span id="cb36-24"><a href="mcmc.html#cb36-24" aria-hidden="true" tabindex="-1"></a>quant_ssb_plot</span></code></pre></div>
 <p><img src="_main_files/figure-html/dqs-1.png" width="576" /></p>
 
 </div>

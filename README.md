@@ -24,9 +24,9 @@ Once you have successfully installed the above packages, run the following code 
 devtools::install_github("NIWAFisheriesModelling/r4Casal2")
 ```
 ## Download `r4Casal2`
-If you have difficulty downloading installing `r4Casal2` via the above methods. You can download a it from [here](https://github.com/NIWAFisheriesModelling/r4Casal2/actions). **note** you will need to be logged in to your github account to access this link. Click on the top action that has passed, indicated by the green tick. It will have the same label as the latest commit. **Don't click** on the action labeled *pages build and deployment*. Once you have clicked on the action you should scroll down to the artifacts sections and click on the link labeled `r4Casal2.tar.gz`. This will download `r4Casal2.tar.gz.zip`. Locate where you downloaded it and unzip it, then assuming there is `r4Casal2.X.X.tar.gz` located in `path_to_tar_gz`. You can install it from you R environment, the same way you would install a local package, or run the following R command
+If you have difficulty downloading installing `r4Casal2` via the above methods. You can download it from [here](https://github.com/NIWAFisheriesModelling/r4Casal2/actions/workflows/deploy_bookdown.yml). **note** you will need to be logged in to your github account to access this link. Click on the top action that has passed, indicated by the green tick. It should have the same label as the latest commit. Once you have clicked on the top passed action you should scroll down to the artifacts sections and click on the link labeled `r4Casal2.tar.gz`. This will download `r4Casal2.tar.gz.zip`. Locate where you downloaded it and unzip it, then assuming there is `r4Casal2.X.X.tar.gz` located in `path_to_tar_gz`. You can install it from you R environment, the same way you would install a local package, or run the following R command
 ```r
-remotes::install_local(path = file.path(path_to_tar_gz, "r4Casal2.X.X.tar.gz"))```
+remotes::install_local(path = file.path(path_to_tar_gz, "r4Casal2.X.X.tar.gz"))
 ```
 
 ## Query Functionality
@@ -34,4 +34,9 @@ Once the library is installed you can query the functionality to see the functio
 
 ## Issues
 If you have an issues please create a github issue, or reach out on the [discourse page](https://casal2.discourse.group/) 
+
+
+## Contributing to r4Casal2
+If you have some R code for Casal2 models or output, the best way to contribute is to either clone this repository and push and pull changes. If this falls in the too hard basket and you have code that would be helpful to others. Please email it in a zipped file to the Casal2 development team <mailto:Casal2@niwa.co.nz> and they will add in the **misc** folder until it has been wrapped in formal functions.
+
 

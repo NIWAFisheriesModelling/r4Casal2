@@ -25,10 +25,20 @@ jobs:
             any::DHARMa
             any::mvtnorm
           dependencies: '"hard"'
-      - name: Install Casal2 and r4Casal2
+      - name: Install Casal2
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e 'devtools::install_github("https://github.com/NIWAFisheriesModelling/CASAL2", subdir="R-libraries/casal2", ref = "HEAD")' -e "devtools::install_github('NIWAFisheriesModelling/r4Casal2', build_vignettes  = F,dependencies = F)"
+        run: Rscript -e 'devtools::install_github("https://github.com/NIWAFisheriesModelling/CASAL2", subdir="R-libraries/casal2", ref = "HEAD")'
+
+      - name: Build r4Casal2
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
+        run: Rscript -e 'devtools::build(dest_path = "r4Casal2")'
+      - uses: actions/upload-artifact@v1
+        with:
+          name: r4Casal2.tar.gz
+      - name: install r4Casal2
+        run: Rscript -e 'devtools::install()'
 
       - name: Render Book
         run: Rscript -e 'bookdown::render_book(input = "GitBook")'

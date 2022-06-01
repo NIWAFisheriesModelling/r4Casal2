@@ -23,6 +23,11 @@ Once you have successfully installed the above packages, run the following code 
 ```r
 devtools::install_github("NIWAFisheriesModelling/r4Casal2")
 ```
+## Download `r4Casal2`
+If you have difficulty downloading installing `r4Casal2` via the above methods. You can download a it from [here](https://github.com/NIWAFisheriesModelling/r4Casal2/actions). **note** you will need to be logged in to your github account to access this link. Click on the top action that has passed, indicated by the green tick. It will have the same label as the latest commit. **Don't click** on the action labeled *pages build and deployment*. Once you have clicked on the action you should scroll down to the artifacts sections and click on the link labeled `r4Casal2.tar.gz`. This will download `r4Casal2.tar.gz.zip`. Locate where you downloaded it and unzip it, then assuming there is `r4Casal2.X.X.tar.gz` located in `path_to_tar_gz`. You can install it from you R environment, the same way you would install a local package, or run the following R command
+```r
+remotes::install_local(path = file.path(path_to_tar_gz, "r4Casal2.X.X.tar.gz"))```
+```
 
 ## Query Functionality
 Once the library is installed you can query the functionality to see the functions `library(help="r4Casal2")` or even better see [**the online book**](https://niwafisheriesmodelling.github.io/r4Casal2/).

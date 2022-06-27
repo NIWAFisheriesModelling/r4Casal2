@@ -22,33 +22,21 @@
 #' @rdname summarise_config
 #' @export summarise_config
 summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet = T, fileEncoding = "") {
-  file = scan(file = file.path(config_dir, config_file), what = "", sep = "\n", quiet = T)
+  config_file_in = scan(file = file.path(config_dir, config_file), what = "", sep = "\n", quiet = T)
   ## deal with comments
-  file <- file[substring(file, 1, 1) != "#"]
-  index1 <- ifelse(substring(file, 1, 2) == "/*", 1:length(file), 0)
-  index2 <- ifelse(substring(file, 1, 2) == "*/", 1:length(file), 0)
-  index1 <- index1[index1 != 0]
-  index2 <- index2[index2 != 0]
-  if (length(index1) != length(index2))
-    stop(paste("Error in the file ", filename, ". Cannot find a matching '/*' or '*/'", sep = ""))
-  if (length(index1) > 0 || length(index2) > 0) {
-    index <- unlist(apply(cbind(index1, index2), 1, function(x) seq(x[1], x[2])))
-    file <- file[!1:length(file) %in% index]
-  }
-  file <- ifelse(regexpr("#", file) > 0, substring(file, 1, regexpr("#", file) - 1), file)
-  file <- file[file != ""]
+  config_file_in <- strip_coms(config_file_in)
   ## get includes assumes file names have \" \"
-  file = substring(file, first = 10) # '!include ' is 10 characters
+  config_file_in = substring(config_file_in, first = 10) # '!include ' is 10 characters
   ## check for '"'
-  ndx = regexpr("\"", file) > 0
+  ndx = regexpr("\"", config_file_in) > 0
   if(any(ndx)) {
-    for(i in 1:length(file)) {
+    for(i in 1:length(config_file_in)) {
       if(ndx[i])
-        file[i] = substring(file[i], first = 2, last = nchar(file[i]) - 1)
+        config_file_in[i] = substring(config_file_in[i], first = 2, last = nchar(config_file_in[i]) - 1)
     }
   }
   if(!quiet)
-    cat("found the following files to read in ", file, "\n")
+    cat("found the following files to read in ", config_file_in, "\n")
   ## now read in these config files
   model_block = list()
   observation_blocks = list()
@@ -66,12 +54,12 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
   model_length_bins = NULL
   ages = NULL
   time_steps = NULL
-  for(i in 1:length(file)) {
-    if(!file.exists(file.path(config_dir, file[i])))
-      cat("couldn't find file = ", file.path(config_dir, file[i]))
-    this_file = tryCatch(extract.csl2.file(path = config_dir, file = file[i], quiet = quiet), error=function(e) {e}, warning=function(w) {w})
+  for(i in 1:length(config_file_in)) {
+    if(!file.exists(file.path(config_dir, config_file_in[i])))
+      cat("couldn't find file = ", file.path(config_dir, config_file_in[i]))
+    this_file = tryCatch(extract.csl2.file(path = config_dir, file = config_file_in[i], quiet = quiet), error=function(e) {e}, warning=function(w) {w})
     if(inherits(this_file, "error") | inherits(this_file, "warning")) {
-      cat("failed to readin the following file ", file[i], " so skipping it.\n\nthe error\n",this_file$message,"\n")
+      cat("failed to readin the following file ", config_file_in[i], " so skipping it.\n\nthe error\n",this_file$message,"\n")
       next
     }
     blocks = (sapply(strsplit(names(this_file), split = "\\["), "[", 1))
@@ -189,7 +177,7 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
   method_df = NULL
   for(i in 1:length(process_blocks)) {
     this_process = process_blocks[[i]]
-    if(this_process$type$value == "mortality_instantaneous") {
+    if(tolower(this_process$type$value) == "mortality_instantaneous") {
       m = expand_shorthand_syntax(this_process$m$value)
       categories = NULL
       for(j in 1:length(this_process$categories$value))
@@ -223,8 +211,8 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
 
       this_method$process = names(process_blocks)[i]
       method_df = rbind(method_df, this_method)
-    } else if(this_process$type$value == "mortality_instantaneous_retained") {
-
+    } else if(tolower(this_process$type$value) == "mortality_instantaneous_retained") {
+      print("not yet implemented for mortality_instantaneous_retained")
     }
   }
 

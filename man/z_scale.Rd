@@ -4,6 +4,9 @@
 \alias{z_scale}
 \title{Convergence and efficiency diagnostics for Markov Chains These functions are
 improved versions of the traditional Rhat (for convergence) and Effective Sample Size (for efficiency).
+Credit for this code https://github.com/stan-dev/rstan/blob/develop/rstan/rstan/R/monitor.R
+Protected under GPLv3
+must remain free and available
 Rank normalization}
 \usage{
 z_scale(x)

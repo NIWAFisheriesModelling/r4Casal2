@@ -36,6 +36,7 @@
         this_ob = this_report$Values
         this_ob$observation_label = reports_labels[i]
         this_ob$observation_type = this_report$observation_type
+        this_ob$likelihood = this_report$likelihood
         this_ob$par_set = 1 ## so compatible with -i runs
         ## check col compatibility some reports will print residuals and some wont
         if(!is.null(complete_df)) {
@@ -65,6 +66,7 @@
           this_ob = this_report[[dash_i]]$Values
           this_ob$observation_label = reports_labels[i]
           this_ob$observation_type = this_report$observation_type
+          this_ob$likelihood = this_report[[dash_i]]$likelihood
           this_ob$par_set = dash_i
           ## check col compatibility some reports will print residuals and some wont
           if(!is.null(complete_df)) {
@@ -133,6 +135,8 @@
   complete_df = NULL
   reports_labels = names(model)
   for(i in 1:length(model)) {
+    if (reports_labels[i] == "header")
+      next;
     this_report = model[[i]]
     if(any(names(this_report) == "type")) {
       if(this_report$type != "observation") {
@@ -143,6 +147,7 @@
         this_ob = this_report$Values
         this_ob$observation_label = reports_labels[i]
         this_ob$observation_type = this_report$observation_type
+        this_ob$likelihood = this_report$likelihood
         this_ob$par_set = 1 ## so compatible with -i runs
         ## check col compatibility some reports will print residuals and some wont
         if(!is.null(complete_df)) {
@@ -170,6 +175,7 @@
         for(dash_i in 1:n_runs) {
           ## add it to full df
           this_ob = this_report[[dash_i]]$Values
+          this_ob$likelihood = this_report[[dash_i]]$likelihood
           this_ob$observation_label = reports_labels[i]
           this_ob$observation_type = this_report$observation_type
           this_ob$par_set = dash_i
@@ -240,6 +246,8 @@
   complete_df = NULL
   reports_labels = names(model)
   for(i in 1:length(model)) {
+    if (reports_labels[i] == "header")
+      next;
     this_report = model[[i]]
     if(any(names(this_report) == "type")) {
       if(this_report$type != "observation") {
@@ -250,6 +258,7 @@
         this_ob = this_report$Values
         this_ob$observation_label = reports_labels[i]
         this_ob$observation_type = this_report$observation_type
+        this_ob$likelihood = this_report$likelihood
         this_ob$par_set = 1 ## so compatible with -i runs
         ## check col compatibility some reports will print residuals and some wont
         if(!is.null(complete_df)) {
@@ -278,6 +287,7 @@
           this_ob = this_report[[dash_i]]$Values
           this_ob$observation_label = reports_labels[i]
           this_ob$observation_type = this_report$observation_type
+          this_ob$likelihood = this_report[[dash_i]]$likelihood
           this_ob$par_set = dash_i
           ## check col compatibility some reports will print residuals and some wont
           if(!is.null(complete_df)) {

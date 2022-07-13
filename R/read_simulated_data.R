@@ -1,4 +1,4 @@
-#' @title read.simulated.data
+#' @title read_simulated_data
 #'
 #' @description
 #' A utility function for reading in Casal2 simualted data sets. For help on simulated data from Casal2 see
@@ -9,15 +9,15 @@
 #' @param verbose true print out statements throught function to help debug
 #' @return a list of all the simulated data sets. in each element there is a matrix with rows = year, col = simulation reps
 #' @export
-#' @rdname read.simulated.data
-#' @export read.simulated.data
+#' @rdname read_simulated_data
+#' @export read_simulated_data
 
-read.simulated.data <- function(dir, verbose = FALSE, mean_age = TRUE) {
+read_simulated_data <- function(dir, verbose = FALSE, mean_age = TRUE) {
   ## add to this as the function grows
   currently_implemented_obs = c("biomass", "abundance", "process_removals_by_length", "proportions_at_length", "process_removals_by_age", "proportions_at_age", "process_proportions_migrating", "tag_recapture_by_length")
 
   if(verbose)
-    cat("enter: read.simulated.data\n")
+    cat("enter: read_simulated_data\n")
 
   sim_file_names = unique(sapply(strsplit(list.files(dir), split = "\\."), "[", 1))
   extensions = unique(sapply(strsplit(list.files(dir), split = "\\."), "[", 2))
@@ -156,6 +156,6 @@ read.simulated.data <- function(dir, verbose = FALSE, mean_age = TRUE) {
   names(sim_obs) = sim_file_names
 
   if(verbose)
-    cat("exit: read.simulated.data\n")
+    cat("exit: read_simulated_data\n")
   return(list(sim_obs = sim_obs, failed_files = failed_files))
 }

@@ -70,10 +70,10 @@
       n_runs = length(this_report)
       for(dash_i in 1:n_runs) {
         ## only a single trajectory
-        f_ndx = grepl(pattern = "fishing_pressure\\[", names(this_report))
-        exploitation_ndx = grepl(pattern = "exploitation_rate", names(this_report))
-        catch_ndx = grepl(pattern = "catch", substring(names(this_report), first = 1, last = 5))
-        actual_catch_ndx = grepl(pattern = "actual_catch", names(this_report))
+        f_ndx = grepl(pattern = "fishing_pressure\\[", names(this_report[[dash_i]]))
+        exploitation_ndx = grepl(pattern = "exploitation_rate", names(this_report[[dash_i]]))
+        catch_ndx = grepl(pattern = "catch", substring(names(this_report[[dash_i]]), first = 1, last = 5))
+        actual_catch_ndx = grepl(pattern = "actual_catch", names(this_report[[dash_i]]))
         start_index = as.numeric(regexpr(pattern = "\\[", text = names(this_report[[dash_i]])[f_ndx])) + 1
         stop_index = as.numeric(regexpr(pattern = "\\]", text = names(this_report[[dash_i]])[f_ndx])) - 1
         fisheries = substring(names(this_report[[dash_i]])[f_ndx], start_index, last = stop_index)

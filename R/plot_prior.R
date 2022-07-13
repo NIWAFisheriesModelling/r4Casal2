@@ -1,14 +1,14 @@
-#' @title plot.prior plot that could be assumed in a Casal2 model
+#' @title plot_prior plot that could be assumed in a Casal2 model
 #'
 #' @description
 #' A plotting a prior, to visulise
 #'
 #' @author A.Dunn
 #' @return plot of a priors
-#' @rdname plot.prior
-#' @export plot.prior
+#' @rdname plot_prior
+#' @export plot_prior
 
-"plot.prior" <-
+"plot_prior" <-
 function(type = "lognormal", mu, sd, cv, A = 0, B = 1, bounds, xlim, label = F, xlab = "x", ylab = "Density", logx = F, add = F, dump = F, n = 201, ...) {
   # type define the type of prior to plot. mu, sd, cv are the parameters of the
   # priors (not all parameters are valid for all priors). bounds are the bounds

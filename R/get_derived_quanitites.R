@@ -45,7 +45,7 @@
       DQ_types = names(this_report)[!names(this_report) %in% "type"]
       dq_df = NULL
       for(dq_iter in 1:length(DQ_types)) {
-        temp_df = data.frame(par_set = 1, years = names(this_report[[DQ_types[dq_iter]]]$values), values = this_report[[DQ_types[dq_iter]]]$values, dq_label = DQ_types[dq_iter]);
+        temp_df = data.frame(par_set = 1, years = names(this_report[[DQ_types[dq_iter]]]$values), values = this_report[[DQ_types[dq_iter]]]$values, initialisation_value = this_report[[DQ_types[dq_iter]]]$`initialisation_phase[1]`, dq_label = DQ_types[dq_iter]);
         dq_df = rbind(dq_df, temp_df)
       }
       dq_df$par_set = 1
@@ -61,7 +61,7 @@
         DQ_types = names(this_report[[dash_i]])[!names(this_report[[dash_i]]) %in% "type"]
         dq_df = NULL
         for(dq_iter in 1:length(DQ_types)) {
-          temp_df = data.frame(par_set = dash_i, years = names(this_report[[dash_i]][[DQ_types[dq_iter]]]$values), values = this_report[[dash_i]][[DQ_types[dq_iter]]]$values, dq_label = DQ_types[dq_iter]);
+          temp_df = data.frame(par_set = dash_i, years = names(this_report[[dash_i]][[DQ_types[dq_iter]]]$values), initialisation_value = this_report[[dash_i]][[DQ_types[dq_iter]]]$`initialisation_phase[1]`, values = this_report[[dash_i]][[DQ_types[dq_iter]]]$values, dq_label = DQ_types[dq_iter]);
           dq_df = rbind(dq_df, temp_df)
         }
         complete_df = rbind(complete_df, dq_df)
@@ -71,7 +71,8 @@
 
     }
   }
-  dq_df$years = as.numeric(dq_df$years)
+  complete_df$initialisation_value = as.numeric(complete_df$initialisation_value)
+  complete_df$years = as.numeric(complete_df$years)
   return(complete_df)
   invisible()
 }

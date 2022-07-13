@@ -4,16 +4,19 @@
 #' A Generic plotting function for selectivities that are derived from get_selectivities function()
 #'
 #' @author Craig Marsh
-#' @param selectivity_df data.frame
+#' @param model data.frame
+#' @param selectivity_labels optional command if you only want to plot a subset of the available selectivities
 #' @importFrom ggplot2 ggplot geom_line aes
 #' @return a ggplot
 #' @rdname plot_selectivities
 #' @export plot_selectivities
 
 
-"plot_selectivities" <- function(selectivity_df) {
-  plt = ggplot(full_DF, aes(x = bins, group = label, col = label)) +
-    geom_line(aes(y = values), size = 2)
-  return(full_DF)
-  invisible()
+"plot_selectivities" <- function(model, selectivity_labels = NULL) {
+  full_DF = get_selectivities(model)
+  if(!is.null(selectivity_labels))
+    full_DF = subset(full_DF, subset = full_DF$selectivity_label %in% selectivity_labels)
+  plt = ggplot(full_DF, aes(x = bin, group = selectivity_labels, col = selectivity_labels)) +
+    geom_line(aes(y = selectivity), size = 2)
+  return(plt)
 }

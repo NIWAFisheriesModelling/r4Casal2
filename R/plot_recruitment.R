@@ -1,4 +1,4 @@
-#' @title plot.recruitment plot recuitment
+#' @title plot_recruitment plot recuitment
 #'
 #' @description
 #' A plotting function to plot recuitment for 'casal2TAB' and 'casal2MPD' objects.
@@ -16,26 +16,26 @@
 #' @param plot.it Whether to generate a default plot or return the values as a dataframe for personal plots
 #' @param ... remaining plotting options
 #' @return generate a plot over time if plot.it = T, if plot.it = F it will return a matrix of values.
-#' @rdname plot.recruitment
-#' @export plot.recruitment
+#' @rdname plot_recruitment
+#' @export plot_recruitment
 #' @importFrom dplyr filter
 #' @importFrom ggplot2 ggplot geom_line aes theme facet_wrap aes_string
 #' @details
 #' If you have multiple time-steps and Recruitment
 
-"plot.recruitment" <-
+"plot_recruitment" <-
   function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
     if(!quantity %in% c("ycs_values", "Recruits", "true_ycs", "standardised_ycs"))
-      stop("quantity, has incorrect values please check ?plot.recruitment")
-    UseMethod("plot.recruitment", model)
+      stop("quantity, has incorrect values please check ?plot_recruitment")
+    UseMethod("plot_recruitment", model)
   }
 
 #' @return \code{NULL}
 #'
-#' @rdname plot.recruitment
-#' @method plot.recruitment casal2MPD
+#' @rdname plot_recruitment
+#' @method plot_recruitment casal2MPD
 #' @export
-"plot.recruitment.casal2MPD" = function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
+"plot_recruitment.casal2MPD" = function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
   muliple_iterations_in_a_report = FALSE
   N_runs = 1
   temp_DF = NULL
@@ -118,10 +118,10 @@
 ## method for class casal2TAB
 #' @return \code{NULL}
 #'
-#' @rdname plot.recruitment
-#' @method plot.recruitment casal2TAB
+#' @rdname plot_recruitment
+#' @method plot_recruitment casal2TAB
 #' @export
-"plot.recruitment.casal2TAB" = function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
+"plot_recruitment.casal2TAB" = function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
 
   invisible()
 }

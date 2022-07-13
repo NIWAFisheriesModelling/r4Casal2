@@ -33,3 +33,4 @@ simulations
 summarising-simulated-data-in-r
 posterior-predictive-checks
 pit-residuals
+presentwithBookdown

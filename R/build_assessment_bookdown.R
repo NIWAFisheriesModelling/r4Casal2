@@ -1,11 +1,10 @@
-#' build_assessment_bookdown
-#' @details Build a skeleton Bookdown summarising a single model MPD (casal2 -r, -e)
+#' @description This function will build a skeleton/template html bookdown summarizing a single model MPD (casal2 -r, -e)
 #' @param csl_dir directory path to where the Casal2 model is. Currently this function assumes config_filename and mpd_filename are in this directory
 #' @param output_folder_name foldername for bookdown. It will be relative to csl_dir
 #' @param mpd_filename the filename for the Casal2 model output
 #' @param config_filename the filename for the Casal2 config. Default is 'config.csl2' can be replaced with others if you use the -c argument when running Casal2
 #' @param verbose if the function unexpectedly quits errors, set this to T to see where the problem lies
-#' @return will save a Rmd files in output_dir that will make a bookdown
+#' @return will save a suite of Rmd files in output_dir that can be compiled as a bookdown. It should compile the bookdown in the folder _book
 #' @importFrom Casal2 extract.mpd
 #' @importFrom bookdown render_book
 #' @importFrom knitr kable

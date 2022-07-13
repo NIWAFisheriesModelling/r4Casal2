@@ -19,7 +19,6 @@ This book demonstrates functionality of the `r4Casal2` R package. This is an R p
 
 All functions in this package should be documented using the `roxygen` syntax with input parameters available using the `?` query. For example `?get_fisheries`. To get a list of functions and general info on the package you can use `library(help="r4Casal2")` or see Section \@ref(functionlist) for another list
 
-
 ```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}
 library(r4Casal2)
 library(Casal2)
@@ -28,8 +27,6 @@ library(ggplot2)
 library(dplyr)
 library(reshape2)
 ```
-
-
 
 The core functionality of `r4Casal2` are its accessor functions. These are functions that will return a specific object from a range of Casal2 objects in long format that are `ggplot`, `dplyr` friendly. Most accessors start with `get_` and should be self explanatory. There are some plotting functions, but I have found that I often want to custom ggplots and so mainly have custom plots. The accessors are coded to deal with three types of outpus. These are;
 

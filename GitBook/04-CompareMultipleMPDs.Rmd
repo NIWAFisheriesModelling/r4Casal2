@@ -4,9 +4,11 @@
 
 ## Read in models
 ```{r read_multiple_models, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
-file_name_low_m = system.file("extdata", "low_m.log", package = "r4Casal2", mustWork = TRUE)
+file_name_low_m = system.file("extdata", "SimpleTestModel" ,"LowM.log", 
+                              package = "r4Casal2", mustWork = TRUE)
 low_m_mpd = extract.mpd(file = file_name_low_m)
-file_name_high_m = system.file("extdata", "high_m.log", package = "r4Casal2", mustWork = TRUE)
+file_name_high_m = system.file("extdata", "SimpleTestModel", "highM.log", 
+                               package = "r4Casal2", mustWork = TRUE)
 high_m_mpd = extract.mpd(file = file_name_high_m)
 ## create a named list
 models = list("M = 0.22" = low_m_mpd, "M = 0.44" = high_m_mpd)

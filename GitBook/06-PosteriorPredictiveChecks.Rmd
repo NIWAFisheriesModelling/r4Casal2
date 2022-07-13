@@ -162,7 +162,7 @@ normalised_resids = ggplot(mpd$chatTANbiomass$Values, aes(sample = normalised_re
   stat_qq_line(col = "steelblue", size = 1.5, linetype = "dashed") +
   labs(x = "Theoretical", y = "Sample")
 ## Plot fits obs
-fits = plot.relative_index(model = mpd, report_label = "chatTANbiomass") + ggtitle("")
+fits = plot_relative_index(model = mpd, report_label = "chatTANbiomass") + ggtitle("")
 ##
 fits
 ```
@@ -222,7 +222,7 @@ OM_file = system.file("extdata", "PosteriorPredictiveChecks","OM","OM_vary.log",
 OM_run = extract.mpd(file = OM_file)
 
 ## plot SSBs
-my_plot = r4Casal2::plot.derived_quantities(model = list(OM = OM_run, EM = mpd), report_label = "biomass_t1")
+my_plot = r4Casal2::plot_derived_quantities(model = list(OM = OM_run, EM = mpd))
 my_plot = my_plot + xlab("SSB") + ylim(0, 120000)
 ```
 

@@ -4,7 +4,8 @@
 
 ## Single Model Output
 ```{r read_single_model, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
-file_name = system.file("extdata", "estimate.out", package = "r4Casal2", mustWork = TRUE)
+file_name = system.file("extdata","SimpleTestModel", 
+                        "estimate.log", package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
 ```
 
@@ -138,7 +139,8 @@ Below illustrates code to plot fishing pressure, but you can also easily adapt t
 Some R-code used to summarise fishing pressures.
 
 ```{r pressures, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
-file_name = system.file("extdata", "estimate.log", package = "r4Casal2", mustWork = TRUE)
+file_name = system.file("extdata", "SimpleTestModel", "estimate.log", 
+                        package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
 # Report labels
 # names(mpd) 
@@ -175,12 +177,16 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = label)) +
 
 ## Multiple Casal2 runs with -i or -s 
 ```{r pressures_multi, fig.width=6, fig.height=4, results = 'hide', message=FALSE, warning=FALSE}
-file_name = system.file("extdata", "multi_run.out", package = "r4Casal2", mustWork = TRUE)
+file_name = system.file("extdata", "SimpleTestModel","multi_run.log", 
+                        package = "r4Casal2", mustWork = TRUE)
 mpd = extract.mpd(file = file_name)
 # Report labels
 # names(mpd) 
 # plot fishing pressures
-my_plot = r4Casal2::plot.pressure(model = mpd, report_label = "Instantaneous_Mortality")
+fishery_df = get_fisheries(model = mpd)
+my_plot = ggplot(fishery_df, aes(x = year, y = exploitation, col = factor(par_set))) +
+  geom_line(size = 1.4) +
+  facet_wrap(~fishery)
 my_plot = my_plot + theme(axis.text.x = element_text(angle = 90))
 # this will generate a generic ggplot
 print(my_plot)
@@ -198,7 +204,7 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = report_label, line_ty
 
 ### Plotting Fits {-}
 ```{r plot_relative_index, fig.width=8, fig.height=6}
-my_plot = plot.relative_index(model = mpd, report_labels = c("autumnTANbiomass", "summerTANbiomass"), plot.it = T, plot_type = "classic")
+my_plot = plot_relative_index(model = mpd, report_labels = c("chatTANbiomass"), plot.it = T, plot_type = "classic")
 my_plot
 
 ```

@@ -42,7 +42,9 @@
 
 * `create_simulation_reports` This will create a range of `@report.type=simulated_observation` Casal2 reports that can help set up simulations. See Section \@ref(PPC) on why you want to do this.
 
-* `summarise_config` Will summaris input files see Section \@ref(summariseinputs)
+* `build_assessment_bookdown` This will create a bookdown template for an assessment model MPD run.
+
+* `summarise_config` Will summarize input files see Section \@ref(summariseinputs)
 
 
 

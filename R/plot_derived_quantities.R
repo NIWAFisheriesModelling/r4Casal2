@@ -59,5 +59,15 @@
 #' @method plot_derived_quantities list
 #' @export
 "plot_derived_quantities.list" <- function(model, plot_type = "classic", plot.it = T) {
-  stop("function not coded yet")
+  ssb_df = get_derived_quanitites(model)
+  ssb_df_percent = ssb_df
+  ssb_df_percent$values = ssb_df_percent$values / ssb_df_percent$initialisation_value * 100
+  ssb_df$type = "Absolute"
+  ssb_df_percent$type = "Percent B0"
+  full_ssb_df = rbind(ssb_df, ssb_df_percent)
+  ggplot(full_ssb_df, aes(x = years, y = values, col = dq_label, linetype = dq_label)) +
+    geom_line(size = 2) +
+    ylim(0, NA) +
+    labs(colour="Label", linetype = "Label", x = "Years", y = "") +
+    facet_wrap(~type, scales = "free_y")
 }

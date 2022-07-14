@@ -7,7 +7,7 @@ name: renderbook
 
 jobs:
   Ubuntu:
-    name: Render-Book
+    name: Ubuntu-Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -87,7 +87,7 @@ jobs:
 
 ## test it on windows
   Windows:
-    name: Render-Book
+    name: Windows-Build
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2

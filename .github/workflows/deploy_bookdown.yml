@@ -55,7 +55,7 @@ jobs:
           name: _book
           path: GitBook/_book/
       - name: Run Unittests for r4Casal2
-        run: Rscript -e 'testthat::test_dir("tests/testthat/")'
+        run: Rscript -e 'library(r4Casal2); testthat::test_dir("tests/testthat/")'
 
 
 

@@ -5,7 +5,6 @@
 
 test_that("build_assessment_bookdown", {
   test_data_dir = normalizePath(file.path("..","..","inst","testdata"), winslash = "/")
-  print(getwd());
   ## ComplexTag
   expect_message(build_assessment_bookdown(csl_dir = file.path(test_data_dir, "ComplexTag"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "ComplexTag", verbose = T))
 

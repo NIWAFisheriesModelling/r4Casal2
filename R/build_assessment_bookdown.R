@@ -5,6 +5,7 @@
 #' @param mpd_filename the filename for the Casal2 model output
 #' @param config_filename the filename for the Casal2 config. Default is 'config.csl2' can be replaced with others if you use the -c argument when running Casal2
 #' @param verbose if the function unexpectedly quits errors, set this to T to see where the problem lies
+#' @param prompt_user_before_deleting <bool> everytime this function is run it can delete existing bookdowns. Should always be T, unless used in unittests
 #' @param model_label string a model label used for headers
 #' @return will save a suite of Rmd files in output_dir that can be compiled as a bookdown. It should compile the bookdown in the folder _book
 #' @importFrom Casal2 extract.mpd
@@ -22,7 +23,7 @@
 # config_filename = "config.csl2"
 # output_folder_name = "BookDown";model_label = NULL; verbose = F
 #
-build_assessment_bookdown <- function(csl_dir, output_folder_name, mpd_filename, config_filename = "config.csl2", model_label = NULL, verbose = F) {
+build_assessment_bookdown <- function(csl_dir, output_folder_name, mpd_filename, config_filename = "config.csl2", model_label = NULL, verbose = F, prompt_user_before_deleting = T) {
   if(verbose)
     print("Enter: build_assessment_bookdown")
 
@@ -45,6 +46,12 @@ build_assessment_bookdown <- function(csl_dir, output_folder_name, mpd_filename,
 
   output_dir = normalizePath(file.path(csl_dir, output_folder_name), winslash = "/")
   if(dir.exists(output_dir)) {
+    if(prompt_user_before_deleting) {
+      result = menu(c("Yes", "No"), title="Do you to delete the existing Bookdown located at output_dir?")
+      if(result == 2) {
+        return (stop("exiting function because you don't want to delete output_dir"))
+      }
+    }
     unlink(output_dir, recursive = T, force = T)
     if(verbose)
       print("deleting 'output_dir'")

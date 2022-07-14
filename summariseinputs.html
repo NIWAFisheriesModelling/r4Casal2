@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-07-13" />
+<meta name="date" content="2022-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -248,7 +248,8 @@ div.csl-indent {
 <pre><code>##  [1] &quot;category_df&quot;           &quot;estimate_df&quot;           &quot;full_category_df&quot;     
 ##  [4] &quot;method_df&quot;             &quot;catch_df&quot;              &quot;time_step_df&quot;         
 ##  [7] &quot;time_step_df_just_lab&quot; &quot;obs_year_df&quot;           &quot;model_years&quot;          
-## [10] &quot;model_ages&quot;            &quot;model_length_bins&quot;     &quot;M_by_category&quot;</code></pre>
+## [10] &quot;model_ages&quot;            &quot;model_length_bins&quot;     &quot;M_by_category&quot;        
+## [13] &quot;model_block&quot;</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="summariseinputs.html#cb4-1" aria-hidden="true" tabindex="-1"></a>catches_melted <span class="ot">=</span> <span class="fu">melt</span>(summary<span class="sc">$</span>catch_df, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&quot;process&quot;</span>, <span class="st">&quot;year&quot;</span>))</span>
 <span id="cb4-2"><a href="summariseinputs.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(catches_melted, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">col =</span> variable)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="summariseinputs.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>

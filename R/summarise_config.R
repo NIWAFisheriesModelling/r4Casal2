@@ -61,7 +61,7 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
   model_length_bins = NULL
   ages = NULL
   time_steps = NULL
-  length_based_model = NULL
+  length_based_model = F
   for(i in 1:length(config_file_in)) {
     if(!file.exists(file.path(config_dir, config_file_in[i])))
       cat("couldn't find file = ", file.path(config_dir, config_file_in[i]))
@@ -165,7 +165,7 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
       this_length_weight = length_weight_list[[this_growth$length_weight$value]]
       distribution = "normal" # default
       if(!is.null(this_growth$distribution))
-        distribution = this_age_length$distribution
+        distribution = this_growth$distribution
       this_cat_df = data.frame("Category" = category_labels[i], "GrowthIncrement" = category_growth_increments[i], "LengthWeight" = this_growth$length_weight$value, "Distribution" = distribution)
 
       this_cat_full_df = data.frame("Category" = category_labels[i], "GrowthIncrement" = paste0(category_growth_increments[i], " (",this_growth$type$value, ")"),

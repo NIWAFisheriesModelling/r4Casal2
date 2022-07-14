@@ -114,7 +114,7 @@ jobs:
       - name: Install r4Casal2
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e "remotes::install_github(repo = 'NIWAFisheriesModelling/r4Casal2', build_vignettes  = F,dependencies = F)"
+        run: Rscript -e "remotes::install_github(repo = 'NIWAFisheriesModelling/r4Casal2', dependencies = F)"
 
       - name: Run Unittests for r4Casal2
         run: Rscript -e 'library(r4Casal2); testthat::test_dir("tests/testthat/")'

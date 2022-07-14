@@ -3,6 +3,10 @@ GitBook/_main_files/
 GitBook/_bookdown_files/
 GitBook/_main.html
 GitBook/_main.Rmd
+inst/testdata/ComplexTag/Bookdown/
+inst/testdata/SBW/Bookdown/
+inst/testdata/TwoSex/Bookdown/
+inst/testdata/SexedLengthBased/Bookdown/
 .Rproj.user
 r4Casal2_0.1.0.tar.gz
 .RData

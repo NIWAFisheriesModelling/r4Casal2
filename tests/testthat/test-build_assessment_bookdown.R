@@ -4,17 +4,17 @@
 #'
 
 test_that("build_assessment_bookdown", {
-  upper_dir = system.file("testdata", package = "r4Casal2", mustWork = TRUE)
+  test_data_dir = file.path("..","..","inst","testdata")
   ## ComplexTag
-  build_assessment_bookdown(csl_dir = file.path(upper_dir, "ComplexTag"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "ComplexTag")
+  build_assessment_bookdown(csl_dir = file.path(test_data_dir, "ComplexTag"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "ComplexTag")
 
   ## SBW
-  build_assessment_bookdown(csl_dir = file.path(upper_dir, "SBW"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "SBW")
+  build_assessment_bookdown(csl_dir = file.path(test_data_dir, "SBW"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "SBW")
 
   ## TwoSex
-  build_assessment_bookdown(csl_dir = file.path(upper_dir, "TwoSex"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "TwoSex")
+  build_assessment_bookdown(csl_dir = file.path(test_data_dir, "TwoSex"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "TwoSex")
 
   ## SexedLengthBased
-  build_assessment_bookdown(csl_dir = file.path(upper_dir, "SexedLengthBased"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "SexedLengthBased")
+  build_assessment_bookdown(csl_dir = file.path(test_data_dir, "SexedLengthBased"), output_folder_name = "Bookdown", mpd_filename = "estimate_betadiff.log", config_filename = "config_betadiff.csl2", model_label = "SexedLengthBased")
 
 })

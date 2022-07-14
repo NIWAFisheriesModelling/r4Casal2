@@ -1,0 +1,21 @@
+## report configuration file
+
+@assert obj
+type objective_function
+value 929.01854
+
+@report estimate_value
+type estimate_value
+
+@report obj
+type objective_function 
+
+@report default
+type default
+processes true
+observations true
+catchabilities true
+selectivities true
+projects true
+derived_quantities True
+parameter_transformations true

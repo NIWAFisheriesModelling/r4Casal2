@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: TestSBW_bookdown
-          path: tests/testthat/SBW/Bookdown/book_
+          path: inst/testdata/SBW/Bookdown/book_
 
 
 # Need to first create an empty gh-pages branch
@@ -121,4 +121,6 @@ jobs:
         run: Rscript -e "remotes::install_github(repo = 'NIWAFisheriesModelling/r4Casal2', dependencies = F)"
 
       - name: Run Unittests for r4Casal2
-        run: Rscript -e 'library(r4Casal2); testthat::test_dir(path = file.path("tests","testthat"))'
+        run: Rscript -e "library(r4Casal2); testthat::test_dir(path = file.path('tests', 'testthat'))"
+
+

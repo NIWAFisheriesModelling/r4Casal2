@@ -16,7 +16,8 @@
   full_DF = get_selectivities(model)
   if(!is.null(selectivity_labels))
     full_DF = subset(full_DF, subset = full_DF$selectivity_label %in% selectivity_labels)
-  plt = ggplot(full_DF, aes(x = bin, group = selectivity_labels, col = selectivity_labels)) +
-    geom_line(aes(y = selectivity), size = 2)
+  plt = ggplot(full_DF, aes(x = bin, group = selectivity_label, col = selectivity_label)) +
+    geom_line(aes(y = selectivity), size = 2) +
+    facet_wrap(~selectivity_label)
   return(plt)
 }

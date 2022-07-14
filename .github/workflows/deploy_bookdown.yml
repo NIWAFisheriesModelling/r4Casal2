@@ -61,8 +61,16 @@ jobs:
         with:
           name: TestSBW_bookdown
           path: inst/testdata/SBW/Bookdown/book_
-
-
+      - name: artifact test SexedLengthBased assessment bookdown
+        uses: actions/upload-artifact@v1
+        with:
+          name: Test_SexedLengthBased_bookdown
+          path: inst/testdata/SexedLengthBased/Bookdown/book_
+      - name: artifact test TwoSex assessment bookdown
+        uses: actions/upload-artifact@v1
+        with:
+          name: Test_TwoSex_bookdown
+          path: inst/testdata/TwoSex/Bookdown/book_
 # Need to first create an empty gh-pages branch
 # see https://pkgdown.r-lib.org/reference/deploy_site_github.html
 # and also add secrets for a GH_PAT and EMAIL to the repository

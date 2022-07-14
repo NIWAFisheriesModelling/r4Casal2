@@ -207,7 +207,7 @@ library(reshape2)
 
 
   ## give users a message
-  cat("Success (hopefully), if you navigate to the directory \n",
+  message("Success (hopefully), if you navigate to the directory \n",
 output_dir,
 "\nand go to the folder '_book'. You will see a whole lot of html file
 that can be viewed by double clicking the .html files, or opening them in browser.

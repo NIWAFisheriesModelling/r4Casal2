@@ -1,10 +1,10 @@
 Casal2
-Call: D:\a\CASAL2\CASAL2\BuildSystem/Casal2/casal2.exe -e -g 20 -c config_gammadiff.csl2 
-Date: Thu Jun 30 00:48:31 2022
+Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -e -g 20 -c config_gammadiff.csl2 
+Date: Thu Jul 14 19:04:44 2022
 Seed: 20
-Version: v22.06 (2022-06-29)
+Version: v22.07 (2022-07-14)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=runneradmin Machine=fv-az71-153 OS=Windows_NT PID=1040
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=28052
 
 
 *estimate_value[estimate_value]
@@ -180,6 +180,18 @@ additional_prior->CPUE-Commercialq_1 -6.84946
 additional_prior->TrawlSurveyq_1 -2.84815
 additional_prior->TrawlSurveyq_2 -2.62632
 total_score 6910.98
+*end
+
+*catchability[__CPUE-Commercialq_1__]
+q: 0.00106003
+*end
+
+*catchability[__TrawlSurveyq_1__]
+q: 0.0569133
+*end
+
+*catchability[__TrawlSurveyq_2__]
+q: 0.0719801
 *end
 
 *derived_quantity[SSB]
@@ -7227,7 +7239,7 @@ m: 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25
 relative_m_by_length: One One One One One One One One
 time_step_proportions: 0.33000000000000002 0.25 0.41999999999999998
 type: mortality_instantaneous
-year: 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 
+year: 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 
 fishing_pressure[Trawl_1]: 0 0.000358961 0.00126676 0.010888 0.0959818 0.0431902 0.0428679 0.0180117 0.0490789 0.0787303 0.0543354 0.159661 0.157889 0.147301 0.0483518 0.112309 0.14729 0.0735939 0.0589981 0.0559687 0.0502449 0.0755872 0.0398978 0.0950919 0.0856387 0.0597969 0.0672839 0.0855881 0.0583727 0.0838643 0.0720023 0.0971012 0.0881897 0.0966498 0.0500146 0.0775442 
 exploitation_rate[Trawl_1]: 0 0.000360481 0.00127212 0.0109341 0.0963882 0.0433731 0.0430494 0.0180879 0.0492867 0.0790637 0.0545655 0.160337 0.158558 0.147925 0.0485566 0.112784 0.147913 0.0739056 0.0592479 0.0562057 0.0504576 0.0759073 0.0400668 0.0954947 0.0860013 0.0600501 0.0675689 0.0859506 0.0586199 0.0842194 0.0723072 0.0975125 0.0885632 0.0970591 0.0502264 0.0778726 
 catch[Trawl_1]: 0 0.600717 2.04244 16.4864 142.472 73.0609 77.1359 31.4664 76.9058 106.82 62.5205 155.507 130.068 103.371 30.0703 67.2101 79.3681 41.9775 36.7015 37.7364 35.5204 55.2808 31.6972 85.9792 81.9098 61.1491 75.3825 101.486 69.9168 98.3855 84.0914 108.566 95.2891 108.596 61.0885 94 
@@ -8592,6 +8604,9 @@ Values {vector}
 Values {string}
 Setting the random number seed to 20
 Estimable parameters were loaded from the free parameter file: 
+Creating default report for catchability CPUE-Commercialq_1
+Creating default report for catchability TrawlSurveyq_1
+Creating default report for catchability TrawlSurveyq_2
 Creating default report for derived quantity SSB
 Creating default report for observation sim_CPUE-Trawl_1
 Creating default report for observation sim_TrawlSurvey_1

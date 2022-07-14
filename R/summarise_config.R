@@ -26,7 +26,7 @@
 summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet = T, fileEncoding = "") {
   config_file_in = scan(file = file.path(config_dir, config_file), what = "", sep = "\n", quiet = T)
   ## deal with comments
-  config_file_in <- strip_comments(config_file_in)
+  config_file_in <- StripComments(config_file_in)
   ## ignore all file lines that are not an !include
   include_lines = grepl(pattern = "!include", config_file_in)
   config_file_in = config_file_in[include_lines]
@@ -260,21 +260,26 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
 
 
       M_time_steps = rbind(M_time_steps, data.frame(process = names(process_blocks)[i], time_step_proportions = time_prop))
-      this_catch = Reduce(cbind, this_process$Table$catches)
-      class(this_catch) = "numeric"
-      colnames(this_catch) = names(this_process$Table$catches)
-      this_catch = as.data.frame(this_catch)
-      this_catch$process = names(process_blocks)[i]
-      catch_df = rbind(catch_df, this_catch)
 
-      this_method = Reduce(cbind, this_process$Table$method)
-      colnames(this_method) = names(this_process$Table$method)
-      this_method = as.data.frame(this_method, stringsAsFactors = F)
-      for(i in 1:nrow(this_method))
-        this_method$category[i] = paste(expand_category_shorthand(this_method$category[i] , category_labels, category_format = category_format), collapse = ",")
+      ## sometimes people add catches as an !include. if that is the case
+      ## we will ignore it: TODO add cod to get all the includes go and get it
+      if(!is.null(this_process$Table$catches)) {
+        this_catch = Reduce(cbind, this_process$Table$catches)
+        class(this_catch) = "numeric"
+        colnames(this_catch) = names(this_process$Table$catches)
+        this_catch = as.data.frame(this_catch)
+        this_catch$process = names(process_blocks)[i]
+        catch_df = rbind(catch_df, this_catch)
 
-      this_method$process = names(process_blocks)[i]
-      method_df = rbind(method_df, this_method)
+        this_method = Reduce(cbind, this_process$Table$method)
+        colnames(this_method) = names(this_process$Table$method)
+        this_method = as.data.frame(this_method, stringsAsFactors = F)
+        for(i in 1:nrow(this_method))
+          this_method$category[i] = paste(expand_category_shorthand(this_method$category[i] , category_labels, category_format = category_format), collapse = ",")
+
+        this_method$process = names(process_blocks)[i]
+        method_df = rbind(method_df, this_method)
+      }
     } else if(tolower(this_process$type$value) == "mortality_instantaneous_retained") {
       print("not yet implemented for mortality_instantaneous_retained")
     }

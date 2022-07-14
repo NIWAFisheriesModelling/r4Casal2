@@ -14,6 +14,9 @@ resizing from 94316 to 103747
 resizing from 103747 to 114121
 resizing from 114121 to 125533
 resizing from 125533 to 138086
+[INFO] Creating default report for catchability CPUE-Commercialq_1
+[INFO] Creating default report for catchability TrawlSurveyq_1
+[INFO] Creating default report for catchability TrawlSurveyq_2
 [INFO] Creating default report for derived quantity SSB
 [INFO] Creating default report for observation sim_CPUE-Trawl_1
 [INFO] Creating default report for observation sim_TrawlSurvey_1
@@ -379,4 +382,4 @@ ireturn = -1
 finished main minimiser loop
 Successful convergence in optimise
 [INFO] Completed
-[INFO] Total elapsed time: 40 seconds
+[INFO] Total elapsed time: 22 seconds

@@ -1,6 +1,9 @@
 
 [INFO] Setting the random number seed to 20
 [INFO] Estimable parameters were loaded from the free parameter file: 
+[INFO] Creating default report for catchability CPUE-Commercialq_1
+[INFO] Creating default report for catchability TrawlSurveyq_1
+[INFO] Creating default report for catchability TrawlSurveyq_2
 [INFO] Creating default report for derived quantity SSB
 [INFO] Creating default report for observation sim_CPUE-Trawl_1
 [INFO] Creating default report for observation sim_TrawlSurvey_1
@@ -71,4 +74,4 @@
 [INFO] Convergence check value = 0.0372473. Convergence tolerance   = 0.02
 [INFO] Convergence check value = 0.0163213. Convergence tolerance   = 0.02
 [INFO] Completed
-[INFO] Total elapsed time: 1.1 minutes
+[INFO] Total elapsed time: 1.017 minutes

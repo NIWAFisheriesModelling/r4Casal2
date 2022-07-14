@@ -245,7 +245,7 @@ expand_shorthand_syntax <- function(syntax) {
   }
   return(repeated_values)
 }
-#' @title strip_comments
+#' @title StripComments
 #'
 #' @description
 #' A utility function for stripping out comments that is
@@ -258,7 +258,7 @@ expand_shorthand_syntax <- function(syntax) {
 #' @rdname strip_coms
 #' @export
 #' @import stats
-strip_comments <- function(file) {
+StripComments <- function(file) {
   file <- file[substring(file, 1, 1) != "#"]
   file <- ifelse(regexpr("#", file) > 0, substring(file, 1, regexpr("#", file) - 1), file)
   file <- file[file != ""]

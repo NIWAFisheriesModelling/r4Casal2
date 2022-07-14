@@ -44,10 +44,24 @@
 [WARNING] obs sum total (0.9999) for year (1998) doesn't sum to 1.0
 [WARNING] obs sum total (0.9997) for year (2000) doesn't sum to 1.0
 [WARNING] obs sum total (0.9997) for year (2001) doesn't sum to 1.0
-[INFO] The likelihood for the observation 'Tangaroa_propn_at_age_Jan' is multinomial. Normalised residuals can only be calculated for the lognormal, lognormal_with_Q, and normal likelihoods
-[INFO] The likelihood for the observation 'trawl_propn_at_age' is multinomial. Normalised residuals can only be calculated for the lognormal, lognormal_with_Q, and normal likelihoods
-[INFO] The likelihood for the observation 'longline_propn_at_length' is multinomial. Normalised residuals can only be calculated for the lognormal, lognormal_with_Q, and normal likelihoods
-[INFO] The likelihood for the observation 'longline_propn_at_age' is multinomial. Normalised residuals can only be calculated for the lognormal, lognormal_with_Q, and normal likelihoods
+[INFO] Creating default report for catchability chatTANq
+[INFO] Creating default report for derived quantity SSB
+[INFO] Creating default report for observation chatTANbiomass
+[INFO] Creating default report for observation Tangaroa_propn_at_age_Jan
+[INFO] Creating default report for observation trawl_propn_at_age
+[INFO] Creating default report for observation longline_propn_at_age
+[INFO] Creating default report for observation longline_propn_at_length
+[INFO] Creating default report for process Recruitment
+[INFO] Creating default report for process Ageing
+[INFO] Creating default report for process instant_mort
+[INFO] Creating default report for selectivity MaturationSel_male
+[INFO] Creating default report for selectivity MaturationSel_female
+[INFO] Creating default report for selectivity chatTANSel_m
+[INFO] Creating default report for selectivity chatTANSel_f
+[INFO] Creating default report for selectivity trwlFSel_m
+[INFO] Creating default report for selectivity trwlFSel_f
+[INFO] Creating default report for selectivity lineFSel
+[INFO] Creating default report for selectivity One
 [INFO] Initiating point estimate run mode
 [INFO] Estimation with the adolc minimiser
 [INFO] Convergence check value = 1.46865. Convergence tolerance   = 1e-06
@@ -129,4 +143,4 @@
 [INFO] Convergence check value = 2.57678e-07. Convergence tolerance   = 1e-06
 [WARNING] estimated parameter 'selectivity[chatTANSel_m].sigma_r' was within 0.001 of upper bound 200
 [INFO] Completed
-[INFO] Total elapsed time: 4 seconds
+[INFO] Total elapsed time: 6 seconds

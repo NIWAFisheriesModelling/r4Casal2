@@ -7,7 +7,7 @@
 #' @return plot of a priors
 #' @rdname plot_prior
 #' @export plot_prior
-
+#' @importFrom graphics axis box lines mtext par polygon
 "plot_prior" <-
 function(type = "lognormal", mu, sd, cv, A = 0, B = 1, bounds, xlim, label = F, xlab = "x", ylab = "Density", logx = F, add = F, dump = F, n = 201, ...) {
   # type define the type of prior to plot. mu, sd, cv are the parameters of the

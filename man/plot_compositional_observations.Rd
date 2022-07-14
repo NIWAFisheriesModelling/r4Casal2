@@ -2,9 +2,17 @@
 % Please edit documentation in R/plot_compositional_observations.R
 \name{plot_compositional_observations}
 \alias{plot_compositional_observations}
+\alias{plot_compositional_observations.casal2MPD}
 \title{plot_compositional_observations}
 \usage{
 plot_compositional_observations(
+  model,
+  report_labels = NULL,
+  plot_type = "classic",
+  plot.it = T
+)
+
+\method{plot_compositional_observations}{casal2MPD}(
   model,
   report_labels = NULL,
   plot_type = "classic",
@@ -26,6 +34,8 @@ plot_compositional_observations(
 }
 \value{
 A ggplot object
+
+\code{NULL}
 }
 \description{
 A plotting function for Casal2 fits to age and length compositional data

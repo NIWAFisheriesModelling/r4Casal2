@@ -5,7 +5,7 @@
 #'
 #' @author Craig Marsh
 #' @param model <casal2MPD, casal2TAB> object that are generated from one of the extract.mpd() and extract.tabular() functions using the Casal2 base library
-#' @param report_label <string>
+#' @param report_label <string> optional if you want to plot a specific recruitement report
 #' @param quantity
 #'  \itemize{
 #'   \item ycs_values
@@ -13,9 +13,7 @@
 #'   \item true_ycs
 #'   \item standardised_ycs
 #' }
-#' @param plot.it Whether to generate a default plot or return the values as a dataframe for personal plots
-#' @param ... remaining plotting options
-#' @return generate a plot over time if plot.it = T, if plot.it = F it will return a matrix of values.
+#' @return generate a plot over time uses get_BH_recruitment
 #' @rdname plot_recruitment
 #' @export plot_recruitment
 #' @importFrom dplyr filter
@@ -24,7 +22,7 @@
 #' If you have multiple time-steps and Recruitment
 
 "plot_recruitment" <-
-  function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
+  function(model, report_label = NULL, quantity = "ycs_values") {
     if(!quantity %in% c("ycs_values", "Recruits", "true_ycs", "standardised_ycs"))
       stop("quantity, has incorrect values please check ?plot_recruitment")
     UseMethod("plot_recruitment", model)
@@ -35,84 +33,16 @@
 #' @rdname plot_recruitment
 #' @method plot_recruitment casal2MPD
 #' @export
-"plot_recruitment.casal2MPD" = function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
-  muliple_iterations_in_a_report = FALSE
-  N_runs = 1
-  temp_DF = NULL
-
-  check_report = check_report_label(report_label = report_label, model = model)
-  if(!check_report$check)
-    stop(check_report$msg)
-
-  ## get the report out
-  this_report = get(report_label, model)
-  ## check that the report label is of type "process"
-  if (any(names(this_report) == "type")) {
-    if (this_report$type != "process")
-      stop(paste0("The report label '", report_label, "' is not a process. Please check that the correct report_label was specified."))
-    if (!(this_report$sub_type %in% c("recruitment_beverton_holt")))
-      stop(paste0("The report label '", report_label, "' is a process that should be type 'recruitment_beverton_holt'."))
-
-  } else {
-    print("multi iteration report found")
-    muliple_iterations_in_a_report = TRUE
-    N_runs = length(this_report)
-    if (this_report$'1'$type != "process")
-      stop(paste0("The report label '", report_label, "' is not a process. Please check that the correct report_label was specified."))
-    if (!(this_report$'1'$sub_type %in% c("recruitment_beverton_holt")))
-      stop(paste0("The report label '", report_label, "' is a process that should be type 'recruitment_beverton_holt'."))
+"plot_recruitment.casal2MPD" = function(model, report_label = NULL, quantity = "ycs_values") {
+  recruit_df = get_BH_recruitment(model)
+  if(!is.null(report_label)) {
+    recruit_df = subset(recruit_df, subset = label %in% report_label)
   }
-  full_df = NULL;
-  if (!muliple_iterations_in_a_report) {
-    ## only a single trajectory
-    standardised_ycs = this_report$standardised_ycs
-    ycs_values = this_report$ycs_values
-    ycs_years = this_report$ycs_years
-    Recruits = this_report$Recruits
-    true_ycs = this_report$true_ycs
-
-    full_df = data.frame(ycs_years = this_report$ycs_years,
-                         standardised_ycs = this_report$standardised_ycs,
-                         ycs_values = this_report$ycs_values,
-                         recruits = this_report$Recruits,
-                         true_ycs = this_report$true_ycs,
-                         par_set = 1,
-                         label = report_label)
-
-
-    ## create a plot
-    plt = ggplot(full_df, aes_string(x = "ycs_years", y = quantity)) +
-      geom_line(size = 2)
-    if(plot.it)
-      return(plt)
-
-  } else {
-    ## Multiple parameter inputs
-    n_runs = length(this_report)
-    for(dash_i in 1:n_runs) {
-      ## only a single trajectory
-      temp_df = data.frame(
-        standardised_ycs = this_report[[dash_i]]$standardised_ycs,
-        ycs_values = this_report[[dash_i]]$ycs_values,
-        ycs_years = this_report[[dash_i]]$ycs_years,
-        Recruits = this_report[[dash_i]]$Recruits,
-        true_ycs = this_report[[dash_i]]$true_ycs,
-        par_set = dash_i,
-        label = report_label)
-      full_df = rbind(full_df, temp_df)
-    }
-    ## create a plot
-    plt = ggplot(full_df, aes_string(x = "ycs_years", y = quantity)) +
-      geom_line(size = 2)
-
-    if(plot.it)
-      return(plt)
-
-  }
-
-  if (plot.it == FALSE)
-    return(full_df)
-  invisible()
+  ## create a plot
+  plt = ggplot(recruit_df, aes_string(x = "ycs_years", y = quantity)) +
+    geom_line(size = 2) +
+    facet_wrap(~label)
+  return(plt)
 }
 
 ## method for class casal2TAB
@@ -121,7 +51,7 @@
 #' @rdname plot_recruitment
 #' @method plot_recruitment casal2TAB
 #' @export
-"plot_recruitment.casal2TAB" = function(model, report_label = "", quantity = "ycs_values", plot.it = T, ...) {
+"plot_recruitment.casal2TAB" = function(model, report_label = "", quantity = "ycs_values") {
 
   invisible()
 }

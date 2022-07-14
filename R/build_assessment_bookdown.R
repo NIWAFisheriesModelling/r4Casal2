@@ -1,9 +1,11 @@
+#' build_assessment_bookdown
 #' @description This function will build a skeleton/template html bookdown summarizing a single model MPD (casal2 -r, -e)
 #' @param csl_dir directory path to where the Casal2 model is. Currently this function assumes config_filename and mpd_filename are in this directory
 #' @param output_folder_name foldername for bookdown. It will be relative to csl_dir
 #' @param mpd_filename the filename for the Casal2 model output
 #' @param config_filename the filename for the Casal2 config. Default is 'config.csl2' can be replaced with others if you use the -c argument when running Casal2
 #' @param verbose if the function unexpectedly quits errors, set this to T to see where the problem lies
+#' @param model_label string a model label used for headers
 #' @return will save a suite of Rmd files in output_dir that can be compiled as a bookdown. It should compile the bookdown in the folder _book
 #' @importFrom Casal2 extract.mpd
 #' @importFrom bookdown render_book
@@ -171,9 +173,9 @@ library(reshape2)
 
   ## Recruitment
   write("## Recruitment \n\n```{r recruit, eval = T, echo = T}", file = model_quant_file, append = T)
-  write("plot_recruitment(model = cas2_mpd, report_label = 'Recruitment_ENLD', type = 'ycs_values') + ylab('YCS values')", file = model_quant_file, append = T)
-  write("plot_recruitment(model = cas2_mpd, report_label = 'Recruitment_ENLD', type = 'standardised_ycs') + ylab('Standardised YCS values')", file = model_quant_file, append = T)
-  write("plot_recruitment(model = cas2_mpd, report_label = 'Recruitment_ENLD', type = 'true_ycs') + ylab('True YCS values')", file = model_quant_file, append = T)
+  write("plot_recruitment(model = cas2_mpd, quantity = 'ycs_values') + ylab('YCS values')", file = model_quant_file, append = T)
+  write("plot_recruitment(model = cas2_mpd, quantity = 'standardised_ycs') + ylab('Standardised YCS values')", file = model_quant_file, append = T)
+  write("plot_recruitment(model = cas2_mpd, quantity = 'true_ycs') + ylab('True YCS values')", file = model_quant_file, append = T)
   write("``` \n", file = model_quant_file, append = T)
 
   ## Exploitation

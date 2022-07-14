@@ -22,16 +22,15 @@ build_assessment_bookdown(
 
 \item{config_filename}{the filename for the Casal2 config. Default is 'config.csl2' can be replaced with others if you use the -c argument when running Casal2}
 
+\item{model_label}{string a model label used for headers}
+
 \item{verbose}{if the function unexpectedly quits errors, set this to T to see where the problem lies}
 }
 \value{
-will save a Rmd files in output_dir that will make a bookdown
+will save a suite of Rmd files in output_dir that can be compiled as a bookdown. It should compile the bookdown in the folder _book
 }
 \description{
-build_assessment_bookdown
-}
-\details{
-Build Bookdown summarising a single model MPD (casal2 -r, -e)
+This function will build a skeleton/template html bookdown summarizing a single model MPD (casal2 -r, -e)
 }
 \examples{
 \dontrun{

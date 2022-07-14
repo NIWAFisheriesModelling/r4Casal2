@@ -6,12 +6,7 @@
 \alias{plot_pressure.casal2TAB}
 \title{plot_pressure plot fishing pressure if there has been an exploitation process reported.}
 \usage{
-plot_pressure(
-  model,
-  report_label = "",
-  fisheryLabels = NULL,
-  quantity = "fishing_pressure"
-)
+plot_pressure(model, fisheryLabels = NULL, quantity = "fishing_pressure")
 
 \method{plot_pressure}{casal2MPD}(model, fisheryLabels = NULL, quantity = "fishing_pressure")
 

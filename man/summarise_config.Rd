@@ -15,6 +15,10 @@ summarise_config(
 \item{config_dir}{path directory}
 
 \item{config_file}{the starting config that starts a Casal2 model default config.csl2, but can be overridden with casal2 -c my_config. in the later case it should be the my_config name}
+
+\item{quiet}{<bool> print out additional information to console. Useful for debugging}
+
+\item{fileEncoding}{<string> for different utf encodings}
 }
 \value{
 

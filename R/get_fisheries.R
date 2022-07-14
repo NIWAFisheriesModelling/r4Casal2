@@ -9,7 +9,7 @@
 #' @rdname get_fisheries
 #' @export get_fisheries
 #' @importFrom reshape2 melt
-#' @importFrom tidyr gather separate spread
+#' @importFrom tidyr gather separate spread %>%
 
 
 "get_fisheries" <-

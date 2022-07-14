@@ -22,7 +22,7 @@
 #' If you have multiple time-steps and fisheries happening at different time-steps it may be useful to use the fisheryLabels command to split out the plots.
 
 "plot_pressure" <-
-function(model, report_label = "", fisheryLabels = NULL, quantity = "fishing_pressure") {
+function(model, fisheryLabels = NULL, quantity = "fishing_pressure") {
   if(!quantity %in% c("fishing_pressure", "exploitation", "catch", "actual_catch"))
     stop("quantity, has incorrect values please check ?plot_recruitment")
   UseMethod("plot_pressure", model)

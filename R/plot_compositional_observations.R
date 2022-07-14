@@ -27,9 +27,14 @@
 
 #' @return \code{NULL}
 #'
+#' @rdname plot_compositional_observations
+#' @method plot_compositional_observations casal2MPD
 #' @export
 "plot_compositional_observations.casal2MPD" <- function(model, report_labels = NULL, plot_type = "classic", plot.it = T) {
   comp_obs = get_composition_observations(model)
+  if(is.null(comp_obs)) {
+    return("Did not find any composition observations")
+  }
   if(!is.null(report_labels)) {
     comp_obs = subset(comp_obs, subset = comp_obs$observation_label %in% report_labels)
   }

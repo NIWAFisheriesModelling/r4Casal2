@@ -41,6 +41,9 @@
 #' @export
 "plot_relative_index.casal2MPD" <- function(model, report_labels = NULL, plot_type = "classic", plot.it = T) {
   abundance_obs = get_abundance_observations(model)
+  if(is.null(abundance_obs)) {
+    return("Did not find any abundance observations")
+  }
   multiple_iterations_in_a_report = F
   if(length(unique(abundance_obs$par_set)) > 1)
     multiple_iterations_in_a_report = T

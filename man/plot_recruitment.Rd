@@ -6,34 +6,16 @@
 \alias{plot_recruitment.casal2TAB}
 \title{plot_recruitment plot recuitment}
 \usage{
-plot_recruitment(
-  model,
-  report_label = "",
-  quantity = "ycs_values",
-  plot.it = T,
-  ...
-)
+plot_recruitment(model, report_label = NULL, quantity = "ycs_values")
 
-\method{plot_recruitment}{casal2MPD}(
-  model,
-  report_label = "",
-  quantity = "ycs_values",
-  plot.it = T,
-  ...
-)
+\method{plot_recruitment}{casal2MPD}(model, report_label = NULL, quantity = "ycs_values")
 
-\method{plot_recruitment}{casal2TAB}(
-  model,
-  report_label = "",
-  quantity = "ycs_values",
-  plot.it = T,
-  ...
-)
+\method{plot_recruitment}{casal2TAB}(model, report_label = "", quantity = "ycs_values")
 }
 \arguments{
 \item{model}{<casal2MPD, casal2TAB> object that are generated from one of the extract.mpd() and extract.tabular() functions using the Casal2 base library}
 
-\item{report_label}{<string>}
+\item{report_label}{<string> optional if you want to plot a specific recruitement report}
 
 \item{quantity}{\itemize{
   \item ycs_values
@@ -41,13 +23,9 @@ plot_recruitment(
   \item true_ycs
   \item standardised_ycs
 }}
-
-\item{plot.it}{Whether to generate a default plot or return the values as a dataframe for personal plots}
-
-\item{...}{remaining plotting options}
 }
 \value{
-generate a plot over time if plot.it = T, if plot.it = F it will return a matrix of values.
+generate a plot over time uses get_BH_recruitment
 
 \code{NULL}
 

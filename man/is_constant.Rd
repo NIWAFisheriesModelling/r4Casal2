@@ -7,6 +7,11 @@ is a vector constant}
 \usage{
 is_constant(x, tol = .Machine$double.eps)
 }
+\arguments{
+\item{x}{vector}
+
+\item{tol}{the magnitude that flags a difference}
+}
 \description{
 is_constant
 is a vector constant

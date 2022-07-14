@@ -5,6 +5,8 @@
 #' @author Craig Marsh
 #' @param config_dir path directory
 #' @param config_file the starting config that starts a Casal2 model default config.csl2, but can be overridden with casal2 -c my_config. in the later case it should be the my_config name
+#' @param quiet <bool> print out additional information to console. Useful for debugging
+#' @param fileEncoding <string> for different utf encodings
 #' @importFrom Casal2 extract.csl2.file
 #' @return
 #' @examples
@@ -24,7 +26,10 @@
 summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet = T, fileEncoding = "") {
   config_file_in = scan(file = file.path(config_dir, config_file), what = "", sep = "\n", quiet = T)
   ## deal with comments
-  config_file_in <- strip_coms(config_file_in)
+  config_file_in <- strip_comments(config_file_in)
+  ## ignore all file lines that are not an !include
+  include_lines = grepl(pattern = "!include", config_file_in)
+  config_file_in = config_file_in[include_lines]
   ## get includes assumes file names have \" \"
   config_file_in = substring(config_file_in, first = 10) # '!include ' is 10 characters
   ## check for '"'
@@ -46,14 +51,17 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
   categories_list = list()
   age_length_list = list()
   length_weight_list = list();
+  growth_list = list();
   category_labels = NULL
   observation_labels = NULL
   category_age_lengths = NULL;
+  category_growth_increments = NULL;
   category_format = NULL
   model_years = NULL
   model_length_bins = NULL
   ages = NULL
   time_steps = NULL
+  length_based_model = NULL
   for(i in 1:length(config_file_in)) {
     if(!file.exists(file.path(config_dir, config_file_in[i])))
       cat("couldn't find file = ", file.path(config_dir, config_file_in[i]))
@@ -67,9 +75,21 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
     labels = (sapply(strsplit(labels, split = "\\]"), "[", 1))
     for(j in 1:length(this_file)) {
       if(tolower(blocks[j]) == "model") {
-        model_block[[labels[j]]] = this_file[[j]]
+        if(is.null(this_file[[j]]$type)) {
+          length_based_model = FALSE
+          ## default is age based
+        } else {
+          if(this_file[[j]]$type$value == "length") {
+            length_based_model = TRUE
+          } else {
+            length_based_model = FALSE
+          }
+        }
+        model_block[["model"]] = this_file[[j]]
         model_years = as.numeric(this_file[[j]]$start_year$value):as.numeric(this_file[[j]]$final_year$value)
-        ages = as.numeric(this_file[[j]]$min_age$value):as.numeric(this_file[[j]]$max_age$value)
+        # could be a length based model
+        if(!is.null(this_file[[j]]$min_age))
+          ages = as.numeric(this_file[[j]]$min_age$value):as.numeric(this_file[[j]]$max_age$value)
         time_steps = this_file[[j]]$time_steps$value
         if(!is.null(this_file[[j]]$length_bins)) {
           for(k in 1:length(this_file[[j]]$length_bins$value))
@@ -79,17 +99,25 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
       } else if(tolower(blocks[j]) == "time_step") {
         time_steps_list[[labels[j]]] = this_file[[j]]$processes$value
       } else if(tolower(blocks[j]) == "categories") {
-        categories_list[[labels[j]]] = this_file[[j]]
         for(k in 1:length(this_file[[j]]$names$value)) {
           category_labels = c(category_labels, expand_category_block(categories = this_file[[j]]$names$value[k]))
         }
-        for(k in 1:length(this_file[[j]]$age_lengths$value)) {
-          category_age_lengths = c(category_age_lengths, expand_shorthand_syntax(syntax = this_file[[j]]$age_lengths$value[k]))
+        if(!is.null(this_file[[j]]$age_lengths)) {
+          for(k in 1:length(this_file[[j]]$age_lengths$value)) {
+            category_age_lengths = c(category_age_lengths, expand_shorthand_syntax(syntax = this_file[[j]]$age_lengths$value[k]))
+          }
+        }
+        if(!is.null(this_file[[j]]$growth_increment)) {
+          for(k in 1:length(this_file[[j]]$growth_increment$value)) {
+            category_growth_increments = c(category_growth_increments, expand_shorthand_syntax(syntax = this_file[[j]]$growth_increment$value[k]))
+          }
         }
         if(!is.null(this_file[[j]]$format))
           category_format = this_file[[j]]$format$value
       } else if(tolower(blocks[j]) == "age_length") {
         age_length_list[[labels[j]]] = this_file[[j]]
+      } else if(tolower(blocks[j]) == "growth_increment") {
+        growth_list[[labels[j]]] = this_file[[j]]
       } else if(tolower(blocks[j]) == "process") {
         process_blocks[[labels[j]]] = this_file[[j]]
       } else if(tolower(blocks[j]) == "length_weight") {
@@ -107,26 +135,50 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
   category_df = full_category_df = NULL
   age_length_time_step_growth = NULL
   for(i in 1:length(category_labels)) {
-    ## get process type
-    this_category = categories_list[[category_labels[i]]]
-    ## get age-length label type
-    this_age_length = age_length_list[[category_age_lengths[i]]]
-    ## get length-weight label type
-    this_length_weight = length_weight_list[[this_age_length$length_weight$value]]
-    distribution = "normal" # default
-    if(!is.null(this_age_length$distribution))
-      distribution = this_age_length$distribution
-    this_cat_df = data.frame("Category" = category_labels[i], "AgeLength" = category_age_lengths[i], "LengthWeight" = this_age_length$length_weight$value, "Distribution" = distribution)
+    if(!length_based_model) {
 
-    this_cat_full_df = data.frame("Category" = category_labels[i], "AgeLength" = paste0(category_age_lengths[i], " (",this_age_length$type$value, ")"),
-                                  "LengthWeight" = paste0(this_age_length$length_weight$value, " (",this_length_weight$type$value, ")"), "Distribution" = distribution)
+      ## get age-length label type
+      this_age_length = age_length_list[[category_age_lengths[i]]]
+      ## get length-weight label type
+      this_length_weight = length_weight_list[[this_age_length$length_weight$value]]
+      distribution = "normal" # default
+      if(!is.null(this_age_length$distribution))
+        distribution = this_age_length$distribution
+      this_cat_df = data.frame("Category" = category_labels[i], "AgeLength" = category_age_lengths[i], "LengthWeight" = this_age_length$length_weight$value, "Distribution" = distribution)
 
-    category_df = rbind(category_df, this_cat_df)
-    full_category_df = rbind(full_category_df, this_cat_full_df)
-    if(is.null(age_length_time_step_growth))
-      age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(AgeLength = category_age_lengths[i], time_step_proportions = this_age_length$time_step_proportions$value))
-    if(!category_age_lengths[i] %in% age_length_time_step_growth$AgeLength)
-      age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(AgeLength = category_age_lengths[i], time_step_proportions = this_age_length$time_step_proportions$value))
+      this_cat_full_df = data.frame("Category" = category_labels[i], "AgeLength" = paste0(category_age_lengths[i], " (",this_age_length$type$value, ")"),
+                                    "LengthWeight" = paste0(this_age_length$length_weight$value, " (",this_length_weight$type$value, ")"), "Distribution" = distribution)
+
+      category_df = rbind(category_df, this_cat_df)
+      if(is.null(this_age_length$time_step_proportions$value))
+        this_age_length$time_step_proportions$value = 0.0;
+
+      full_category_df = rbind(full_category_df, this_cat_full_df)
+      if(is.null(age_length_time_step_growth))
+        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(AgeLength = category_age_lengths[i], time_step_proportions = this_age_length$time_step_proportions$value))
+      if(!category_age_lengths[i] %in% age_length_time_step_growth$AgeLength)
+        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(AgeLength = category_age_lengths[i], time_step_proportions = this_age_length$time_step_proportions$value))
+    } else {
+      ## get age-length label type
+      this_growth = growth_list[[category_growth_increments[i]]]
+      ## get length-weight label type
+      this_length_weight = length_weight_list[[this_growth$length_weight$value]]
+      distribution = "normal" # default
+      if(!is.null(this_growth$distribution))
+        distribution = this_age_length$distribution
+      this_cat_df = data.frame("Category" = category_labels[i], "GrowthIncrement" = category_growth_increments[i], "LengthWeight" = this_growth$length_weight$value, "Distribution" = distribution)
+
+      this_cat_full_df = data.frame("Category" = category_labels[i], "GrowthIncrement" = paste0(category_growth_increments[i], " (",this_growth$type$value, ")"),
+                                    "LengthWeight" = paste0(this_growth$length_weight$value, " (",this_length_weight$type$value, ")"), "Distribution" = distribution)
+
+      category_df = rbind(category_df, this_cat_df)
+      full_category_df = rbind(full_category_df, this_cat_full_df)
+      if(is.null(age_length_time_step_growth))
+        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(GrowthIncrement = category_growth_increments[i], time_step_proportions = this_growth$time_step_proportions$value))
+      if(!category_growth_increments[i] %in% age_length_time_step_growth$GrowthIncrement)
+        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(GrowthIncrement = category_growth_increments[i], time_step_proportions = this_growth$time_step_proportions$value))
+
+    }
   }
   ## Observations
   obs_year_df = NULL
@@ -159,15 +211,27 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
     time_step_df = rbind(time_step_df, this_step)
     time_step_df_just_lab = rbind(time_step_df_just_lab, data.frame(time_step = time_steps[i], processes = paste(proceses, collapse = ", ")))
   }
-  age_length_labs = unique(age_length_time_step_growth$AgeLength)
-  for(i in 1:length(age_length_labs)) {
-    this_growth = age_length_time_step_growth[which(age_length_time_step_growth$AgeLength == age_length_labs[i]),]
-    time_step_df = cbind(time_step_df, this_growth$time_step_proportions)
-    time_step_df_just_lab = cbind(time_step_df_just_lab, this_growth$time_step_proportions)
+  if(!length_based_model) {
+    age_length_labs = unique(age_length_time_step_growth$AgeLength)
+    for(i in 1:length(age_length_labs)) {
+      this_growth = age_length_time_step_growth[which(age_length_time_step_growth$AgeLength == age_length_labs[i]),]
+      time_step_df = cbind(time_step_df, this_growth$time_step_proportions)
+      time_step_df_just_lab = cbind(time_step_df_just_lab, this_growth$time_step_proportions)
+    }
+    age_length_labs = paste0(age_length_labs, " (assumed growth)")
+    colnames(time_step_df_just_lab) = c("Time-step", "Processes", age_length_labs)
+    colnames(time_step_df) = c("Time-step", "Processes (type)", age_length_labs)
+  } else {
+    age_length_labs = unique(age_length_time_step_growth$GrowthIncrement)
+    for(i in 1:length(age_length_labs)) {
+      this_growth = age_length_time_step_growth[which(age_length_time_step_growth$GrowthIncrement == age_length_labs[i]),]
+      time_step_df = cbind(time_step_df, this_growth$time_step_proportions)
+      time_step_df_just_lab = cbind(time_step_df_just_lab, this_growth$time_step_proportions)
+    }
+    age_length_labs = paste0(age_length_labs, " (assumed growth)")
+    colnames(time_step_df_just_lab) = c("Time-step", "Processes", age_length_labs)
+    colnames(time_step_df) = c("Time-step", "Processes (type)", age_length_labs)
   }
-  age_length_labs = paste0(age_length_labs, " (assumed growth)")
-  colnames(time_step_df_just_lab) = c("Time-step", "Processes", age_length_labs)
-  colnames(time_step_df) = c("Time-step", "Processes (type)", age_length_labs)
 
 
   ## Catch and M
@@ -247,5 +311,5 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
     }
   }
 
-  return(list(category_df = category_df, estimate_df = estimate_df, full_category_df = full_category_df, method_df = method_df, catch_df = catch_df, time_step_df = time_step_df, time_step_df_just_lab = time_step_df_just_lab, obs_year_df = obs_year_df, model_years = model_years, model_ages = ages, model_length_bins = model_length_bins, M_by_category = M_by_category))
+  return(list(category_df = category_df, estimate_df = estimate_df, full_category_df = full_category_df, method_df = method_df, catch_df = catch_df, time_step_df = time_step_df, time_step_df_just_lab = time_step_df_just_lab, obs_year_df = obs_year_df, model_years = model_years, model_ages = ages, model_length_bins = model_length_bins, M_by_category = M_by_category, model_block = model_block[["model"]]))
 }

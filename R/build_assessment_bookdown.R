@@ -51,6 +51,8 @@ build_assessment_bookdown <- function(csl_dir, output_folder_name, mpd_filename,
 
   }
   dir.create(output_dir)
+  if(verbose)
+    print(paste0("creating 'output_dir' ", output_dir))
   ## build a skeleton Bookdown
   bookdown:::bookdown_skeleton(output_dir)
   ## get rid of these skeleton changes. This may need tweaking over time

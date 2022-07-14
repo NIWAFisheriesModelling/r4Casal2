@@ -3,10 +3,6 @@
 library(devtools)
 library(roxygen2)
 document()
-
 devtools::install()
-devtools::check()
-
-library(r4Casal2)
-
-?plot.relative_index
+## devtools::check() doesn't like how we have put Casal2 in the Suggests:
+testthat::test_dir("tests/testthat/")

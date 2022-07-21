@@ -74,12 +74,13 @@
       geom_errorbar(aes(ymin=L_CI, ymax=U_CI, col = "95% CI")) +
       geom_point(aes(y = observed, col = "observed"), size = 2) +
       geom_point(aes(y = expected, col = "expected"), size = 2) +
+      geom_line(aes(y = expected, col = "expected"), size = 1.5, linetype = "dashed") +
       scale_colour_manual(name="Key",values=col_pallete)
 
     if(multiple_iterations_in_a_report) {
-      plt = plt + facet_grid(par_set~observation_label)
+      plt = plt + facet_grid(par_set~observation_label, scales	= "free_y")
     } else {
-      plt = plt + facet_wrap(~observation_label)
+      plt = plt + facet_wrap(~observation_label, scales	= "free_y")
     }
   } else if(plot_type == "classic_ribbon") {
     plt = ggplot(abundance_obs, aes(x = year, group = observation_label, col = observation_label)) +
@@ -90,9 +91,9 @@
       scale_fill_manual(name="Key",values=col_pallete) +
       scale_alpha(guide = 'none') +
       if(multiple_iterations_in_a_report) {
-        plt = plt + facet_grid(par_set~observation_label)
+        plt = plt + facet_grid(par_set~observation_label, scales	= "free_y")
       } else {
-        plt = plt + facet_wrap(~observation_label)
+        plt = plt + facet_wrap(~observation_label, scales	= "free_y")
       }
 
   } else if(plot_type == "residual") {
@@ -114,9 +115,9 @@
     }
 
     if(multiple_iterations_in_a_report) {
-      plt = plt + facet_grid(par_set~observation_label)
+      plt = plt + facet_grid(par_set~observation_label, scales	= "free_y")
     } else {
-      plt = plt + facet_wrap(~observation_label)
+      plt = plt + facet_wrap(~observation_label, scales	= "free_y")
     }
   }
 

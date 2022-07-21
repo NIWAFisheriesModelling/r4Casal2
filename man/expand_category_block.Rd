@@ -50,6 +50,4 @@ expand_category_shorthand(shorthand_categories ="stock=BOP", reference_categorie
 }
 \author{
 Craig Marsh
-
-Craig Marsh
 }

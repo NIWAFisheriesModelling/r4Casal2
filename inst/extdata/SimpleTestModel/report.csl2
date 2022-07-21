@@ -17,3 +17,15 @@ time_step step1
 
 @report estimate_value
 type estimate_value
+
+@report estimate_summary
+type estimate_summary
+
+@report hessian_matrix
+type hessian_matrix
+
+@report covariance_matrix
+type covariance_matrix
+
+@report correlation_matrix
+type correlation_matrix

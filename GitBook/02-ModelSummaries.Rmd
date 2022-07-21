@@ -14,8 +14,7 @@ names(summary)
 ```
 
 ```{r input_catches, fig.width=6, fig.height=4}
-catches_melted = melt(summary$catch_df, id.vars = c("process", "year"))
-ggplot(catches_melted, aes(x = year, y = value, col = variable)) +
+ggplot(summary$catch_df, aes(x = year, y = catch, col = fishery)) +
   geom_line(size = 1.5) +
   labs(x = "Year", y = "Catch (t)", col = "Fishery")
 ```

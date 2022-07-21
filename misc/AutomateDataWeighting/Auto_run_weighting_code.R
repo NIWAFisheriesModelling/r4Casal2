@@ -51,9 +51,9 @@ while(max_tolerance > 0.01) {
     # change the subcommand 'error_value_multiplier'
     if(is.null(this_obs$error_value_multiplier)) {
       this_obs$error_value_multiplier = list()
-      this_obs$error_value_multiplier$value = 10
+      this_obs$error_value_multiplier$value = weight
     } else {
-      this_obs$error_value_multiplier$value = 10
+      this_obs$error_value_multiplier$value = weight
     }
     # the francis method wants weight = 1.0
 

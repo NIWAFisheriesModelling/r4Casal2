@@ -2,7 +2,7 @@
 % Please edit documentation in R/UtilityFunctions.R
 \name{is_matrix_invertable}
 \alias{is_matrix_invertable}
-\title{helper function to see if a matrix is invertable}
+\title{is_matrix_invertable}
 \usage{
 is_matrix_invertable(m)
 }

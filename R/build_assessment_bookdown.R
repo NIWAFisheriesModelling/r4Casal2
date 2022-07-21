@@ -104,13 +104,12 @@ library(reshape2)
   write("```{r read_in_info, eval = T, echo = T, results = F}", file = model_input_file, append = T)
   write(paste0("cas2_mpd = extract.mpd(file = '",mpd_filename,"', path = csl_dir)"), file = model_input_file, append = T)
   write(paste0("config_summary = summarise_config(config_file = '",config_filename,"', config_dir = csl_dir)"), file = model_input_file, append = T)
-  write('catches_melted = melt(config_summary$catch_df, id.vars = c("process", "year"))', file = model_input_file, append = T)
   write("```\n\n\n", file = model_input_file, append = T)
 
   ## Plot input Catch
   write('## Input catches\n\n```{r plot_input_catches, eval = T, echo = T, results = T,fig.cap = "Catch by fishery over time"}', file = model_input_file, append = T)
   write(
-'ggplot(catches_melted, aes(x = year, y = value, col = variable)) +
+'ggplot(config_summary$catch_df, aes(x = year, y = catch, col = fishery)) +
   geom_line(size = 1.5) +
   labs(x = "Year", y = "Catch (t)", col = "Fishery")', file = model_input_file, append = T)
   write("```\n\n\n", file = model_input_file, append = T)

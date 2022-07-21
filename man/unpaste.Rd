@@ -7,7 +7,7 @@
 unpaste(string, sep)
 }
 \value{
-
+unpasted string
 }
 \description{
 unpaste

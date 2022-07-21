@@ -21,7 +21,7 @@ summarise_config(
 \item{fileEncoding}{<string> for different utf encodings}
 }
 \value{
-
+data.frame with different Casal2 input values
 }
 \description{
 utility function that reads in config.csl2 file and summarises a model in table formats and plots
@@ -37,6 +37,7 @@ names(summary)
 ggplot(summary$obs_year_df, aes(x = year, y = observation, col = observation, size = active)) +
 geom_point() +
 guides(colour = "none", size = "none")
+config_dir = "C:\\\\Users\\\\marshc\\\\OneDrive - NIWA\\\\22_23\\\\SNA1\\\\csl\\\\P30 Base HGBP\\\\Casal2"
 }
 }
 \author{

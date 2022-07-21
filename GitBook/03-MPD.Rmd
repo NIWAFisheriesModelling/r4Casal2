@@ -34,7 +34,19 @@ mpd = extract.mpd(file = mpd_file_name)
 isSymmetric(mpd$covar$covariance_matrix)
 # is hessian invertable
 is_matrix_invertable(mpd$hess$hessian_matrix)
+# check high correlations
+correlation_matrix = cov2cor(mpd$covar$covariance_matrix)
+corr_df = get_high_correlations(correlation_matrix = correlation_matrix, max_correlation = 0.8, 
+                      labels = names(mpd$estimate_value$values))
+corr_df$correlation = round(corr_df$correlation, 3)
 ```
+
+```{r correlated_params}
+kable(x = corr_df[,c("correlation", "row_param", "col_param")], 
+      caption = "Correlated Parameters")
+```
+You will want to try remove high correlations from the covariance to help estimation and MCMC simulations. We recommend you explore parameter transformations to remove high correlations or alternative parameterisations.
+
 
 Once these are satisfied you will have more confidence in your standard errors, in addition to being able to run MCMC run mode.
 

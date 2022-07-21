@@ -47,6 +47,10 @@
 * `summarise_config` Will summarize input files see Section \@ref(summariseinputs)
 
 
+* `calculate_composition_stage_two_weights` Calculates the stage-two weights using @francis2011data TA1.8 method.
+
+
+* `get_high_correlations` Returns index of parameters that have high correlations from MPD.
 
 
 

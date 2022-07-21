@@ -1,4 +1,5 @@
-#' helper function to see if a matrix is invertable
+#' is_matrix_invertable
+#' @description helper function to see if a matrix is invertable
 #' @param m an n x n matrix
 #' @export
 #' @return bool
@@ -37,7 +38,7 @@ should_return_NA <- function(x) {
 
 #' unpaste
 #' @export
-#' @return
+#' @return unpasted string
 unpaste <- function (string, sep)  {
   return(unlist(strsplit(string, split = sep)))
 }

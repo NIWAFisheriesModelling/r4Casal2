@@ -10,7 +10,8 @@ build_assessment_bookdown(
   mpd_filename,
   config_filename = "config.csl2",
   model_label = NULL,
-  verbose = F
+  verbose = F,
+  prompt_user_before_deleting = T
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ build_assessment_bookdown(
 \item{model_label}{string a model label used for headers}
 
 \item{verbose}{if the function unexpectedly quits errors, set this to T to see where the problem lies}
+
+\item{prompt_user_before_deleting}{<bool> everytime this function is run it can delete existing bookdowns. Should always be T, unless used in unittests}
 }
 \value{
 will save a suite of Rmd files in output_dir that can be compiled as a bookdown. It should compile the bookdown in the folder _book

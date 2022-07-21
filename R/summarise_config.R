@@ -7,8 +7,9 @@
 #' @param config_file the starting config that starts a Casal2 model default config.csl2, but can be overridden with casal2 -c my_config. in the later case it should be the my_config name
 #' @param quiet <bool> print out additional information to console. Useful for debugging
 #' @param fileEncoding <string> for different utf encodings
+#' @return data.frame with different Casal2 input values
 #' @importFrom Casal2 extract.csl2.file
-#' @return
+#' @importFrom reshape2 melt
 #' @examples
 #' \dontrun{
 #' library(r4Casal2)
@@ -20,6 +21,7 @@
 #' ggplot(summary$obs_year_df, aes(x = year, y = observation, col = observation, size = active)) +
 #' geom_point() +
 #' guides(colour = "none", size = "none")
+#' config_dir = "C:\\Users\\marshc\\OneDrive - NIWA\\22_23\\SNA1\\csl\\P30 Base HGBP\\Casal2"
 #' }
 #' @rdname summarise_config
 #' @export summarise_config
@@ -269,13 +271,14 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
         colnames(this_catch) = names(this_process$Table$catches)
         this_catch = as.data.frame(this_catch)
         this_catch$process = names(process_blocks)[i]
-        catch_df = rbind(catch_df, this_catch)
+        molten_catch = melt(this_catch,id.vars = c("year","process"), value.name = "catch", variable.name = "fishery")
+        catch_df = rbind(catch_df, molten_catch)
 
         this_method = Reduce(cbind, this_process$Table$method)
         colnames(this_method) = names(this_process$Table$method)
         this_method = as.data.frame(this_method, stringsAsFactors = F)
-        for(i in 1:nrow(this_method))
-          this_method$category[i] = paste(expand_category_shorthand(this_method$category[i] , category_labels, category_format = category_format), collapse = ",")
+        for(k in 1:nrow(this_method))
+          this_method$category[k] = paste(expand_category_shorthand(this_method$category[k] , category_labels, category_format = category_format), collapse = ",")
 
         this_method$process = names(process_blocks)[i]
         method_df = rbind(method_df, this_method)

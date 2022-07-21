@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-07-14" />
+<meta name="date" content="2022-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -250,10 +250,9 @@ div.csl-indent {
 ##  [7] &quot;time_step_df_just_lab&quot; &quot;obs_year_df&quot;           &quot;model_years&quot;          
 ## [10] &quot;model_ages&quot;            &quot;model_length_bins&quot;     &quot;M_by_category&quot;        
 ## [13] &quot;model_block&quot;</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="summariseinputs.html#cb4-1" aria-hidden="true" tabindex="-1"></a>catches_melted <span class="ot">=</span> <span class="fu">melt</span>(summary<span class="sc">$</span>catch_df, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&quot;process&quot;</span>, <span class="st">&quot;year&quot;</span>))</span>
-<span id="cb4-2"><a href="summariseinputs.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(catches_melted, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">col =</span> variable)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="summariseinputs.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="summariseinputs.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Catch (t)&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Fishery&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="summariseinputs.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary<span class="sc">$</span>catch_df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> catch, <span class="at">col =</span> fishery)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="summariseinputs.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="summariseinputs.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Catch (t)&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Fishery&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/input_catches-1.png" width="576" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="summariseinputs.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary<span class="sc">$</span>obs_year_df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> observation, <span class="at">col =</span> observation, <span class="at">size =</span> active)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="summariseinputs.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>

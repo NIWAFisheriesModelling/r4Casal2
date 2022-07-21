@@ -26,6 +26,10 @@
 #' @rdname summarise_config
 #' @export summarise_config
 summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet = T, fileEncoding = "") {
+  ## check file exists
+  if(!file.exists(file.path(config_dir, config_file)))
+    stop(paste0("Could not find ", config_file, " at ", config_dir))
+
   config_file_in = scan(file = file.path(config_dir, config_file), what = "", sep = "\n", quiet = T)
   ## deal with comments
   config_file_in <- StripComments(config_file_in)

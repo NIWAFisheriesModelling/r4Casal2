@@ -4,6 +4,8 @@
 #' @param max_correlation the max correlation value. must be a value between (0 - 1)
 #' @param labels parameter labels for the correlation matrix
 #' @return data frame of row and column index and paramater label if labels supplied along with the correlation value
+#' @rdname get_high_correlations
+#' @export get_high_correlations
 get_high_correlations <- function(correlation_matrix, max_correlation = 0.8, labels = NULL) {
   if(!any(class(correlation_matrix) == "matrix"))
     stop("correlation_matrix is not a matrix")

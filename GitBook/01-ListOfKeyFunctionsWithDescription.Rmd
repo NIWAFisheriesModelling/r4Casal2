@@ -53,5 +53,8 @@
 * `get_high_correlations` Returns index of parameters that have high correlations from MPD.
 
 
+* `run_automatic_reweighting` Automatically apply iterative reweighting methods for a Casal2 model
+
+
 
 

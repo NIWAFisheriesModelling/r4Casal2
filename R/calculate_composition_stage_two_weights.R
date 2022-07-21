@@ -6,6 +6,8 @@
 #' @return data.frame of second stage weights
 #' @importFrom Rdpack reprompt
 #' @importFrom Casal2 Method.TA1.8
+#' @rdname calculate_composition_stage_two_weights
+#' @export calculate_composition_stage_two_weights
 #' @references
 #' \insertAllCited{}
 calculate_composition_stage_two_weights <- function(model, observation_labels = NULL) {

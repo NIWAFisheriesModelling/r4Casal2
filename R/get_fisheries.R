@@ -62,9 +62,9 @@
       complete_df = rbind(complete_df, full_df)
 
     } else {
-      if(this_report$'1'$type != "process")
+      if(this_report[[1]]$type != "process")
         next;
-      if(this_report$'1'$type == "process" & this_report$'1'$sub_type != "mortality_instantaneous")
+      if(this_report[[1]]$type == "process" & this_report[[1]]$sub_type != "mortality_instantaneous")
         next;
       ## Multiple parameter inputs
       n_runs = length(this_report)

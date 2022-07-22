@@ -4,13 +4,16 @@
 \alias{plot_recruitment}
 \alias{plot_recruitment.casal2MPD}
 \alias{plot_recruitment.casal2TAB}
+\alias{plot_recruitment.list}
 \title{plot_recruitment plot recuitment}
 \usage{
 plot_recruitment(model, report_label = NULL, quantity = "ycs_values")
 
 \method{plot_recruitment}{casal2MPD}(model, report_label = NULL, quantity = "ycs_values")
 
-\method{plot_recruitment}{casal2TAB}(model, report_label = "", quantity = "ycs_values")
+\method{plot_recruitment}{casal2TAB}(model, report_label = NULL, quantity = "ycs_values")
+
+\method{plot_recruitment}{list}(model, report_label = NULL, quantity = "ycs_values")
 }
 \arguments{
 \item{model}{<casal2MPD, casal2TAB> object that are generated from one of the extract.mpd() and extract.tabular() functions using the Casal2 base library}

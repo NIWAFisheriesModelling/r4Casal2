@@ -7,20 +7,20 @@
 \alias{plot_derived_quantities.list}
 \title{plot_derived_quantities default}
 \usage{
-plot_derived_quantities(model, plot_type = "classic", plot.it = T)
+plot_derived_quantities(model)
 
-\method{plot_derived_quantities}{casal2MPD}(model, plot_type = "classic", plot.it = T)
+\method{plot_derived_quantities}{casal2MPD}(model)
 
-\method{plot_derived_quantities}{casal2TAB}(model, plot_type = "classic", plot.it = T)
+\method{plot_derived_quantities}{casal2TAB}(model)
 
-\method{plot_derived_quantities}{list}(model, plot_type = "classic", plot.it = T)
+\method{plot_derived_quantities}{list}(model)
 }
 \arguments{
 \item{model}{<casal2MPD, casal2TAB, list> object that are generated from one of the extract() functions. If list then we expect multiple mpd runs (should be a named list )}
 
-\item{plot_type}{string}
-
 \item{plot.it}{Whether to generate a default plot or return the values as a matrix.}
+
+\item{plot_type}{string}
 }
 \value{
 A ggplot object

@@ -1,5 +1,6 @@
 #' build_assessment_bookdown
 #' @description This function will build a skeleton/template html bookdown summarizing a single model MPD (casal2 -r, -e)
+#' @author Craig Marsh
 #' @param csl_dir directory path to where the Casal2 model is. Currently this function assumes config_filename and mpd_filename are in this directory
 #' @param output_folder_name foldername for bookdown. It will be relative to csl_dir
 #' @param mpd_filename the filename for the Casal2 model output
@@ -188,9 +189,9 @@ library(reshape2)
 
   ## Exploitation
   write("## Exploitation \n\n```{r exploitation, eval = T, echo = T}", file = model_quant_file, append = T)
-  write("plot_pressure(model = cas2_mpd, quantity = 'fishing_pressure') + ylab('Fishing Pressure')", file = model_quant_file, append = T)
-  write("plot_pressure(model = cas2_mpd, quantity = 'exploitation') + ylab('Exploitation')", file = model_quant_file, append = T)
-  write("plot_pressure(model = cas2_mpd, quantity = 'actual_catch') + ylab('Actual Catch')", file = model_quant_file, append = T)
+  write("plot_fishery(model = cas2_mpd, quantity = 'fishing_pressure') + ylab('Fishing Pressure')", file = model_quant_file, append = T)
+  write("plot_fishery(model = cas2_mpd, quantity = 'exploitation') + ylab('Exploitation')", file = model_quant_file, append = T)
+  write("plot_fishery(model = cas2_mpd, quantity = 'actual_catch') + ylab('Actual Catch')", file = model_quant_file, append = T)
   write("``` \n", file = model_quant_file, append = T)
 
   ## Selectivities

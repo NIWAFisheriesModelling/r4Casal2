@@ -1,7 +1,7 @@
-#' @title plot_pressure plot fishing pressure if there has been an exploitation process reported.
+#' @title plot_fishery plot fishing pressure if there has been an exploitation process reported.
 #'
 #' @description
-#' A plotting function to plot fishing presuure (U's ) for 'casal2TAB' and 'casal2MPD' objects.
+#' A plotting function to plot a range of fishery attributes (only instantenous_mortality) for 'casal2TAB' and 'casal2MPD' objects.
 #'
 #' @author Craig Marsh
 #' @param model <casal2MPD, casal2TAB> object that are generated from one of the extract.mpd() and extract.tabular() functions using the Casal2 base library
@@ -14,26 +14,26 @@
 #'   \item actual_catch
 #' }
 #' @return generate a plot over time if plot.it = T, if plot.it = F it will return a matrix of values.
-#' @rdname plot_pressure
-#' @export plot_pressure
+#' @rdname plot_fishery
+#' @export plot_fishery
 #' @importFrom dplyr filter
 #' @importFrom ggplot2 ggplot geom_line aes theme facet_wrap aes_string
 #' @details
 #' If you have multiple time-steps and fisheries happening at different time-steps it may be useful to use the fisheryLabels command to split out the plots.
 
-"plot_pressure" <-
+"plot_fishery" <-
 function(model, fisheryLabels = NULL, quantity = "fishing_pressure") {
   if(!quantity %in% c("fishing_pressure", "exploitation", "catch", "actual_catch"))
     stop("quantity, has incorrect values please check ?plot_recruitment")
-  UseMethod("plot_pressure", model)
+  UseMethod("plot_fishery", model)
 }
 
 #' @return \code{NULL}
 #'
-#' @rdname plot_pressure
-#' @method plot_pressure casal2MPD
+#' @rdname plot_fishery
+#' @method plot_fishery casal2MPD
 #' @export
-"plot_pressure.casal2MPD" = function(model, fisheryLabels = NULL, quantity = "fishing_pressure") {
+"plot_fishery.casal2MPD" = function(model, fisheryLabels = NULL, quantity = "fishing_pressure") {
   fishery_df = get_fisheries(model)
   ggplot(fishery_df, aes_string(x = "year", y = quantity, col = "fishery")) +
     geom_line(size = 2) +
@@ -44,10 +44,10 @@ function(model, fisheryLabels = NULL, quantity = "fishing_pressure") {
 ## method for class casal2TAB
 #' @return \code{NULL}
 #'
-#' @rdname plot_pressure
-#' @method plot_pressure casal2TAB
+#' @rdname plot_fishery
+#' @method plot_fishery casal2TAB
 #' @export
-"plot_pressure.casal2TAB" = function(model,fisheryLabels = NULL, quantity = "fishing_pressure") {
+"plot_fishery.casal2TAB" = function(model,fisheryLabels = NULL, quantity = "fishing_pressure") {
   if(F) {
     ## check report label exists
     if (!report_label %in% names(model))
@@ -85,4 +85,17 @@ function(model, fisheryLabels = NULL, quantity = "fishing_pressure") {
     }
     invisible()
   }
+}
+
+#'
+#' @rdname plot_fishery
+#' @method plot_fishery list
+#' @export
+"plot_fishery.list" = function(model, fisheryLabels = NULL, quantity = "fishing_pressure") {
+  fishery_df = get_fisheries(model)
+  ggplot(fishery_df, aes_string(x = "year", y = quantity, col = "model_label", linetype = "model_label")) +
+    geom_line(size = 1.5) +
+    labs(colour="Model", linetype = "Model", x = "Years", y = quantity) +
+    facet_wrap(~fishery)
+
 }

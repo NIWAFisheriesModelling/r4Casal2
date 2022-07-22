@@ -1,6 +1,7 @@
 #' run_automatic_reweighting
 #' @description a function that will automatically conduct an iterative reweighting re-esitmation.
 #'
+#' @author Craig Marsh
 #' @param config_dir directory that contains config. See details for info on nested folder configs
 #' @param config_filename the config file that describes all Casal2 input files. Expected to be in 'config_dir'.
 #' @param weighting_folder_name A folder name created in 'config_dir' where re-estiamtion is done and output saved.
@@ -10,10 +11,12 @@
 #' @param prompt_user_before_deleting if FALSE will delete previous weighting_folder_name without prompting user.
 #' @param observation_labels if you only want to weight a subset of compositional data sets
 #' @param verbose print additional information to screen
-#' @details Sometimes users may have subdirectories containing config files. This function is untested for this config model structure
+#' @param approximate_single_year_obs whether to try and approximate a weigth for observations with a single year
+#' @details Sometimes users may have subdirectories containing config files. This function is untested for this config model structure.
+#' To read in the reweighted outputs from this function see the function extract_reweighted_mpds.
 #' @rdname run_automatic_reweighting
 #' @export run_automatic_reweighting
-#' @return data frame of weights in each loop
+#' @return data frame of weights in each loop. Will also create estimated mpd output in weighting_folder_name with the format 'estimate_"iteration_number".log'
 #'
 run_automatic_reweighting <- function(config_dir,
                                       config_filename = "config.csl2",
@@ -23,7 +26,8 @@ run_automatic_reweighting <- function(config_dir,
                                       observation_labels = NULL,
                                       dash_i_par_filename = NULL,
                                       prompt_user_before_deleting = TRUE,
-                                      verbose = T) {
+                                      verbose = T,
+                                      approximate_single_year_obs = FALSE) {
   ## check files exists
   if(!file.exists(file.path(config_dir, config_filename)))
     stop(paste0("Could not find ", config_filename, " at ", config_dir))
@@ -82,7 +86,7 @@ run_automatic_reweighting <- function(config_dir,
 
   ## now we work
   mpd = extract.mpd(path = config_dir, file = mpd_file_name)
-  final_weights = initial_stage_two_weights = calculate_composition_stage_two_weights(mpd)
+  final_weights = initial_stage_two_weights = calculate_composition_stage_two_weights(mpd, approximate_single_year_obs = approximate_single_year_obs)
   ##
   for(loop_iter in 1:n_loops) {
     if(verbose)
@@ -90,7 +94,7 @@ run_automatic_reweighting <- function(config_dir,
     if(loop_iter > 1) {
       ## read in mpd and calculate stage two weights
       mpd = extract.mpd(path = working_dir, file = paste0("estimate_", loop_iter - 1,".log"))
-      initial_stage_two_weights = calculate_composition_stage_two_weights(mpd)
+      initial_stage_two_weights = calculate_composition_stage_two_weights(mpd, approximate_single_year_obs = approximate_single_year_obs)
       final_weights = cbind(final_weights, initial_stage_two_weights$weight)
     }
     ## loop through all the config_file_in, if it has an @observation block

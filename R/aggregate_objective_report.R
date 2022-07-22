@@ -9,11 +9,41 @@
 #'
 
 aggregate_objective_report <- function(objective_report) {
-  if(is.null(objective_report$type))
-    stop("objective_report not an expecated Casal2 objective function report")
-  if(objective_report$type != "objective_function")
-    stop("objective_report must be of type  'objective_function'")
-  obj_labels = names(objective_report$values)
+  multi_parameter_input = F
+  if(is.null(objective_report$type)) {
+    ## possible -i input
+    if(is.null(objective_report[[1]]$type)) {
+      stop("Unknown format for objective_report")
+    }
+    if(objective_report[[1]]$type != "objective_function")
+      stop("objective_report must be of type  'objective_function'")
+    multi_parameter_input = T
+  } else if(objective_report$type != "objective_function") {
+      stop("objective_report must be of type  'objective_function'")
+  }
+
+  if(!multi_parameter_input) {
+    return(aggregate_single_objective_report(objective_report$values))
+  } else {
+    full_df = NULL
+    for(i in 1:length(objective_report)) {
+      this_par_set = aggregate_single_objective_report(objective_report[[i]]$values)
+      if(i == 1) {
+        full_df = this_par_set
+      } else {
+        full_df = cbind(full_df, this_par_set$negative_loglik)
+      }
+    }
+    return(full_df)
+  }
+}
+
+#' aggregate_single_objective_report
+#' @details used by aggregate_objective_report
+#' @param values data.frame from a Casal2 objective_function report
+#' @return data frame with aggregated values
+aggregate_single_objective_report <- function(values) {
+  obj_labels = names(values)
   type = Reduce(c, lapply(strsplit(obj_labels, split = "->", fixed = T), FUN = function(x){x[1]}))
   label = Reduce(c, lapply(strsplit(obj_labels, split = "-", fixed = T), FUN = function(x){x[2]}))
   label = substring(label, first = 2)
@@ -23,8 +53,9 @@ aggregate_objective_report <- function(objective_report) {
   ## observations
   for(i in 1:length(aggregate_labs)) {
     ndx = unique_vals  %in%  aggregate_labs[i]
-    ll_values[i] = sum(objective_report$values[ndx])
+    ll_values[i] = sum(values[ndx])
   }
   obj_df = data.frame(component = aggregate_labs, negative_loglik = ll_values)
+
   return(obj_df)
 }

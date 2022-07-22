@@ -35,7 +35,7 @@
       temp_df = data.frame(par_set = 1, label = reports_labels[i], catchability = this_report$q);
       complete_df = rbind(complete_df, temp_df)
     } else {
-      if(this_report$'1'$type != "catchability") {
+      if(this_report[[1]]$type != "catchability") {
         next;
       }
       n_runs = length(this_report)

@@ -47,7 +47,7 @@
       complete_df = rbind(complete_df, temp_df)
 
     } else {
-      if(this_report$'1'$type != "partition") {
+      if(this_report[[1]]$type != "partition") {
         next;
       }
       ## Multiple parameter inputs

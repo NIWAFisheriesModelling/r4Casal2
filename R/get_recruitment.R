@@ -52,9 +52,9 @@
                            label = reports_labels[i])
       complete_df = rbind(complete_df, full_df)
     } else {
-      if(this_report$'1'$type != "process")
+      if(this_report[[1]]$type != "process")
         next;
-      if(this_report$'1'$type == "process" & this_report$'1'$sub_type != "recruitment_beverton_holt")
+      if(this_report[[1]]$type == "process" & this_report[[1]]$sub_type != "recruitment_beverton_holt")
         next;
       ## Multiple parameter inputs
       n_runs = length(this_report)

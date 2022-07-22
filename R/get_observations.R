@@ -56,10 +56,10 @@
     } else {
       print("multi iteration report found")
       multiple_iterations_in_a_report <- TRUE
-      if (this_report$'1'$type != "observation") {
+      if (this_report[[1]]$type != "observation") {
         next;
       }
-      if(this_report$'1'$observation_type %in% observation_type_allowed) {
+      if(this_report[[1]]$observation_type %in% observation_type_allowed) {
         n_runs = length(this_report)
         for(dash_i in 1:n_runs) {
           ## add it to full df

@@ -37,7 +37,7 @@
       this_df$par_set = 1;
       complete_df = rbind(complete_df, this_df)
     } else {
-      if(this_report$'1'$type != "initialisation_partition") {
+      if(this_report[[1]]$type != "initialisation_partition") {
         next;
       }
       ## Multiple parameter inputs

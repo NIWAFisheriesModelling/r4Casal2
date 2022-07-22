@@ -54,7 +54,7 @@
       next;
     } else {
       multiple_iterations_in_a_report <- TRUE
-      if (this_report$'1'$type != "selectivity") {
+      if (this_report[[1]]$type != "selectivity") {
         next;
       }
       n_runs = length(this_report)

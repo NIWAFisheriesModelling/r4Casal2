@@ -52,7 +52,7 @@
       dq_df$label = reports_labels[i]
       complete_df = rbind(complete_df, dq_df)
     } else {
-      if(this_report$'1'$type != "derived_quantity") {
+      if(this_report[[1]]$type != "derived_quantity") {
         next;
       }
       n_runs = length(this_report)

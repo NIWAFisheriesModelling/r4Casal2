@@ -55,6 +55,9 @@
 
 * `run_automatic_reweighting` Automatically apply iterative reweighting methods for a Casal2 model
 
+* `extract_reweighted_mpds` extract all the reweighted mpds that are created by `run_automatic_reweighting` 
+
+* `error_value_table` Create a table of all observations from a casal2 mpd run outlining likelihood type, observation type and error value by year and observation.
 
 
 

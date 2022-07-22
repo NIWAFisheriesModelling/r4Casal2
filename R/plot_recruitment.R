@@ -51,7 +51,22 @@
 #' @rdname plot_recruitment
 #' @method plot_recruitment casal2TAB
 #' @export
-"plot_recruitment.casal2TAB" = function(model, report_label = "", quantity = "ycs_values") {
+"plot_recruitment.casal2TAB" = function(model, report_label = NULL, quantity = "ycs_values") {
 
   invisible()
+}
+## method for class list
+#'
+#' @rdname plot_recruitment
+#' @method plot_recruitment list
+#' @export
+"plot_recruitment.list" = function(model, report_label = NULL, quantity = "ycs_values") {
+  recruit_df = get_BH_recruitment(model)
+  if(!is.null(report_label)) {
+    recruit_df = subset(recruit_df, subset = label %in% report_label)
+  }
+  ggplot(recruit_df, aes_string(x = "ycs_years", y = quantity, col = "model_label", linetype = "model_label")) +
+    geom_line(size = 1.5) +
+    labs(colour="Model", linetype = "Model", x = "YCS years", y = quantity) +
+    facet_wrap(~label)
 }

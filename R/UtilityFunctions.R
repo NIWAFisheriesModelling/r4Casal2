@@ -303,3 +303,22 @@ StripComments <- function(file) {
   return(file)
 }
 
+#' drop_runs_from_multi_input_mpd
+#' @description this function will remove runs from an extract.mpd that is a multiinput paramter run
+#' @param model a model that has been run with -i format
+#' @param elements_to_drop vector of integers that will be deleted from the model
+#' @return model that has been modified
+#' @export
+drop_runs_from_multi_input_mpd <- function(model, elements_to_drop) {
+  reports = names(model)
+  for(i in 1:length(reports)) {
+    if(reports[i] == "header")
+      next
+    this_report = model[[i]]
+    for(j in elements_to_drop) {
+      this_report[[as.character(j)]] = NULL
+    }
+    model[[i]] = this_report
+  }
+  return(model)
+}

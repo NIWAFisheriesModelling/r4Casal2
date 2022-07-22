@@ -48,7 +48,7 @@
       complete_df = rbind(complete_df, temp_df)
     } else {
       multiple_iterations_in_a_report <- TRUE
-      if (this_report$'1'$type != "selectivity_by_year") {
+      if (this_report[[1]]$type != "selectivity_by_year") {
         next;
       }
       n_runs = length(this_report)

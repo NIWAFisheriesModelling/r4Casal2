@@ -40,3 +40,6 @@ This function will build a skeleton/template html bookdown summarizing a single 
 library(r4Casal2)
 }
 }
+\author{
+Craig Marsh
+}

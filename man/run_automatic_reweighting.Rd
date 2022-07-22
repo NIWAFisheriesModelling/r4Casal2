@@ -13,7 +13,8 @@ run_automatic_reweighting(
   observation_labels = NULL,
   dash_i_par_filename = NULL,
   prompt_user_before_deleting = TRUE,
-  verbose = T
+  verbose = T,
+  approximate_single_year_obs = FALSE
 )
 }
 \arguments{
@@ -34,13 +35,19 @@ run_automatic_reweighting(
 \item{prompt_user_before_deleting}{if FALSE will delete previous weighting_folder_name without prompting user.}
 
 \item{verbose}{print additional information to screen}
+
+\item{approximate_single_year_obs}{whether to try and approximate a weigth for observations with a single year}
 }
 \value{
-data frame of weights in each loop
+data frame of weights in each loop. Will also create estimated mpd output in weighting_folder_name with the format 'estimate_"iteration_number".log'
 }
 \description{
 a function that will automatically conduct an iterative reweighting re-esitmation.
 }
 \details{
-Sometimes users may have subdirectories containing config files. This function is untested for this config model structure
+Sometimes users may have subdirectories containing config files. This function is untested for this config model structure.
+To read in the reweighted outputs from this function see the function extract_reweighted_mpds.
+}
+\author{
+Craig Marsh
 }

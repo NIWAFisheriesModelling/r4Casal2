@@ -6,18 +6,19 @@
 #' @param plot_it if true plot MPD value, intial value, and prior, otherwise report MPD, init, lower_bound, upper_bound, prior_type
 #' @return either a ggplot or a list with two elements. The first is for plotting, the second is a useful data frame
 #' outlining priors, bounds mpd values intitial values etc.
-#'
+
+
+
 #' @rdname summarise_estimated_parameters
 #' @export summarise_estimated_parameters
-"summarise_estimated_parameters" <- function(model, plot_it = FALSE, ignore_ycs = FALSE) {
-  UseMethod("summarise_estimated_parameters", model, plot_it, ignore_ycs)
+"summarise_estimated_parameters" <- function(model, plot_it = F, ignore_ycs = F) {
+  UseMethod("summarise_estimated_parameters", model)
 }
-#'
+
 #' @rdname summarise_estimated_parameters
 #' @method summarise_estimated_parameters casal2MPD
 #' @export
-
-summarise_estimated_parameters.casal2MPD <- function(model, plot_it = FALSE, ignore_ycs = FALSE) {
+summarise_estimated_parameters.casal2MPD <- function(model, plot_it = F, ignore_ycs = F) {
   multiple_iterations_in_a_report = FALSE
   complete_df = NULL
   found_report = FALSE

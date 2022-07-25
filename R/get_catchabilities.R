@@ -39,8 +39,9 @@
         next;
       }
       n_runs = length(this_report)
+      iter_labs = names(this_report)
       for(dash_i in 1:n_runs) {
-        temp_df = data.frame(par_set = dash_i, label = reports_labels[i], catchability = this_report[[dash_i]]$q);
+        temp_df = data.frame(par_set = iter_labs[dash_i], label = reports_labels[i], catchability = this_report[[dash_i]]$q);
         complete_df = rbind(complete_df, temp_df)
       }
       complete_df$par_set = factor(complete_df$par_set, ordered = T)

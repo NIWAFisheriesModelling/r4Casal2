@@ -68,6 +68,8 @@
         next;
       ## Multiple parameter inputs
       n_runs = length(this_report)
+      iter_labs = names(this_report)
+
       for(dash_i in 1:n_runs) {
         ## only a single trajectory
         f_ndx = grepl(pattern = "fishing_pressure\\[", names(this_report[[dash_i]]))
@@ -86,7 +88,7 @@
                                catch = this_report[[dash_i]][[which(catch_ndx)[f]]],
                                actual_catch = this_report[[dash_i]][[which(actual_catch_ndx)[f]]],
                                fishery = fisheries[f],
-                               par_set = dash_i)
+                               par_set = iter_labs[dash_i])
           full_df = rbind(full_df, temp_df)
         }
         full_df$label = reports_labels[i]

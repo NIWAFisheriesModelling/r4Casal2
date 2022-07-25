@@ -58,11 +58,12 @@
         next;
       }
       n_runs = length(this_report)
+      iter_labs = names(this_report)
       for(dash_i in 1:n_runs) {
         ## add it to full df
         this_selectivity = data.frame(selectivity = as.numeric(this_report[[dash_i]]$Values), bin = names(this_report[[dash_i]]$Values))
         this_selectivity$report_label = reports_labels[i]
-        this_selectivity$par_set = dash_i
+        this_selectivity$par_set = iter_labs[dash_i]
         ## check col compatibility some reports will print residuals and some wont
         if(!is.null(complete_df)) {
           if(any(!colnames(complete_df) %in% colnames(this_selectivity))) {

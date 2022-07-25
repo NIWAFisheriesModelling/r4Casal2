@@ -48,20 +48,7 @@
   if(length(unique(abundance_obs$par_set)) > 1)
     multiple_iterations_in_a_report = T
 
-  abundance_obs$U_CI = NA
-  abundance_obs$L_CI = NA
 
-  ## deal with normal
-  normal_ndx = abundance_obs$likelihood == "normal"
-  total_sigma <- abundance_obs$observed * abundance_obs$adjusted_error
-  abundance_obs$U_CI[normal_ndx] <- abundance_obs$observed[normal_ndx] + 1.96 * total_sigma[normal_ndx]
-  abundance_obs$L_CI[normal_ndx] <- abundance_obs$observed[normal_ndx] - 1.96 * total_sigma[normal_ndx]
-  ## deal with lognormal
-  lognormal_ndx = abundance_obs$likelihood == "lognormal"
-  total_sigma <- sqrt(log(1 + abundance_obs$adjusted_error[lognormal_ndx] ^ 2))
-  Mean <- log(abundance_obs$observed[lognormal_ndx]) - 0.5 * (total_sigma ^ 2)
-  abundance_obs$U_CI[lognormal_ndx] <- exp(Mean + 1.96 * total_sigma)
-  abundance_obs$L_CI[lognormal_ndx] <- exp(Mean - 1.96 * total_sigma)
   ## subset to specific obs
   if(!is.null(report_labels)) {
     abundance_obs = subset(abundance_obs, subset = abundance_obs$observation_label %in% report_labels)

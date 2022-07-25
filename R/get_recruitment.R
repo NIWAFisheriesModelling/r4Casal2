@@ -58,6 +58,7 @@
         next;
       ## Multiple parameter inputs
       n_runs = length(this_report)
+      iter_labs = names(this_report)
       for(dash_i in 1:n_runs) {
         ## only a single trajectory
         temp_df = data.frame(
@@ -68,7 +69,7 @@
           true_ycs = this_report[[dash_i]]$true_ycs,
           r0 = this_report[[dash_i]]$r0,
           b0 = this_report[[dash_i]]$b0,
-          par_set = dash_i,
+          par_set = iter_labs[dash_i],
           label = reports_labels[i])
         complete_df = rbind(complete_df, temp_df)
       }

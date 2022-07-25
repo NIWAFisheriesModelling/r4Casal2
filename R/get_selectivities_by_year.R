@@ -52,6 +52,8 @@
         next;
       }
       n_runs = length(this_report)
+      iter_labs = names(this_report)
+
       for(dash_i in 1:n_runs) {
         temp_df = NULL
         this_par_df = this_report[[dash_i]]
@@ -66,7 +68,7 @@
           this_df$year = years[y]
           temp_df = rbind(temp_df, this_df)
         }
-        temp_df$par_set = dash_i;
+        temp_df$par_set = iter_labs[dash_i];
         complete_df = rbind(complete_df, temp_df)
       }
     }

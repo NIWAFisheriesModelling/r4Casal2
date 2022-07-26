@@ -344,3 +344,34 @@ log_sigma = function(cv) {
   sigma = sqrt(log(cv^2 + 1))
   return(sigma)
 }
+
+#' get_block
+#' @description get the block type for a parameter
+#' @param parameter_label full parameter label 'block[label].parameter'
+#' @return the block label
+#' @export
+
+get_block = function(parameter_label) {
+  return(sapply(strsplit(parameter_label, split = "\\["), "[", 1))
+}
+#' get_label
+#' @description get the label type for a parameter
+#' @param parameter_label full parameter label 'block[label].parameter'
+#' @return the block label
+#' @export
+get_label = function(parameter_label) {
+  labels = (sapply(strsplit(parameter_label, split = "\\["), "[", 2))
+  labels = (sapply(strsplit(labels, split = "\\]"), "[", 1))
+  return(labels)
+}
+#' get_parameter
+#' @description get the parameter label
+#' @param parameter_label full parameter label 'block[label].parameter'
+#' @return the block label
+#' @export
+get_parameter = function(parameter_label) {
+  param = (sapply(strsplit(parameter_label, split = "\\."), "[", 2))
+  return(param)
+}
+
+

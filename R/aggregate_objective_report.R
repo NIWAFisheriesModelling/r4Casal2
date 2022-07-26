@@ -47,7 +47,8 @@ aggregate_single_objective_report <- function(values) {
   type = Reduce(c, lapply(strsplit(obj_labels, split = "->", fixed = T), FUN = function(x){x[1]}))
   label = Reduce(c, lapply(strsplit(obj_labels, split = "-", fixed = T), FUN = function(x){x[2]}))
   label = substring(label, first = 2)
-  unique_vals = paste0(type, "-",label)
+  new_label = ifelse(!is.na(label), paste0("-",label),"")
+  unique_vals = paste0(type,new_label)
   aggregate_labs = unique(unique_vals)
   ll_values = vector()
   ## observations

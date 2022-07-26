@@ -239,7 +239,7 @@ div.csl-indent {
 <div id="accessor-functions" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Accessor functions<a href="functionlist.html#accessor-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p><code>get_derived_quanitites()</code> or for lazy people (like my self) <code>get_dqs()</code>. These will return all the derived quantities for a model output.</p></li>
+<li><p><code>get_derived_quanitites()</code> or for lazy people (like myself) <code>get_dqs()</code>. These will return all the derived quantities for a model output.</p></li>
 <li><p><code>get_selectivities</code> will return a data frame with all the selectivity reports for a model output.</p></li>
 <li><p><code>get_selectivities_by_year</code> will return a data frame with all the reports of type <code>selectivity_by_year</code> from a model output.</p></li>
 <li><p><code>get_catchabilities</code> will return a data frame with all the catchability reports for a model output.</p></li>
@@ -247,25 +247,30 @@ div.csl-indent {
 <li><p><code>get_BH_recruitment</code> will return a data frame with information from a <code>recruitment_beverton_holt</code> process for a model output.</p></li>
 <li><p><code>get_abundance_observations</code> will return a data frame with information from an <code>abundance</code> or <code>biomass</code> observation for a model output.</p></li>
 <li><p><code>get_composition_observations</code> will return a data frame with information from an <code>proportion_at_length</code>, <code>proportion_at_age</code>, <code>process_removals_by_age</code> and <code>process_removals_by_length</code> observation for a model output.</p></li>
+<li><p><code>get_composition_mean_bin</code> will return a data frame with information from an <code>proportion_at_length</code>, <code>proportion_at_age</code>, <code>process_removals_by_age</code> and <code>process_removals_by_length</code> summarised as the mean length or mean age.</p></li>
 <li><p><code>get_tag_recapture_observations</code> will return a data frame with information from an <code>tag_recapture_by_length_for_growth</code>, <code>tag_recapture_by_length</code> and <code>tag_recapture_by_age</code> observation for a model output.</p></li>
-<li><p><code>get_projections</code> will return a data frame of all <code>projection</code> reports from a model output.</p></li>
 <li><p><code>get_partition</code> will return a data frame with partition data from <code>partition</code> report.</p></li>
 <li><p><code>get_inital_partition</code> will return a data frame with initial partition <code>initialisation_partition</code> report.</p></li>
+<li><p><code>get_profile</code> Will return a data frame for a <code>profile</code> report.</p></li>
+<li><p><code>get_estimated_values</code> Will return a data frame for a <code>estimate_value</code> report.</p></li>
 <li><p><code>get_simulated_age_resids</code> Will reformat simulated data read in by the <code>read.simulated.data</code> function.</p></li>
+<li><p><code>get_projections</code> will return a data frame of all <code>projection</code> reports from a model output.</p></li>
 </ul>
 </div>
 <div id="other-useful-functions" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Other useful functions<a href="functionlist.html#other-useful-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p><code>aggregate_objective_report</code> This trys and reformats the an objective function report to be “similar” to CASALs output.</p></li>
+<li><p><code>aggregate_objective_report</code> This reformats an objective function report to be “similar” to CASALs output.</p></li>
 <li><p><code>create_simulation_reports</code> This will create a range of <code>@report.type=simulated_observation</code> Casal2 reports that can help set up simulations. See Section <a href="PPC.html#PPC">7</a> on why you want to do this.</p></li>
 <li><p><code>build_assessment_bookdown</code> This will create a bookdown template for an assessment model MPD run.</p></li>
 <li><p><code>summarise_config</code> Will summarize input files see Section <a href="summariseinputs.html#summariseinputs">3</a></p></li>
 <li><p><code>calculate_composition_stage_two_weights</code> Calculates the stage-two weights using <span class="citation">Francis (<a href="#ref-francis2011data" role="doc-biblioref">2011</a>)</span> TA1.8 method.</p></li>
-<li><p><code>get_high_correlations</code> Returns index of parameters that have high correlations from MPD.</p></li>
+<li><p><code>get_high_correlations</code> Returns index of parameters that have high correlations from MPD. This requires the Casal2 model to have reported the <code>correlation_matrix</code></p></li>
 <li><p><code>run_automatic_reweighting</code> Automatically apply iterative reweighting methods for a Casal2 model</p></li>
-<li><p><code>extract_reweighted_mpds</code> extract all the reweighted mpds that are created by <code>run_automatic_reweighting</code></p></li>
-<li><p><code>error_value_table</code> Create a table of all observations from a casal2 mpd run outlining likelihood type, observation type and error value by year and observation.</p></li>
+<li><p><code>extract_reweighted_mpds</code> extract all the reweighted mpds that are created by <code>run_automatic_reweighting</code>. Useful to then plot the effect of reweighting</p></li>
+<li><p><code>error_value_table</code> Create a data.frame of all observations from a casal2 mpd run outlining likelihood type, observation type and error value by year and observation.</p></li>
+<li><p><code>summarise_estimated_parameters</code> If a model reports <code>estimate_summary</code> this function will extract two data frames that can be used to assess starting values and estimated values along with prior assumptions.</p></li>
+<li><p><code>plot_profile</code> Will plot profiles for reports that have been run with <code>casal2 -p</code> format.</p></li>
 </ul>
 
 </div>

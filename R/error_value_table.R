@@ -37,7 +37,7 @@ error_value_table <- function(model) {
   complete_df$year = factor(complete_df$year, levels = seq(from = min(complete_df$year), to = max(complete_df$year), by = 1))
   ## now covert into a table somehow
   observation_error_tab = complete_df %>% group_by(year, label) %>%
-    pivot_wider(names_from = year, names_expand = T, values_from = error_value, values_fill = "")
+    pivot_wider(names_from = year, names_expand = T, values_from = error_value, values_fill = NA)
 
   return(observation_error_tab);
 }

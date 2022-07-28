@@ -38,7 +38,7 @@ get_profile.casal2MPD <- function(model) {
       }
       if(this_report[[1]]$type == "objective_function") {
         ## found an objective function class
-        objective_function_df = aggregate_objective_report(this_report)
+        objective_function_df = aggregate_objective_report(objective_report = this_report)
       }
     }
   }

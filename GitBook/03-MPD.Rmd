@@ -91,6 +91,19 @@ head(obj)
 ```
 
 
+A useful diagnostic that is encouraged to explore is to run Casal2 as an age-structured population model (ASPM) [@MINTEVERA2017114; @CARVALHO2021105959]. This is useful for asking the following question "do we need to know the variability in recruitment to get the “correct” trends in relative abundance and the absolute scale of the model?" The diagnostic is run following these steps
+1. Estimate the full integrated model
+2. Fix selectivity parameters at MPD values from step 2
+3. Turn off recruitment variability i.e., assume \(R_0\) for all years
+4. fit the model (ASPM) to the indices of abundance only. Just estimating \(R_0\), \(q\) etc.
+5. fit the above model again but estimate YCS parameters (ASPMdev)
+6. fit the model again with the recruitment deviates set equal to the MPD values from the integrated model (ASPMfix)
+
+This runs will help you explore the fit and production assumptions in the data. The idea is to understand what parameters are informing what population signals and how perhaps identify misspecifications. For more information on this diagnostic we recommend users read @MINTEVERA2017114.
+
+
+
+
 
 ### Data Weighting
 Some pseudo r code to help with data weighting according to @francis2011data with multinomial data.

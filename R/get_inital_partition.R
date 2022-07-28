@@ -35,6 +35,7 @@
       this_df = melt(as.matrix(this_report$values))
       colnames(this_df) = c("category", "bin", "value")
       this_df$par_set = 1;
+      this_df$label = reports_labels[i]
       complete_df = rbind(complete_df, this_df)
     } else {
       if(this_report[[1]]$type != "initialisation_partition") {
@@ -47,6 +48,7 @@
         this_df = melt(as.matrix(this_report[[dash_i]]$values))
         colnames(this_df) = c("category", "bin", "value")
         this_df$par_set = dash_i
+        this_df$label = reports_labels[i]
         complete_df = rbind(complete_df, this_df)
       }
     }

@@ -4,7 +4,12 @@
 \alias{get_high_correlations}
 \title{get_high_correlations}
 \usage{
-get_high_correlations(correlation_matrix, max_correlation = 0.8, labels = NULL)
+get_high_correlations(
+  correlation_matrix,
+  max_correlation = 0.8,
+  labels = NULL,
+  tol = .Machine$double.eps
+)
 }
 \arguments{
 \item{correlation_matrix}{symetric correlation matrix}
@@ -12,6 +17,8 @@ get_high_correlations(correlation_matrix, max_correlation = 0.8, labels = NULL)
 \item{max_correlation}{the max correlation value. must be a value between (0 - 1)}
 
 \item{labels}{parameter labels for the correlation matrix}
+
+\item{tol}{tolerance for symetric check, sometimes rounding can cause an issue when checking if symetric}
 }
 \value{
 data frame of row and column index and paramater label if labels supplied along with the correlation value

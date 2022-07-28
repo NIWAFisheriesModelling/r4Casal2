@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-07-26" />
+<meta name="date" content="2022-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -366,6 +366,14 @@ div.csl-indent {
 <span id="cb14-32"><a href="mpd-summaries.html#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="do">## get aggregated objective functions</span></span>
 <span id="cb14-33"><a href="mpd-summaries.html#cb14-33" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">=</span> <span class="fu">aggregate_objective_report</span>(<span class="at">model =</span> multi_est)</span>
 <span id="cb14-34"><a href="mpd-summaries.html#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(obj)</span></code></pre></div>
+<p>A useful diagnostic that is encouraged to explore is to run Casal2 as an age-structured population model (ASPM) <span class="citation">(<a href="#ref-MINTEVERA2017114" role="doc-biblioref">Minte-Vera et al. 2017</a>; <a href="#ref-CARVALHO2021105959" role="doc-biblioref">Carvalho et al. 2021</a>)</span>. This is useful for asking the following question “do we need to know the variability in recruitment to get the “correct” trends in relative abundance and the absolute scale of the model?” The diagnostic is run following these steps
+1. Estimate the full integrated model
+2. Fix selectivity parameters at MPD values from step 2
+3. Turn off recruitment variability i.e., assume <span class="math inline">\(R_0\)</span> for all years
+4. fit the model (ASPM) to the indices of abundance only. Just estimating <span class="math inline">\(R_0\)</span>, <span class="math inline">\(q\)</span> etc.
+5. fit the above model again but estimate YCS parameters (ASPMdev)
+6. fit the model again with the recruitment deviates set equal to the MPD values from the integrated model (ASPMfix)</p>
+<p>This runs will help you explore the fit and production assumptions in the data. The idea is to understand what parameters are informing what population signals and how perhaps identify misspecifications. For more information on this diagnostic we recommend users read <span class="citation">Minte-Vera et al. (<a href="#ref-MINTEVERA2017114" role="doc-biblioref">2017</a>)</span>.</p>
 </div>
 <div id="data-weighting" class="section level3 hasAnchor" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Data Weighting<a href="mpd-summaries.html#data-weighting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -485,8 +493,14 @@ Flexibility using standard ggplot functions</p>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-CARVALHO2021105959" class="csl-entry">
+Carvalho, Felipe, Henning Winker, Dean Courtney, Maia Kapur, Laurence Kell, Massimiliano Cardinale, Michael Schirripa, et al. 2021. <span>“A Cookbook for Using Model Diagnostics in Integrated Stock Assessments.”</span> <em>Fisheries Research</em> 240: 105959. https://doi.org/<a href="https://doi.org/10.1016/j.fishres.2021.105959">https://doi.org/10.1016/j.fishres.2021.105959</a>.
+</div>
 <div id="ref-francis2011data" class="csl-entry">
 Francis, RIC Chris. 2011. <span>“Data Weighting in Statistical Fisheries Stock Assessment Models.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 68 (6): 1124–38.
+</div>
+<div id="ref-MINTEVERA2017114" class="csl-entry">
+Minte-Vera, Carolina V., Mark N. Maunder, Alexandre M. Aires-da-Silva, Keisuke Satoh, and Koji Uosaki. 2017. <span>“Get the Biology Right, or Use Size-Composition Data at Your Own Risk.”</span> <em>Fisheries Research</em> 192: 114–25.
 </div>
 </div>
             </section>

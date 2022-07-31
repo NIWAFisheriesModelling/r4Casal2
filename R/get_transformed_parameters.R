@@ -45,3 +45,27 @@ get_transformed_parameters.casal2MPD <- function(model) {
   }
   return(parameter_df)
 }
+
+
+#'
+#' @rdname get_transformed_parameters
+#' @method get_transformed_parameters list
+#' @export
+"get_transformed_parameters.list" = function(model) {
+  run_labs = names(model)
+  full_DF = NULL
+  ## iterate over the models
+  for(i in 1:length(model)) {
+
+    if(class(model[[i]]) != "casal2MPD") {
+      stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
+    }
+    this_df = get_transformed_parameters(model[[i]])
+    if(is.null(this_df))
+      next;
+    this_df$model_label = run_labs[i]
+    full_DF = rbind(full_DF, this_df);
+  }
+  return(full_DF)
+  invisible()
+}

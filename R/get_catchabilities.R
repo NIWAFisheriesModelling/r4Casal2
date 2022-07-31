@@ -63,9 +63,11 @@
     if(class(model[[i]]) != "casal2MPD") {
       stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
     }
-    this_dq = get_catchabilities(model[[i]])
-    this_dq$model_label = run_labs[i]
-    full_DF = rbind(full_DF, this_dq);
+    this_df = get_catchabilities(model[[i]])
+    if(is.null(this_df))
+      next;
+    this_df$model_label = run_labs[i]
+    full_DF = rbind(full_DF, this_df);
   }
   return(full_DF)
   invisible()

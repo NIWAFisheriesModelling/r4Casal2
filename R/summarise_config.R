@@ -51,6 +51,7 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
   ## now read in these config files
   model_block = list()
   observation_blocks = list()
+  derived_quantity_blocks = list()
   process_blocks = list()
   estimate_blocks = list()
   time_steps_list = list()
@@ -76,9 +77,8 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
       cat("failed to readin the following file ", config_file_in[i], " so skipping it.\n\nthe error\n",this_file$message,"\n")
       next
     }
-    blocks = (sapply(strsplit(names(this_file), split = "\\["), "[", 1))
-    labels = (sapply(strsplit(names(this_file), split = "\\["), "[", 2))
-    labels = (sapply(strsplit(labels, split = "\\]"), "[", 1))
+    blocks = get_block(names(this_file))
+    labels = get_label(names(this_file))
     for(j in 1:length(this_file)) {
       if(tolower(blocks[j]) == "model") {
         if(is.null(this_file[[j]]$type)) {
@@ -133,6 +133,8 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
       } else if(tolower(blocks[j]) == "observation") {
         observation_blocks[[labels[j]]] = this_file[[j]]
         observation_labels = c(observation_labels, labels[j])
+      } else if(tolower(blocks[j]) == "derived_quantity") {
+        derived_quantity_blocks[[labels[j]]] = this_file[[j]]
       }
     }
   }
@@ -212,6 +214,18 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
     for(j in 1:length(proceses)) {
       process_type[j] = process_blocks[[proceses[j]]]$type$value
       df_entry[j] = paste0(proceses[j], " (", process_type[j], ")")
+    }
+    # check when derived quantities are calculated if any
+    for(j in 1:length(derived_quantity_blocks)) {
+      if(time_steps[i] == derived_quantity_blocks[[j]]$time_step$value) {
+        prop_mortality = 0.5
+        if(exists(x = "time_step_proportion", where = derived_quantity_blocks[[j]])) {
+          prop_mortality = as.numeric(derived_quantity_blocks[[j]]$time_step_proportion$value)
+        }
+        ## this dq in this time-step
+        process_type = c(process_type, "derived-quantity")
+        df_entry = c(df_entry, paste0(names(derived_quantity_blocks)[j], " (derived-quantity ",round(prop_mortality,2), ")"))
+      }
     }
     this_step = data.frame(time_step = time_steps[i], processes = paste(df_entry, collapse = ", "))
     time_step_df = rbind(time_step_df, this_step)

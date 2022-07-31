@@ -56,3 +56,30 @@ ggplot(abundance_obs_df, aes(x = year)) +
   facet_wrap(~observation_label, scales = "free")
 ```
 
+### Compare objective function
+```{r obj_table, fig.width=6, fig.height=6}
+cas2_obj = get_objective_function(models)
+compar_obj = cas2_obj %>% pivot_wider(values_from = negative_loglik, names_from = model_label, id_cols = component, values_fill	= NA)
+head(compar_obj, n = 10)
+```
+
+```{r obj_plot, fig.width=6, fig.height=6}
+## rescale objective score so the model with the best fit (lowest score)
+## will have zero for a given component and others will have be reference from that
+obj_df = cas2_obj %>% group_by(component) %>% 
+  mutate(rescaled_obj = negative_loglik - min(negative_loglik, na.rm = T))
+## plot it for each component
+ggplot(obj_df, aes(x = rescaled_obj, y = component, col = model_label, shape = model_label)) +
+  geom_point(size = 2) +
+  labs(x = "Objective function - min (objective function)", y = "") +
+  geom_vline(xintercept = 0, col = "gray", linetype = "dashed", size = 1) +
+  theme(legend.position = "bottom", 
+        axis.text = element_text(size = 12), 
+        axis.title = element_text(size = 12),
+        strip.text = element_text(size=16),
+        title=element_blank(),
+        legend.text = element_text(size=14))
+```
+
+
+

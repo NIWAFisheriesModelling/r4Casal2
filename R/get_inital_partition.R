@@ -71,6 +71,8 @@
       stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
     }
     this_dq = get_inital_partition(model[[i]])
+    if(is.null(this_dq))
+      next;
     this_dq$model_label = run_labs[i]
     full_DF = rbind(full_DF, this_dq);
   }

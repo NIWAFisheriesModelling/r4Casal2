@@ -57,6 +57,21 @@
 #' @export
 "get_estimated_values.list" = function(model) {
   ## not written yet, but will need to deal with non overlapping parameters across models
-  return("Function not written yet")
+  run_labs = names(model)
+  full_DF = NULL
+  ## iterate over the models
+  for(i in 1:length(model)) {
+
+    if(class(model[[i]]) != "casal2MPD") {
+      stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
+    }
+    this_dq = get_estimated_values(model[[i]])
+    if(is.null(this_dq))
+      next;
+    this_dq$model_label = run_labs[i]
+    full_DF = rbind(full_DF, this_dq);
+  }
+  return(full_DF)
+  invisible()
 }
 

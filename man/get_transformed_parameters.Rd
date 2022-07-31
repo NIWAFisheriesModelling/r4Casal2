@@ -3,11 +3,14 @@
 \name{get_transformed_parameters}
 \alias{get_transformed_parameters}
 \alias{get_transformed_parameters.casal2MPD}
+\alias{get_transformed_parameters.list}
 \title{get_transformed_parameters}
 \usage{
 get_transformed_parameters(model)
 
 \method{get_transformed_parameters}{casal2MPD}(model)
+
+\method{get_transformed_parameters}{list}(model)
 }
 \arguments{
 \item{model}{<casal2MPD> object that are generated from one of the extract.mpd() and extract.tabular() functions.}

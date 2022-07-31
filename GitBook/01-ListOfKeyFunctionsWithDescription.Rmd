@@ -32,12 +32,15 @@
 
 * `get_estimated_values` Will return a data frame for a `estimate_value` report.
 
+* `get_transformed_parameters` Will return a data frame for a `parameter_transformations` report.
+
+* `get_timevarying_parameters` Will return a data frame for a `time_varying` report.
+
 * `get_simulated_age_resids` Will reformat simulated data read in by the `read.simulated.data` function.
 
 * `get_projections` will return a data frame of all `projection` reports from a model output.
 
 ## Other useful functions
-
 * `aggregate_objective_report` This reformats an objective function report to be "similar" to CASALs output.
 
 * `create_simulation_reports` This will create a range of `@report.type=simulated_observation` Casal2 reports that can help set up simulations. See Section \@ref(PPC) on why you want to do this.

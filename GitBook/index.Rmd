@@ -26,6 +26,7 @@ library(knitr)
 library(ggplot2)
 library(dplyr)
 library(reshape2)
+library(tidyr)
 ```
 
 The core functionality of `r4Casal2` are its accessor functions. These are functions that will return a specific object from a range of Casal2 objects in long format that are `ggplot`, `dplyr` friendly. Most accessors start with `get_` and should be self explanatory. There are some plotting functions, but I have found that I often want to custom ggplots and so mainly have custom plots. The accessors are coded to deal with three types of outpus. These are;

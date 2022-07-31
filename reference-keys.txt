@@ -20,6 +20,7 @@ selectivities
 derived-quantities
 recruitment
 abundance-fits
+compare-objective-function
 mcmc
 read-in-models-1
 diagnostics

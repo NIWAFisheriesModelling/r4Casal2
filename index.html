@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-07-28" />
+<meta name="date" content="2022-07-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,6 +191,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.2.2" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#derived-quantities"><i class="fa fa-check"></i><b>5.2.2</b> Derived quantities</a></li>
 <li class="chapter" data-level="5.2.3" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#recruitment"><i class="fa fa-check"></i><b>5.2.3</b> Recruitment</a></li>
 <li class="chapter" data-level="5.2.4" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#abundance-fits"><i class="fa fa-check"></i><b>5.2.4</b> Abundance fits</a></li>
+<li class="chapter" data-level="5.2.5" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#compare-objective-function"><i class="fa fa-check"></i><b>5.2.5</b> Compare objective function</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mcmc.html"><a href="mcmc.html"><i class="fa fa-check"></i><b>6</b> MCMC</a>
@@ -237,7 +238,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">r4Casal2</h1>
 <p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2022-07-28</em></p>
+<p class="date"><em>2022-07-31</em></p>
 </div>
 <div id="welcolme-to-r4casal2" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Welcolme to <strong>r4Casal2</strong><a href="index.html#welcolme-to-r4casal2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -248,7 +249,8 @@ div.csl-indent {
 <span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span></code></pre></div>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div>
 <p>The core functionality of <code>r4Casal2</code> are its accessor functions. These are functions that will return a specific object from a range of Casal2 objects in long format that are <code>ggplot</code>, <code>dplyr</code> friendly. Most accessors start with <code>get_</code> and should be self explanatory. There are some plotting functions, but I have found that I often want to custom ggplots and so mainly have custom plots. The accessors are coded to deal with three types of outpus. These are;</p>
 <ul>
 <li><code>extract.mpd()</code> where Casal2 has been run with default report style. These objects are of class <code>casal2MPD</code> which are set by the Casal2 base function</li>

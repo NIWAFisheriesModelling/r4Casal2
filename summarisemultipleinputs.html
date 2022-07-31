@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-07-28" />
+<meta name="date" content="2022-07-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,6 +191,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.2.2" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#derived-quantities"><i class="fa fa-check"></i><b>5.2.2</b> Derived quantities</a></li>
 <li class="chapter" data-level="5.2.3" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#recruitment"><i class="fa fa-check"></i><b>5.2.3</b> Recruitment</a></li>
 <li class="chapter" data-level="5.2.4" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#abundance-fits"><i class="fa fa-check"></i><b>5.2.4</b> Abundance fits</a></li>
+<li class="chapter" data-level="5.2.5" data-path="summarisemultipleinputs.html"><a href="summarisemultipleinputs.html#compare-objective-function"><i class="fa fa-check"></i><b>5.2.5</b> Compare objective function</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mcmc.html"><a href="mcmc.html"><i class="fa fa-check"></i><b>6</b> MCMC</a>
@@ -285,6 +286,41 @@ div.csl-indent {
 <span id="cb29-5"><a href="summarisemultipleinputs.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Abundance&quot;</span>, <span class="at">col =</span> <span class="st">&quot;Model&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;Model&quot;</span>) <span class="sc">+</span></span>
 <span id="cb29-6"><a href="summarisemultipleinputs.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>observation_label, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/compare_abundance-1.png" width="576" /></p>
+</div>
+<div id="compare-objective-function" class="section level3 hasAnchor" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span> Compare objective function<a href="summarisemultipleinputs.html#compare-objective-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="summarisemultipleinputs.html#cb30-1" aria-hidden="true" tabindex="-1"></a>cas2_obj <span class="ot">=</span> <span class="fu">get_objective_function</span>(models)</span>
+<span id="cb30-2"><a href="summarisemultipleinputs.html#cb30-2" aria-hidden="true" tabindex="-1"></a>compar_obj <span class="ot">=</span> cas2_obj <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(<span class="at">values_from =</span> negative_loglik, <span class="at">names_from =</span> model_label, <span class="at">id_cols =</span> component, <span class="at">values_fill =</span> <span class="cn">NA</span>)</span>
+<span id="cb30-3"><a href="summarisemultipleinputs.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(compar_obj, <span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 3
+##    component                    `M = 0.22`   `M = 0.44`
+##    &lt;chr&gt;                             &lt;dbl&gt;        &lt;dbl&gt;
+##  1 observation-chatTANbiomass -18.3         57.5       
+##  2 observation-chatTANage     384.         372.        
+##  3 observation-chatOBSwst     244.         236.        
+##  4 observation-chatOBSest     140.         134.        
+##  5 prior-B0                    11.2         11.2       
+##  6 prior-chatTANq              -2.23        -2.23      
+##  7 prior-TANSel_mu              1.16         1.16      
+##  8 prior-TANSel_sig_l           0.0000399    0.0000399 
+##  9 prior-TANSel_sig_r           0.00000150   0.00000150
+## 10 prior-eastFSel_mu            0            0</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="summarisemultipleinputs.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">## rescale objective score so the model with the best fit (lowest score)</span></span>
+<span id="cb32-2"><a href="summarisemultipleinputs.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="do">## will have zero for a given component and others will have be reference from that</span></span>
+<span id="cb32-3"><a href="summarisemultipleinputs.html#cb32-3" aria-hidden="true" tabindex="-1"></a>obj_df <span class="ot">=</span> cas2_obj <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(component) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-4"><a href="summarisemultipleinputs.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rescaled_obj =</span> negative_loglik <span class="sc">-</span> <span class="fu">min</span>(negative_loglik, <span class="at">na.rm =</span> T))</span>
+<span id="cb32-5"><a href="summarisemultipleinputs.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="do">## plot it for each component</span></span>
+<span id="cb32-6"><a href="summarisemultipleinputs.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(obj_df, <span class="fu">aes</span>(<span class="at">x =</span> rescaled_obj, <span class="at">y =</span> component, <span class="at">col =</span> model_label, <span class="at">shape =</span> model_label)) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="summarisemultipleinputs.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="summarisemultipleinputs.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Objective function - min (objective function)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="summarisemultipleinputs.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="summarisemultipleinputs.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>, </span>
+<span id="cb32-11"><a href="summarisemultipleinputs.html#cb32-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), </span>
+<span id="cb32-12"><a href="summarisemultipleinputs.html#cb32-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb32-13"><a href="summarisemultipleinputs.html#cb32-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">16</span>),</span>
+<span id="cb32-14"><a href="summarisemultipleinputs.html#cb32-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb32-15"><a href="summarisemultipleinputs.html#cb32-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/obj_plot-1.png" width="576" /></p>
 
 </div>
 </div>

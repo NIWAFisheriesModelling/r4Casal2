@@ -42,6 +42,7 @@
       true_ycs = this_report$true_ycs
 
       full_df = data.frame(ycs_years = this_report$ycs_years,
+                           model_years = this_report$ycs_years - this_report$SSB_offset,
                            standardised_ycs = this_report$standardised_ycs,
                            ycs_values = this_report$ycs_values,
                            recruits = this_report$Recruits,
@@ -64,6 +65,7 @@
         temp_df = data.frame(
           standardised_ycs = this_report[[dash_i]]$standardised_ycs,
           ycs_values = this_report[[dash_i]]$ycs_values,
+          model_years = this_report[[dash_i]]$ycs_years - this_report[[dash_i]]$SSB_offset,
           ycs_years = this_report[[dash_i]]$ycs_years,
           Recruits = this_report[[dash_i]]$Recruits,
           true_ycs = this_report[[dash_i]]$true_ycs,

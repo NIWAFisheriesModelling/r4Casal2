@@ -132,7 +132,7 @@ plot_recruitment(MPD_list, quantity = "ycs_values")
 ### Model quantities 
 
 #### Fishing Pressures {-}
-Below illustrates code to plot fishing pressure, but you can also easily adapt the code to plot catches. One thing to note, is Casal2 will report both `exploitation_rate` and `fishing_pressures`. For models that only have a single fishery per time-step or area these will be the same. If there are multiple fisheries interacting with the partition then they will differ. Fishing pressure is the maximum exploitation applied to the partition for that time-step and area. See the user manual for more detail on the difference. `exploitation_rate` reported is just
+Below illustrates code to plot fishing pressure, but you can also easily adapt the code to plot catches. One thing to note, is Casal2 will report both `exploitation_rate` (actual a proportion also called harvest rate) and `fishing_pressures`. For models that only have a single fishery per time-step and area these quantities will be the same. If there are multiple fisheries interacting with the partition in the same time-step then these quantities will differ. Fishing pressure is the maximum exploitation applied to the partition for that time-step. See the Casal2 user manual for more detail on the difference. `exploitation_rate` reported is just
 \[
 \frac{catch}{vunerable}
 \]
@@ -166,6 +166,36 @@ my_plot +
 # Adjust ylim and add a reference limit
 my_plot + ylim(0,0.09) + geom_hline(yintercept = 0.05, linetype = "dashed")
 ```
+#### SSBs {-}
+```{r ssbs, fig.width=6, fig.height=4}
+# get SSB and recruit
+ssb_df = get_dqs(mpd)
+ssb_df$model_years = ssb_df$years
+recruit_df = get_BH_recruitment(mpd)
+# merge these two data frames
+joint_df = right_join(x = ssb_df, y = recruit_df, by = c("model_years", "par_set"))
+## for multi-stock models, you will need to also join by stock id
+joint_df$percent_b0 = joint_df$values / joint_df$b0 * 100
+## plot percent B0
+ggplot(joint_df, aes(x = years, y = percent_b0)) +
+  geom_line(size = 2) +
+  ylim(0,NA) +
+  labs(x = "Year", y = expression(paste(S[t], " / ", S[0], " (%)"))) +
+  geom_hline(yintercept = 40, col = "darkgreen", linetype = "dashed", size = 1.5) +
+  geom_label(x = 1900, y = 40, label = "Target") +
+  geom_hline(yintercept = 20, col = "orange", linetype = "dashed", size = 1.5) +
+  geom_label(x = 1900, y = 20, label = "Soft") +
+  geom_hline(yintercept = 10, col = "red", linetype = "dashed", size = 1.5) +
+  geom_label(x = 1900, y = 10, label = "Hard")+
+  ggtitle("Percent B0") +
+  theme_classic() +
+  theme(legend.position = "bottom", 
+        axis.text = element_text(size = 16), 
+        axis.title = element_text(size = 16),
+        strip.text = element_text(size=16),
+        title=element_blank(),
+        legend.text = element_text(size=16))
+```
 
 #### Plotting selectivities
 ```{r selectivities_mpd, fig.width=6, fig.height=4}
@@ -174,6 +204,135 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = label)) +
   geom_line(size = 1.5) +
   facet_wrap(~label)
 
+```
+
+
+### Plotting Fits
+
+#### Relative abundance {-}
+```{r plot_relative_index, fig.width=8, fig.height=6}
+## define a palette
+obs_pallete <- c("#E69F00", "#56B4E9","#009E73")
+names(obs_pallete) = c("Observed", "Predicted","Pearson's Residuals")
+## get abundance data frames
+abundance_obs = get_abundance_observations(mpd)
+abundance_obs_label = unique((abundance_obs$observation_label))
+
+## plot observed vs fitted
+ggplot(abundance_obs, aes(x = year)) +
+    geom_line(aes(y = expected, col = "Predicted"), size = 1.2, 
+              linetype = "dashed") +
+    geom_point(aes(y = expected, col = "Predicted"), size = 2.5) +
+    geom_errorbar(aes(ymin = L_CI, ymax = U_CI, col = "Observed"), 
+                  width=.5, position = position_dodge(width=0.9)) +
+    geom_point(aes(y = observed, col = "Observed"), size = 2.5) +
+    labs(x = "Year", y = "Relative index", color = "") +
+    ylim(0,NA) +
+    theme_classic() +
+    facet_wrap(~observation_label, ncol = 1, scales = "free_y") +
+    theme(legend.position = "bottom", 
+          axis.text = element_text(size = 14), 
+          axis.title = element_text(size = 14),
+          strip.text = element_text(size=14),
+          legend.text = element_text(size=14)) +
+    scale_color_manual(values = obs_pallete[1:2])
+```
+
+```{r plot_resid_index, fig.width=8, fig.height=6}
+## Plot pearsons residuals
+ggplot(abundance_obs, aes(x = year)) +
+  geom_point(aes(y = pearsons_residuals, col = "Pearson's Residuals"), 
+             size = 2) +
+  geom_smooth(aes(y = pearsons_residuals, col = "Pearson's Residuals", 
+                  fill = "Pearson's Residuals"), size = 1.5, alpha = 0.4,
+              linetype = "dashed") +
+  labs(x = "Age", y = "Pearson's Residuals", fill = "", col = "") +
+  geom_hline(yintercept = 0, col = "#999999", linetype = "dashed", 
+             size = 1.2) +
+  geom_hline(yintercept = c(-2,2), col = "red", linetype = "dashed", 
+             size = 1.2) + 
+  facet_wrap(~observation_label, ncol = 4) +
+  #ylim(3,-3) +
+  theme_classic() +
+  facet_wrap(~observation_label, ncol = 1, scales = "free_y") +
+  list(theme(legend.position = "bottom", 
+        axis.text = element_text(size = 14), 
+        axis.title = element_text(size = 14),
+        strip.text = element_text(size=14),
+        legend.text = element_text(size=14)),
+  scale_color_manual(values = obs_pallete[3]),
+  scale_fill_manual(values = obs_pallete[3]))
+```
+```{r runs_test, fig.width=8, fig.height=6}
+## complete a Wald-Wolfowitz Runs Test
+## are residuals a random sequence
+runs_test_residuals(abundance_obs$pearsons_residuals)
+## seem fine i.e. not rejecting Null hypothesis 
+## H0: "The order of the data is random "
+```
+
+#### Age composition {-}
+
+```{r plot_comp_fit, fig.width=10, fig.height=10}
+## define a palette
+comp_obs = get_composition_observations(mpd)
+unique(comp_obs$observation_label)
+
+## just plot one of them
+## and the first 12 years
+this_obs = comp_obs %>% filter(observation_label == "chatTANage")
+years_to_plot = unique(this_obs$year)[1:12]
+## calcualte effective N for plot
+this_obs = this_obs %>% group_by(year, observation_label) %>% 
+  mutate(Nassumed = mean(adjusted_error))
+  this_obs$label = paste0(this_obs$year, " N = ", round(this_obs$Nassumed,1))
+
+ggplot(this_obs, aes(x = age)) +
+  geom_line(aes(y = expected, col = "Predicted"), size = 1.5) +
+  geom_point(aes(y = observed, col = "Observed"), size = 2.5) +
+  labs(x = "Age", y = "Proportions") +
+  facet_wrap(~label, ncol = 4) +
+  ggtitle("chatTANage") +
+  theme_classic() +
+  theme(legend.position = "bottom", 
+        axis.text = element_text(size = 14), 
+        axis.title = element_text(size = 14),
+        strip.text = element_text(size=14),
+        legend.text = element_text(size=14)) +
+  scale_color_manual(values = obs_pallete[1:2])
+```
+
+
+```{r plot_mean_age_fit, fig.width=10, fig.height=10}
+mean_age_df = get_composition_mean_bin(mpd)
+n_obs = unique(mean_age_df$observation_label)
+## create a nice plot with seperate axis
+ggplot(mean_age_df, aes(x = year, col = observation_label)) +
+  geom_errorbar(aes(ymin = Oy-2*SEy, ymax = Oy + 2*SEy), width=.5, 
+                position = position_dodge(width=0)) +
+  geom_point(aes(y = Oy), position = position_dodge(width=0.9)) +
+  geom_line(aes(y = Ey), linetype = "dashed") +
+  labs(x = "Years",y = "Mean age (+- 2 SE)") +
+  facet_wrap(~observation_label, nrow = length(n_obs))  +
+  theme(legend.position = "bottom", 
+        axis.text = element_text(size = 14), 
+        axis.title = element_text(size = 14),
+        strip.text = element_text(size=14),
+        legend.text = element_text(size=14))
+
+## a nice plot with overlapping mean age
+ggplot(mean_age_df, aes(x = year, col = observation_label)) +
+  geom_errorbar(aes(ymin = Oy-2*SEy, ymax = Oy + 2*SEy), width=.5, 
+                position = position_dodge(width=0.9)) +
+  geom_point(aes(y = Oy), position = position_dodge(width=0.9)) +
+  geom_line(aes(y = Ey), linetype = "dashed") +
+  labs(x = "Years",y = "Mean age (+- 2 SE)") +
+  theme_classic() +
+  theme(legend.position = "right", 
+        axis.text = element_text(size = 14), 
+        axis.title = element_text(size = 14),
+        strip.text = element_text(size=14),
+        legend.text = element_text(size=14))
 ```
 
 ## Multiple Casal2 runs with -i or -s 
@@ -204,7 +363,7 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = report_label, line_ty
 ```
 
 ### Plotting Fits {-}
-```{r plot_relative_index, fig.width=8, fig.height=6}
+```{r plot_relative_index_multi, fig.width=8, fig.height=6}
 my_plot = plot_relative_index(model = mpd, report_labels = c("chatTANbiomass"), plot.it = T, plot_type = "classic")
 my_plot
 

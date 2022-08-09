@@ -12,6 +12,7 @@ model-convergence
 data-weighting
 model-quantities
 plotting-selectivities
+plotting-fits
 multiple-casal2-runs-with--i-or--s
 summarisemultipleinputs
 read-in-models

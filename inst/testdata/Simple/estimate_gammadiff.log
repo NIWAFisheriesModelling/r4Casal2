@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -e -g 20 -c config_gammadiff.csl2 
-Date: Thu Jul 14 16:27:14 2022
+Date: Tue Aug 09 11:07:36 2022
 Seed: 20
-Version: v22.07 (2022-07-14)
+Version: v22.08 (2022-08-08)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=22612
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=4300
 
 
 *partition[partition_step1]
@@ -381,6 +381,7 @@ observation->chatOBSest->1998 17.193
 observation->chatOBSest->2001 21.4576
 observation->chatOBSest->2004 20.799
 observation->chatOBSest->2007 21.5128
+penalty->CatchMustBeTaken1 0
 prior->B0->process[Recruitment].b0 10.8702
 prior->chatTANq->catchability[chatTANq].q -2.2273
 prior->TANSel_mu->selectivity[chatTANSel].mu 1.15511
@@ -438,10 +439,6 @@ total_score 682.978
 values {dataframe}
 process[Recruitment].b0 catchability[chatTANq].q selectivity[chatTANSel].mu selectivity[chatTANSel].sigma_l selectivity[chatTANSel].sigma_r selectivity[eastFSel].mu selectivity[eastFSel].sigma_l selectivity[eastFSel].sigma_r selectivity[westFSel].mu selectivity[westFSel].sigma_l selectivity[westFSel].sigma_r process[Recruitment].ycs_values{1975} process[Recruitment].ycs_values{1976} process[Recruitment].ycs_values{1977} process[Recruitment].ycs_values{1978} process[Recruitment].ycs_values{1979} process[Recruitment].ycs_values{1980} process[Recruitment].ycs_values{1981} process[Recruitment].ycs_values{1982} process[Recruitment].ycs_values{1983} process[Recruitment].ycs_values{1984} process[Recruitment].ycs_values{1985} process[Recruitment].ycs_values{1986} process[Recruitment].ycs_values{1987} process[Recruitment].ycs_values{1988} process[Recruitment].ycs_values{1989} process[Recruitment].ycs_values{1990} process[Recruitment].ycs_values{1991} process[Recruitment].ycs_values{1992} process[Recruitment].ycs_values{1993} process[Recruitment].ycs_values{1994} process[Recruitment].ycs_values{1995} process[Recruitment].ycs_values{1996} process[Recruitment].ycs_values{1997} process[Recruitment].ycs_values{1998} process[Recruitment].ycs_values{1999} process[Recruitment].ycs_values{2000} process[Recruitment].ycs_values{2001} process[Recruitment].ycs_values{2002} process[Recruitment].ycs_values{2003} process[Recruitment].ycs_values{2004} process[Recruitment].ycs_values{2005} process[Recruitment].ycs_values{2006} process[Recruitment].ycs_values{2007} process[Recruitment].ycs_values{2008} process[Recruitment].ycs_values{2009} process[Recruitment].ycs_values{2010} process[Recruitment].ycs_values{2011} 
 52583.2 0.057507 9.51994 5.53389 10.8664 10.813 3.50266 6.8698 6.44798 3.00328 7.88331 1.02472 1.0466 1.06326 1.07301 1.0746 1.06544 1.04331 1.01818 1.00288 0.42694 0.476767 0.520436 0.382206 0.527168 0.445194 0.674283 1.00399 0.761261 0.653445 0.592756 0.488627 0.321251 0.303426 0.221375 0.332995 0.21992 0.328757 0.925187 0.525774 0.434877 0.187223 0.307346 0.259691 0.230943 0.260204 3 3 
-*end
-
-*catchability[__chatTANq__]
-q: 0.057507
 *end
 
 *derived_quantity[biomass_t1]
@@ -1376,6 +1373,7 @@ ycs_values: 1 1.02472 1.0466 1.06326 1.07301 1.0746 1.06544 1.04331 1.01818 1.00
 true_ycs: 1 1.68978 1.72559 1.75238 1.76806 1.77095 1.75651 1.72141 1.68191 1.65894 0.707196 0.790652 0.863899 0.634913 0.876112 0.739918 1.12022 1.66664 1.26219 1.08156 0.979021 0.805243 0.528409 0.49843 0.363379 0.545877 0.359727 0.536478 1.50592 0.853685 0.7035 0.301074 0.492128 0.415815 0.37018 0.417429 2.91983 2.92019 
 Recruits: 4.64517e+06 7.84929e+06 8.01566e+06 8.14012e+06 8.21295e+06 8.22638e+06 8.15929e+06 7.99625e+06 7.81274e+06 7.70605e+06 3.28505e+06 3.67271e+06 4.01296e+06 2.94928e+06 4.06969e+06 3.43704e+06 5.20359e+06 7.74185e+06 5.86308e+06 5.02405e+06 4.54772e+06 3.74049e+06 2.45455e+06 2.31529e+06 1.68796e+06 2.53569e+06 1.67099e+06 2.49203e+06 6.99526e+06 3.96551e+06 3.26788e+06 1.39854e+06 2.28602e+06 1.93153e+06 1.71955e+06 1.93903e+06 1.35631e+07 1.35648e+07 
 Recruit_event_SSB: 52583.2 52507.3 52229.8 51510.3 51115.8 51387.3 52078.6 53614.5 56011.1 59144 62593.8 65861.7 68819.2 71284.5 72862.3 73058.8 71627.6 68955.3 65267.1 60629.9 55703.3 51344.8 48131.2 46117.2 45061.3 43287 40639.1 38098 35701.7 33639 30963.9 27427.7 25330.3 25323.2 25814.6 26211 26443.6 26505.7 
+SSB_offset: 1
 *end
 
 *process[Ageing]
@@ -1613,7 +1611,6 @@ Values {vector}
 Values {string}
 Setting the random number seed to 20
 Estimable parameters were loaded from the free parameter file: 
-Creating default report for catchability chatTANq
 Creating default report for derived quantity biomass_t1
 Creating default report for observation chatTANbiomass
 Creating default report for observation chatTANage

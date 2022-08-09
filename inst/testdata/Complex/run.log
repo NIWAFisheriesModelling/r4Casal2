@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -r 
-Date: Thu Jul 14 16:23:51 2022
-Seed: 72631
-Version: v22.07 (2022-07-14)
+Date: Tue Aug 09 11:05:17 2022
+Seed: 99917
+Version: v22.08 (2022-08-08)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=30216
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=14812
 
 
 *estimate_value[summary]
@@ -226,6 +226,7 @@ observation->SAautage->1998 16.7233
 observation->pspawn_1993 -7.19067
 observation->pspawn->1992 -5.76114
 observation->pspawn->1998 -7.38911
+penalty->CatchMustBeTaken 0
 prior->CSacousq->catchability[CSacous].q -0.381345
 prior->WCacousq->catchability[WCacous].q -0.317965
 prior->CRsumq->catchability[CRsum].q -2.23026
@@ -513,6 +514,7 @@ values {vector}
 *end
 
 *parameter_transformations[__log_sum_b0__]
+transformation_type: log_sum
 parameters: process[recruit_E].b0 process[recruit_W].b0 
 parameter_values: 451777 858436 
 log_total_parameter: 14.0857
@@ -4344,6 +4346,7 @@ ycs_values: 1 1 1 1 1 0.426004 0.701345 0.620773 0.60283 0.457014 0.502504 0.587
 true_ycs: 1 1 0.999755 0.999463 0.999192 0.78845 1.29581 1.14267 1.10891 0.840704 0.924346 1.08188 0.892124 1.6958 1.53413 0.606551 0.281423 2.77453 1.5756 0.149007 0.136398 1.50523 2.2879 0.62091 1.77518 0.388384 0.35625 0.445212 0.331015 0.105804 0.580431 0.145253 1.20026 0.686791 0.727593 0.736269 1.063 0.889156 1.06318 0.735748 0.201514 1.96041 0.319431 0.292433 1.86539 
 Recruits: 3.44114e+09 3.44114e+09 3.4403e+09 3.43929e+09 3.43836e+09 2.71316e+09 4.45908e+09 3.93209e+09 3.81593e+09 2.89298e+09 3.1808e+09 3.72291e+09 3.06992e+09 5.83547e+09 5.27915e+09 2.08722e+09 9.68415e+08 9.54753e+09 5.42184e+09 5.12753e+08 4.69364e+08 5.1797e+09 7.87298e+09 2.13664e+09 6.10863e+09 1.33648e+09 1.2259e+09 1.53204e+09 1.13907e+09 3.64086e+08 1.99734e+09 4.99835e+08 4.13024e+09 2.36334e+09 2.50375e+09 2.5336e+09 3.65794e+09 3.05971e+09 3.65856e+09 2.53181e+09 6.93438e+08 6.74605e+09 1.09921e+09 1.0063e+09 6.41905e+09 
 Recruit_event_SSB: 858436 858436 855923 852933 850188 844560 827665 793207 787427 787641 787266 793116 796242 794510 793405 788781 772620 713143 623233 566839 529948 521571 528777 513660 504629 539340 552488 553112 533368 532520 478470 386750 320735 245003 211872 207295 205474 228262 266428 305262 355338 382703 401231 422948 431890 
+SSB_offset: 2
 *end
 
 *process[recruit_E]
@@ -4365,6 +4368,7 @@ ycs_values: 1 1 1 1 1 0.320262 0.474268 0.527918 0.950748 0.726547 0.262939 0.35
 true_ycs: 1 1 0.999742 0.9995 0.99915 0.690645 1.02038 1.13321 2.0401 1.55794 0.563981 0.755287 0.488218 0.830823 0.968087 0.816493 0.454935 2.19166 2.08849 0.945964 0.285899 0.884089 0.907331 0.853367 1.31702 0.586556 0.626967 1.04442 0.622788 0.119215 1.03443 0.319184 0.571829 0.966012 1.04708 0.934543 1.17232 1.02492 0.713369 1.38195 0.232398 1.76665 0.308139 0.334618 1.91246 
 Recruits: 1.98832e+09 1.98832e+09 1.9878e+09 1.98732e+09 1.98663e+09 1.37322e+09 2.02883e+09 2.25317e+09 4.05637e+09 3.09768e+09 1.12137e+09 1.50175e+09 9.70731e+08 1.65194e+09 1.92486e+09 1.62345e+09 9.04555e+08 4.35772e+09 4.15257e+09 1.88087e+09 5.68458e+08 1.75785e+09 1.80406e+09 1.69676e+09 2.61866e+09 1.16626e+09 1.24661e+09 2.07664e+09 1.2383e+09 2.37037e+08 2.05677e+09 6.34639e+08 1.13698e+09 1.92074e+09 2.08193e+09 1.85817e+09 2.33094e+09 2.03786e+09 1.4184e+09 2.74776e+09 4.6208e+08 3.51265e+09 6.12677e+08 6.65326e+08 3.80258e+09 
 Recruit_event_SSB: 451777 451777 450380 449081 447212 435075 423603 412903 411269 408171 409429 431562 462059 477546 473593 463419 460696 442215 422565 402204 389730 400981 414126 389166 358594 348806 317161 278322 245653 218687 193853 181244 168088 141122 125728 122825 120982 136745 159746 178537 203285 226022 245112 253691 270924 
+SSB_offset: 2
 *end
 
 *process[Instant_mortality]
@@ -4660,7 +4664,7 @@ Values {vector}
 
 *info[messages_encountered]
 Values {string}
-Setting the random number seed to 72631
+Setting the random number seed to 99917
 Estimable parameters were loaded from the free parameter file: 
 Creating default report for catchability CSacous
 Creating default report for catchability WCacous
@@ -4802,6 +4806,7 @@ obs sum total (1) for year (2012) doesn't sum to 1.0
 obs sum total (0.999999) for year (2013) doesn't sum to 1.0
 obs sum total (1) for year (1998) doesn't sum to 1.0
 Estimates were removed because of matching lower and upper bounds. Originally had 152 estimates, now have 151
+Found an @estimate block for selectivity[Wspsl].a50. There are only a few time-varying types such as exogenous where this is okay. Please check this is a sensible configuration.
 estimated parameter 'process[recruit_E].ycs_values{1999}' was within 0.001 of lower bound 0.06
 estimated parameter 'process[recruit_W].ycs_values{1999}' was within 0.001 of lower bound 0.06
 estimated parameter 'selectivity[sel_Whome].v{7}' was within 0.001 of upper bound 1

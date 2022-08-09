@@ -44,7 +44,6 @@
 [WARNING] obs sum total (0.9999) for year (1998) doesn't sum to 1.0
 [WARNING] obs sum total (0.9997) for year (2000) doesn't sum to 1.0
 [WARNING] obs sum total (0.9997) for year (2001) doesn't sum to 1.0
-[INFO] Creating default report for catchability chatTANq
 [INFO] Creating default report for derived quantity SSB
 [INFO] Creating default report for observation chatTANbiomass
 [INFO] Creating default report for observation Tangaroa_propn_at_age_Jan
@@ -147,4 +146,4 @@
 [IMPORTANT] FMM: Small step size convergence
 [WARNING] estimated parameter 'selectivity[chatTANSel_m].sigma_r' was within 0.001 of upper bound 200
 [INFO] Completed
-[INFO] Total elapsed time: 6 seconds
+[INFO] Total elapsed time: 7 seconds

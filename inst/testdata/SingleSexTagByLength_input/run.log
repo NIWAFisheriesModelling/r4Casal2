@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -r -I pars.out 
-Date: Thu Jul 14 16:23:52 2022
-Seed: 72632
-Version: v22.07 (2022-07-14)
+Date: Tue Aug 09 11:05:18 2022
+Seed: 99918
+Version: v22.08 (2022-08-08)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=30048
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=33196
 
 
 *objective_function[obj]
@@ -129,6 +129,8 @@ observation->Tag2012->2015 2.85796
 observation->Tag2013->2014 4.46775
 observation->Tag2013->2015 3.46942
 observation->Tag2014 4.34468
+penalty->event_mortality_penalty 0
+penalty->tagging_penalty 0
 prior->selectivity[Shelfsel].mu 0
 prior->selectivity[Shelfsel].sigma_l 0
 prior->selectivity[Shelfsel].sigma_r 0
@@ -150,7 +152,7 @@ total_score 1482.97
 
 *info[messages_encountered]
 Values {string}
-Setting the random number seed to 72632
+Setting the random number seed to 99918
 Estimable parameters were loaded from the free parameter file: pars.out
 Initiating basic run mode
 *end

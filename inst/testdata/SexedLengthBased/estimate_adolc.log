@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -e -g 20 --config config_adolc.csl2 
-Date: Thu Jul 14 19:06:02 2022
+Date: Tue Aug 09 12:53:36 2022
 Seed: 20
-Version: v22.07 (2022-07-14)
+Version: v22.08 (2022-08-08)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=16952
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=5580
 
 
 *estimate_value[estimate_value]
@@ -7227,6 +7227,7 @@ ycs_values: 0.721831 0.311647 0.323691 0.384213 3.47704 0.483641 0.478064 0.4312
 true_ycs: 1.12803 0.48702 0.506103 0.599887 5.39936 0.744843 0.742579 0.68169 0.402716 0.597621 0.560312 0.518233 0.747344 0.526211 0.725915 0.815246 0.915066 0.397602 0.913325 0.605659 0.652539 0.775088 1.37675 0.851483 1.15219 1.40674 0.92427 0.978 0.710225 1.24544 0.597616 0.765145 1.43008 2.03814 0.427036 0.398108 0.448729 
 Recruits: 1.60331e+07 6.92222e+06 7.19345e+06 8.52644e+06 7.67434e+07 1.05868e+07 1.05546e+07 9.68915e+06 5.72398e+06 8.49424e+06 7.96395e+06 7.36587e+06 1.06223e+07 7.47926e+06 1.03177e+07 1.15874e+07 1.30062e+07 5.65129e+06 1.29815e+07 8.60848e+06 9.27481e+06 1.10167e+07 1.95683e+07 1.21025e+07 1.63766e+07 1.99946e+07 1.3137e+07 1.39007e+07 1.00947e+07 1.77019e+07 8.49417e+06 1.08753e+07 2.03263e+07 2.8969e+07 6.06965e+06 5.65848e+06 6.37798e+06 
 Recruit_event_SSB: 2379.27 2379.28 2394.1 2354.05 2210.66 2022.24 2217.77 2753.94 2695.85 2518.62 2135.34 1781.08 1517.11 1208.39 1044.67 950.497 918.399 849.038 814.501 887.046 964.373 1037.92 1061.09 1086.27 1242.06 1367.57 1435.9 1575.76 1697.01 1729.28 1721.96 1672.2 1657.01 1539.91 1544 1713.93 1863.89 
+SSB_offset: 1
 untagged.male_initial_length_distribution: 0.022563 0.0172706 0.0268962 0.0390749 0.0530715 0.0677428 0.0816862 0.0930239 0.098671 0.098671 0.0930239 0.0816862 0.0677428 0.0530715 0.0390749 0.0268962 0.0172706 0.0103684 0.00585649 0.00314139 0.00161758 0.000808476 0.000396279 0.000192211 9.29468e-05 4.50761e-05 2.20234e-05 1.08769e-05 5.44301e-06 5.83201e-06 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 untagged.female_initial_length_distribution: 0.022563 0.0172706 0.0268962 0.0390749 0.0530715 0.0677428 0.0816862 0.0930239 0.098671 0.098671 0.0930239 0.0816862 0.0677428 0.0530715 0.0390749 0.0268962 0.0172706 0.0103684 0.00585649 0.00314139 0.00161758 0.000808476 0.000396279 0.000192211 9.29468e-05 4.50761e-05 2.20234e-05 1.08769e-05 5.44301e-06 5.83201e-06 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 *end
@@ -8651,30 +8652,62 @@ Creating default report for selectivity tag_1996_3_female.one
 Creating default report for selectivity tag_1997_1_male.one
 Creating default report for selectivity tag_1997_1_female.one
 Initiating point estimate run mode
+Equilibrium_state ran for '0' iterations.
 Estimation with the adolc minimiser
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 3.10416. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
+Equilibrium_state ran for '0' iterations.
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 2.26913. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
+Equilibrium_state ran for '0' iterations.
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.919139. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.96767. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.450542. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.311526. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.101028. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0863387. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0276992. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0221265. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0334071. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0320036. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0536203. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0552634. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0566497. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0397775. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0353428. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0889752. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0654402. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0520225. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.118213. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0583823. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0372473. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
 Convergence check value = 0.0163213. Convergence tolerance   = 0.02
+Equilibrium_state ran for '0' iterations.
+Equilibrium_state ran for '0' iterations.
 *end
 

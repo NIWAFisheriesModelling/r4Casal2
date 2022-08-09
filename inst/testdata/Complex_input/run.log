@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -r -i pars.out 
-Date: Thu Jul 14 16:23:52 2022
-Seed: 72632
-Version: v22.07 (2022-07-14)
+Date: Tue Aug 09 11:05:18 2022
+Seed: 99918
+Version: v22.08 (2022-08-08)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=23980
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=19252
 
 
 *estimate_value[summary]
@@ -226,6 +226,7 @@ observation->SAautage->1998 19.6686
 observation->pspawn_1993 -3.22449
 observation->pspawn->1992 -2.44741
 observation->pspawn->1998 -7.25015
+penalty->CatchMustBeTaken 0
 prior->CSacousq->catchability[CSacous].q -0.359326
 prior->WCacousq->catchability[WCacous].q -0.0783953
 prior->CRsumq->catchability[CRsum].q -2.24845
@@ -388,7 +389,7 @@ total_score 3559.67
 
 *info[messages_encountered]
 Values {string}
-Setting the random number seed to 72632
+Setting the random number seed to 99918
 Estimable parameters were loaded from the free parameter file: pars.out
 Initiating basic run mode
 *end
@@ -482,6 +483,7 @@ obs sum total (1) for year (2012) doesn't sum to 1.0
 obs sum total (0.999999) for year (2013) doesn't sum to 1.0
 obs sum total (1) for year (1998) doesn't sum to 1.0
 Estimates were removed because of matching lower and upper bounds. Originally had 152 estimates, now have 151
+Found an @estimate block for selectivity[Wspsl].a50. There are only a few time-varying types such as exogenous where this is okay. Please check this is a sensible configuration.
 estimated parameter 'process[recruit_E].ycs_values{1999}' was within 0.001 of lower bound 0.06
 estimated parameter 'process[recruit_W].ycs_values{1999}' was within 0.001 of lower bound 0.06
 estimated parameter 'selectivity[M_male].y0' was within 0.001 of upper bound 0.3

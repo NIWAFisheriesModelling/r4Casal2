@@ -9,11 +9,9 @@ type objective_function
 type default
 processes true
 observations true
-catchabilities true
-selectivities true
-projects true
-derived_quantities True
-parameter_transformations true
+derived_quantities true
+selectivities true 
+
 
 @report partition_step1
 type partition

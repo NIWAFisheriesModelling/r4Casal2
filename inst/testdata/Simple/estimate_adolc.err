@@ -33,7 +33,6 @@
 [WARNING] obs sum total (1.0002) for year (1998) doesn't sum to 1.0
 [WARNING] obs sum total (1.0001) for year (2004) doesn't sum to 1.0
 [WARNING] obs sum total (0.9999) for year (2007) doesn't sum to 1.0
-[INFO] Creating default report for catchability chatTANq
 [INFO] Creating default report for derived quantity biomass_t1
 [INFO] Creating default report for observation chatTANbiomass
 [INFO] Creating default report for observation chatTANage

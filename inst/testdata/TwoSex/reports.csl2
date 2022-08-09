@@ -21,16 +21,14 @@ years 1972:2014
 type partition
 time_step step2
 years 1972:2014
-
 @report default
+
+
 type default
 processes true
 observations true
-catchabilities true
-selectivities true
-projects true
-derived_quantities True
-parameter_transformations true
+derived_quantities true
+selectivities true 
 
 @report vb_male
 type age_length

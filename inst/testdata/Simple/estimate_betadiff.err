@@ -1017,7 +1017,7 @@ done fmin call
 ireturn = -1
 finished main minimiser loop
 Successful convergence in optimise
-[WARNING] estimated parameter 'process[Recruitment].ycs_values{2010}' was within 0.001 of upper bound 3
-[WARNING] estimated parameter 'process[Recruitment].ycs_values{2011}' was within 0.001 of upper bound 3
+[WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2011}' was within 0.001 of upper bound 3
+[WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2012}' was within 0.001 of upper bound 3
 [INFO] Completed
-[INFO] Total elapsed time: 2 seconds
+[INFO] Total elapsed time: 1 second

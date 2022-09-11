@@ -39,9 +39,9 @@ ggplot(dq_df, aes(x = years, y = values, col = model_label, linetype = model_lab
 ### Recruitment
 ```{r compare_recruit, fig.width=6, fig.height=6}
 recruit_df = get_BH_recruitment(models)
-ggplot(recruit_df, aes(x = ycs_years, y = standardised_ycs, col = model_label, linetype = model_label)) +
+ggplot(recruit_df, aes(x = model_year, y = standardised_recruitment_multipliers, col = model_label, linetype = model_label)) +
   geom_line(size = 1.3) +
-  labs(x = "YCS year", y = "standardised ycs", col = "Model", linetype = "Model")
+  labs(x = "Recruited year", y = "standardised recruitment multipliers", col = "Model", linetype = "Model")
 ```
 
 

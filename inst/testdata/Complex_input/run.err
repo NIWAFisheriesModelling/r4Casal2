@@ -1,5 +1,5 @@
 
-[INFO] Setting the random number seed to 99918
+[INFO] Setting the random number seed to 88492
 [INFO] Estimable parameters were loaded from the free parameter file: pars.out
 [WARNING] obs sum total (1) for year (1989) doesn't sum to 1.0
 [WARNING] obs sum total (1) for year (1990) doesn't sum to 1.0
@@ -90,8 +90,8 @@
 [WARNING] Estimates were removed because of matching lower and upper bounds. Originally had 152 estimates, now have 151
 [WARNING] Found an @estimate block for selectivity[Wspsl].a50. There are only a few time-varying types such as exogenous where this is okay. Please check this is a sensible configuration.
 [INFO] Initiating basic run mode
-[WARNING] estimated parameter 'process[recruit_E].ycs_values{1999}' was within 0.001 of lower bound 0.06
-[WARNING] estimated parameter 'process[recruit_W].ycs_values{1999}' was within 0.001 of lower bound 0.06
+[WARNING] estimated parameter 'process[recruit_E].recruitment_multipliers{2001}' was within 0.001 of lower bound 0.06
+[WARNING] estimated parameter 'process[recruit_W].recruitment_multipliers{2001}' was within 0.001 of lower bound 0.06
 [WARNING] estimated parameter 'selectivity[M_male].y0' was within 0.001 of upper bound 0.3
 [WARNING] estimated parameter 'selectivity[sel_Whome].v{7}' was within 0.001 of upper bound 1
 [WARNING] estimated parameter 'selectivity[sel_Espmg_Female].v{1}' was within 0.001 of lower bound 0

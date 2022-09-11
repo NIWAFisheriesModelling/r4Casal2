@@ -182,9 +182,9 @@ library(reshape2)
 
   ## Recruitment
   write("## Recruitment \n\n```{r recruit, eval = T, echo = T}", file = model_quant_file, append = T)
-  write("plot_recruitment(model = cas2_mpd, quantity = 'ycs_values') + ylab('YCS values')", file = model_quant_file, append = T)
-  write("plot_recruitment(model = cas2_mpd, quantity = 'standardised_ycs') + ylab('Standardised YCS values')", file = model_quant_file, append = T)
-  write("plot_recruitment(model = cas2_mpd, quantity = 'true_ycs') + ylab('True YCS values')", file = model_quant_file, append = T)
+  write("plot_recruitment(model = cas2_mpd, quantity = 'recruitment_multipliers') + ylab('Recruitment multipliers')", file = model_quant_file, append = T)
+  write("plot_recruitment(model = cas2_mpd, quantity = 'standardised_recruitment_multipliers') + ylab('Standardised recruitment multipliers')", file = model_quant_file, append = T)
+  write("plot_recruitment(model = cas2_mpd, quantity = 'recruits') + ylab('Recruits (000)')", file = model_quant_file, append = T)
   write("``` \n", file = model_quant_file, append = T)
 
   ## Exploitation

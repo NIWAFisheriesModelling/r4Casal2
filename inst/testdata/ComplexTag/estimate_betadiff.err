@@ -1162,4 +1162,4 @@ Successful convergence in optimise
 [WARNING] estimated parameter 'selectivity[AreaEM].sigma_l' was within 0.001 of lower bound 1
 [WARNING] estimated parameter 'selectivity[AreaEF].sigma_l' was within 0.001 of lower bound 1
 [INFO] Completed
-[INFO] Total elapsed time: 1.6 minutes
+[INFO] Total elapsed time: 1.267 minutes

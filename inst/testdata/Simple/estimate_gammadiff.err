@@ -106,7 +106,7 @@
 [INFO] Convergence check value = 2.48719e-06. Convergence tolerance   = 1e-08
 [INFO] Convergence check value = 2.48719e-06. Convergence tolerance   = 1e-08
 [IMPORTANT] FMM: Small step size convergence
-[WARNING] estimated parameter 'process[Recruitment].ycs_values{2010}' was within 0.001 of upper bound 3
-[WARNING] estimated parameter 'process[Recruitment].ycs_values{2011}' was within 0.001 of upper bound 3
+[WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2011}' was within 0.001 of upper bound 3
+[WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2012}' was within 0.001 of upper bound 3
 [INFO] Completed
-[INFO] Total elapsed time: 4 seconds
+[INFO] Total elapsed time: 3 seconds

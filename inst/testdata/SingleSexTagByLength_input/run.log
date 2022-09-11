@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -r -I pars.out 
-Date: Tue Aug 09 11:05:18 2022
-Seed: 99918
-Version: v22.08 (2022-08-08)
+Date: Thu Sep 08 10:08:12 2022
+Seed: 88492
+Version: v22.09 (2022-09-07)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=33196
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=24200
 
 
 *objective_function[obj]
@@ -140,19 +140,19 @@ prior->selectivity[Slopesel].sigma_r 0
 prior->selectivity[Northsel].mu 0
 prior->selectivity[Northsel].sigma_l 0
 prior->selectivity[Northsel].sigma_r 0
-prior->process[Recruitment].ycs_values{2003} -0.789585
-prior->process[Recruitment].ycs_values{2004} -0.786937
-prior->process[Recruitment].ycs_values{2005} -0.784081
-prior->process[Recruitment].ycs_values{2006} -0.778491
-prior->process[Recruitment].ycs_values{2007} -0.766501
-prior->process[Recruitment].ycs_values{2008} -0.784186
-prior->process[Recruitment].ycs_values{2009} -0.723151
+prior->process[Recruitment].recruitment_multipliers{2004} -0.789585
+prior->process[Recruitment].recruitment_multipliers{2005} -0.786937
+prior->process[Recruitment].recruitment_multipliers{2006} -0.784081
+prior->process[Recruitment].recruitment_multipliers{2007} -0.778491
+prior->process[Recruitment].recruitment_multipliers{2008} -0.766501
+prior->process[Recruitment].recruitment_multipliers{2009} -0.784186
+prior->process[Recruitment].recruitment_multipliers{2010} -0.723151
 total_score 1482.97
 *end
 
 *info[messages_encountered]
 Values {string}
-Setting the random number seed to 99918
+Setting the random number seed to 88492
 Estimable parameters were loaded from the free parameter file: pars.out
 Initiating basic run mode
 *end

@@ -104,7 +104,7 @@
 [INFO] Convergence check value = 5.30016e-06. Convergence tolerance   = 1e-06
 [INFO] Convergence check value = 3.97121e-06. Convergence tolerance   = 1e-06
 [INFO] Convergence check value = 2.54496e-07. Convergence tolerance   = 1e-06
-[WARNING] estimated parameter 'process[Recruitment].ycs_values{2010}' was within 0.001 of upper bound 3
-[WARNING] estimated parameter 'process[Recruitment].ycs_values{2011}' was within 0.001 of upper bound 3
+[WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2011}' was within 0.001 of upper bound 3
+[WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2012}' was within 0.001 of upper bound 3
 [INFO] Completed
 [INFO] Total elapsed time: 2 seconds

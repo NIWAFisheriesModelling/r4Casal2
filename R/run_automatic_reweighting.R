@@ -90,7 +90,7 @@ run_automatic_reweighting <- function(config_dir,
   ##
   for(loop_iter in 1:n_loops) {
     if(verbose)
-      cat("loop iter ", loop_iter, "\n")
+      cat("\nloop iter ", loop_iter, "\n")
     if(loop_iter > 1) {
       ## read in mpd and calculate stage two weights
       mpd = extract.mpd(path = working_dir, file = paste0("estimate_", loop_iter - 1,".log"))

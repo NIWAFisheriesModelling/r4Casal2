@@ -142,4 +142,4 @@
 [INFO] Convergence check value = 2.57678e-07. Convergence tolerance   = 1e-06
 [WARNING] estimated parameter 'selectivity[chatTANSel_m].sigma_r' was within 0.001 of upper bound 200
 [INFO] Completed
-[INFO] Total elapsed time: 7 seconds
+[INFO] Total elapsed time: 4 seconds

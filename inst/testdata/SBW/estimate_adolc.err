@@ -336,4 +336,4 @@
 [WARNING] estimated parameter 'observation[TangaroaAcousticMature].process_error' was within 0.001 of lower bound 0.0001
 [WARNING] estimated parameter 'observation[TangaroaAcousticImmature].process_error' was within 0.001 of lower bound 0.0001
 [INFO] Completed
-[INFO] Total elapsed time: 19 seconds
+[INFO] Total elapsed time: 11 seconds

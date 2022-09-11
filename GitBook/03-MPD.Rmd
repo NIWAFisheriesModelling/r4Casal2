@@ -126,7 +126,7 @@ MPD_list = extract_reweighted_mpds(file.path(working_dir,reweight_folder))
 ## plot SSBs
 plot_derived_quantities(MPD_list)
 plot_fishery(MPD_list, quantity = "exploitation")
-plot_recruitment(MPD_list, quantity = "ycs_values")
+plot_recruitment(MPD_list, quantity = "standardised_recruitment_multipliers")
 ```
 
 ### Model quantities 
@@ -170,10 +170,10 @@ my_plot + ylim(0,0.09) + geom_hline(yintercept = 0.05, linetype = "dashed")
 ```{r ssbs, fig.width=6, fig.height=4}
 # get SSB and recruit
 ssb_df = get_dqs(mpd)
-ssb_df$model_years = ssb_df$years
+ssb_df$model_year = ssb_df$years
 recruit_df = get_BH_recruitment(mpd)
 # merge these two data frames
-joint_df = right_join(x = ssb_df, y = recruit_df, by = c("model_years", "par_set"))
+joint_df = right_join(x = ssb_df, y = recruit_df, by = c("model_year", "par_set"))
 ## for multi-stock models, you will need to also join by stock id
 joint_df$percent_b0 = joint_df$values / joint_df$b0 * 100
 ## plot percent B0

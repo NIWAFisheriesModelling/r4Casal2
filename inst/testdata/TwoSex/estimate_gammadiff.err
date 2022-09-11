@@ -146,4 +146,4 @@
 [IMPORTANT] FMM: Small step size convergence
 [WARNING] estimated parameter 'selectivity[chatTANSel_m].sigma_r' was within 0.001 of upper bound 200
 [INFO] Completed
-[INFO] Total elapsed time: 7 seconds
+[INFO] Total elapsed time: 6 seconds

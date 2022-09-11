@@ -9,7 +9,7 @@
 #' @param n_loops number of iterative loops
 #' @param dash_i_par_filename parameter filename compatible with -i format. Useful to start models close to solution for complex models
 #' @param prompt_user_before_deleting if FALSE will delete previous weighting_folder_name without prompting user.
-#' @param observation_labels if you only want to weight a subset of compositional data sets
+#' @param observation_labels_to_exclude if you do not want to weight a compositional data set, include it in this parameter using the label i.e. observation[label].
 #' @param verbose print additional information to screen
 #' @param approximate_single_year_obs whether to try and approximate a weigth for observations with a single year
 #' @details Sometimes users may have subdirectories containing config files. This function is untested for this config model structure.
@@ -23,7 +23,7 @@ run_automatic_reweighting <- function(config_dir,
                                       weighting_folder_name = "Reweight",
                                       mpd_file_name = "estimate.log",
                                       n_loops = 3,
-                                      observation_labels = NULL,
+                                      observation_labels_to_exclude = NULL,
                                       dash_i_par_filename = NULL,
                                       prompt_user_before_deleting = TRUE,
                                       verbose = T,
@@ -107,6 +107,8 @@ run_automatic_reweighting <- function(config_dir,
       if(any(blocks == "observation")) {
         obs_ndx = which(blocks %in%  "observation")
         for(obs_iter in obs_ndx) {
+          if(labels[obs_iter] %in% observation_labels_to_exclude)
+            next;
           if(labels[obs_iter] %in% initial_stage_two_weights$observation) {
             ## adjust the observation
             stage_ndx = initial_stage_two_weights$observation %in% labels[obs_iter]

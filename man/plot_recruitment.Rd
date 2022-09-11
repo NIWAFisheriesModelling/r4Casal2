@@ -21,10 +21,9 @@ plot_recruitment(model, report_label = NULL, quantity = "ycs_values")
 \item{report_label}{<string> optional if you want to plot a specific recruitement report}
 
 \item{quantity}{\itemize{
-  \item ycs_values
-  \item Recruits
-  \item true_ycs
-  \item standardised_ycs
+  \item recruitment_multipliers
+  \item standardised_recruitment_multipliers
+  \item recruits
 }}
 }
 \value{

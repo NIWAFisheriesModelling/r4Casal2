@@ -8,10 +8,9 @@
 #' @param report_label <string> optional if you want to plot a specific recruitement report
 #' @param quantity
 #'  \itemize{
-#'   \item ycs_values
-#'   \item Recruits
-#'   \item true_ycs
-#'   \item standardised_ycs
+#'   \item recruitment_multipliers
+#'   \item standardised_recruitment_multipliers
+#'   \item recruits
 #' }
 #' @return generate a plot over time uses get_BH_recruitment
 #' @rdname plot_recruitment
@@ -23,7 +22,7 @@
 
 "plot_recruitment" <-
   function(model, report_label = NULL, quantity = "ycs_values") {
-    if(!quantity %in% c("ycs_values", "Recruits", "true_ycs", "standardised_ycs"))
+    if(!quantity %in% c("recruitment_multipliers", "recruits", "standardised_recruitment_multipliers"))
       stop("quantity, has incorrect values please check ?plot_recruitment")
     UseMethod("plot_recruitment", model)
   }
@@ -39,7 +38,8 @@
     recruit_df = subset(recruit_df, subset = label %in% report_label)
   }
   ## create a plot
-  plt = ggplot(recruit_df, aes_string(x = "ycs_years", y = quantity)) +
+  plt = ggplot(recruit_df, aes_string(x = "model_year", y = quantity)) +
+    xlab("Recruited year") +
     geom_line(size = 2) +
     facet_wrap(~label)
   return(plt)
@@ -65,8 +65,8 @@
   if(!is.null(report_label)) {
     recruit_df = subset(recruit_df, subset = label %in% report_label)
   }
-  ggplot(recruit_df, aes_string(x = "ycs_years", y = quantity, col = "model_label", linetype = "model_label")) +
+  ggplot(recruit_df, aes_string(x = "model_year", y = quantity, col = "model_label", linetype = "model_label")) +
     geom_line(size = 1.5) +
-    labs(colour="Model", linetype = "Model", x = "YCS years", y = quantity) +
+    labs(colour="Model", linetype = "Model", x = "Recruited year", y = quantity) +
     facet_wrap(~label)
 }

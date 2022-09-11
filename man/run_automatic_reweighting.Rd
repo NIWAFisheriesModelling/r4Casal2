@@ -10,7 +10,7 @@ run_automatic_reweighting(
   weighting_folder_name = "Reweight",
   mpd_file_name = "estimate.log",
   n_loops = 3,
-  observation_labels = NULL,
+  observation_labels_to_exclude = NULL,
   dash_i_par_filename = NULL,
   prompt_user_before_deleting = TRUE,
   verbose = T,
@@ -28,7 +28,7 @@ run_automatic_reweighting(
 
 \item{n_loops}{number of iterative loops}
 
-\item{observation_labels}{if you only want to weight a subset of compositional data sets}
+\item{observation_labels_to_exclude}{if you do not want to weight a compositional data set, include it in this parameter using the label i.e. observation[label].}
 
 \item{dash_i_par_filename}{parameter filename compatible with -i format. Useful to start models close to solution for complex models}
 

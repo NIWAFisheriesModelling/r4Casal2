@@ -37,10 +37,35 @@ get_transformed_parameters.casal2MPD <- function(model) {
       } else if (this_report$transformation_type == "logistic") {
         temp_df = data.frame(label = reports_labels[i], type = this_report$transformation_type, parameter = this_report$parameters, untransformed = this_report$parameter_values, transformed_value = this_report$logistic_parameter)
         parameter_df = rbind(parameter_df, temp_df)
+      } else if (this_report$transformation_type == "orthogonal") {
+        temp_df = data.frame(label = reports_labels[i], type = this_report$transformation_type, parameter = this_report$parameters, untransformed = this_report$parameter_values, transformed_value = c(this_report$product_parameter, this_report$quotient_parameter))
+        parameter_df = rbind(parameter_df, temp_df)
+      } else if (this_report$transformation_type == "log_sum") {
+        temp_df = data.frame(label = reports_labels[i], type = this_report$transformation_type, parameter = this_report$parameters, untransformed = this_report$parameter_values, transformed_value = c(this_report$log_total_parameter, this_report$total_proportion_parameter))
+        parameter_df = rbind(parameter_df, temp_df)
       }
     } else {
-      # multi -i report
-
+      # -i multi run output
+      if(this_report[[1]]$type != "parameter_transformations") {
+        next;
+      }
+      ## Multiple parameter inputs
+      n_runs = length(this_report)
+      iter_labs = names(this_report)
+      for(dash_i in 1:n_runs) {
+        ## these reports are bespoke which sucks
+        if(this_report[[dash_i]]$transformation_type == "log") {
+          temp_df = data.frame(label = reports_labels[i], type = this_report[[dash_i]]$transformation_type, parameter = this_report[[dash_i]]$parameters, untransformed = this_report[[dash_i]]$parameter_values, transformed_value = this_report[[dash_i]]$log_parameter)
+        } else if (this_report[[dash_i]]$transformation_type == "logistic") {
+          temp_df = data.frame(label = reports_labels[i], type = this_report[[dash_i]]$transformation_type, parameter = this_report[[dash_i]]$parameters, untransformed = this_report[[dash_i]]$parameter_values, transformed_value = this_report[[dash_i]]$logistic_parameter)
+        } else if (this_report[[dash_i]]$transformation_type == "orthogonal") {
+          temp_df = data.frame(label = reports_labels[i], type = this_report[[dash_i]]$transformation_type, parameter = this_report[[dash_i]]$parameters, untransformed = this_report[[dash_i]]$parameter_values, transformed_value = c(this_report[[dash_i]]$product_parameter, this_report[[dash_i]]$quotient_parameter))
+        } else if (this_report[[dash_i]]$transformation_type == "log_sum") {
+          temp_df = data.frame(label = reports_labels[i], type = this_report[[dash_i]]$transformation_type, parameter = this_report[[dash_i]]$parameters, untransformed = this_report[[dash_i]]$parameter_values, transformed_value = c(this_report[[dash_i]]$log_total_parameter, this_report[[dash_i]]$total_proportion_parameter))
+        }
+        temp_df$par_set = iter_labs[dash_i]
+        parameter_df = rbind(parameter_df, temp_df)
+      }
     }
   }
   return(parameter_df)

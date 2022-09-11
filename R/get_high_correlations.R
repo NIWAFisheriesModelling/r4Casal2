@@ -11,7 +11,7 @@ get_high_correlations <- function(correlation_matrix, max_correlation = 0.8, lab
   if(!any(class(correlation_matrix) == "matrix"))
     stop("correlation_matrix is not a matrix")
   if(max_correlation <= 0 | max_correlation > 1)
-    stop("silly value of max_correlation specified")
+    stop("silly value of max_correlation specified i.e. values not > 0 & < 1")
   if(!isSymmetric(correlation_matrix, tol = tol))
     stop("correlation_matrix not symetric. Something is wrong")
   # set lower triangle and diagnoal = 0

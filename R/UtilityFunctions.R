@@ -22,6 +22,38 @@
 is_matrix_invertable <- function(m) {
   any("matrix" %in% class(try(solve(m),silent=TRUE)))
 }
+## A function to check if the covariance matrix is positive definite
+#' is_positive_definite
+#' @description helper function to see if a matrix is positive definite
+#' @param m an n x n matrix
+#' @param tol real value. Eigen values less than this tolerance value will fail the check.
+#' @export
+#' @return bool
+#'  \itemize{
+#'   \item false: not a positive definite matrix
+#'   \item true: is a positive definite matrix
+#' }
+is_positive_definite <- function (m, tol = 1e-6)  {
+  ## check it is symetric
+  if(!isSymmetric(m, tol = tol)) {
+    message("Matrix 'm' was not symmetric. Derived using 'isSymmetric(m, tol = tol)'")
+    return(FALSE)
+  }
+  ## get eigen values
+  eS <- eigen(m, symmetric = TRUE)
+  ev <- eS$values
+  ## check with tolerance
+  n <- nrow(m)
+  for (i in 1:n) {
+    if (abs(ev[i]) < tol) {
+      ev[i] <- 0
+    }
+  }
+  if (any(ev <= 0)) {
+    return(FALSE)
+  }
+  return(TRUE)
+}
 
 #' is_constant
 #' is a vector constant

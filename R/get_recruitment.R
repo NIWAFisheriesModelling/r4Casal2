@@ -36,20 +36,25 @@
         next;
       ## only a single trajectory
       standardised_ycs = this_report$standardised_ycs
-      ycs_values = this_report$ycs_values
-      ycs_years = this_report$ycs_years
+      ycs_values = this_report$recruitment_multipliers
+      ycs_years = this_report$spawn_event_year
+      spawn_event_year = this_report$spawn_event_year
+      model_year = this_report$model_year
       Recruits = this_report$Recruits
       true_ycs = this_report$true_ycs
 
-      full_df = data.frame(ycs_years = this_report$ycs_years,
-                           model_years = this_report$ycs_years - this_report$SSB_offset,
-                           standardised_ycs = this_report$standardised_ycs,
-                           ycs_values = this_report$ycs_values,
-                           recruits = this_report$Recruits,
+      full_df = data.frame(ycs_years = ycs_years,
+                           model_year = model_year,
+                           spawn_event_year = spawn_event_year,
+                           standardised_recruitment_multipliers = this_report$standardised_recruitment_multipliers,
+                           recruitment_multipliers = this_report$recruitment_multipliers,
+                           recruits = this_report$recruits,
                            true_ycs = this_report$true_ycs,
                            r0 = this_report$r0,
                            b0 = this_report$b0,
                            par_set = 1,
+                           age = this_report$age,
+                           ssb_offset = this_report$ssb_offset,
                            label = reports_labels[i])
       complete_df = rbind(complete_df, full_df)
     } else {
@@ -62,17 +67,19 @@
       iter_labs = names(this_report)
       for(dash_i in 1:n_runs) {
         ## only a single trajectory
-        temp_df = data.frame(
-          standardised_ycs = this_report[[dash_i]]$standardised_ycs,
-          ycs_values = this_report[[dash_i]]$ycs_values,
-          model_years = this_report[[dash_i]]$ycs_years - this_report[[dash_i]]$SSB_offset,
-          ycs_years = this_report[[dash_i]]$ycs_years,
-          Recruits = this_report[[dash_i]]$Recruits,
-          true_ycs = this_report[[dash_i]]$true_ycs,
-          r0 = this_report[[dash_i]]$r0,
-          b0 = this_report[[dash_i]]$b0,
-          par_set = iter_labs[dash_i],
-          label = reports_labels[i])
+        temp_df = data.frame(ycs_years = this_report[[dash_i]]$spawn_event_year,
+                             model_year = this_report[[dash_i]]$model_year,
+                             spawn_event_year = this_report[[dash_i]]$spawn_event_year,
+                             standardised_recruitment_multipliers = this_report[[dash_i]]$standardised_recruitment_multipliers,
+                             recruitment_multipliers = this_report[[dash_i]]$recruitment_multipliers,
+                             recruits = this_report[[dash_i]]$recruits,
+                             true_ycs = this_report[[dash_i]]$true_ycs,
+                             r0 = this_report[[dash_i]]$r0,
+                             b0 = this_report[[dash_i]]$b0,
+                             par_set = iter_labs[dash_i],
+                             age = this_report[[dash_i]]$age,
+                             ssb_offset = this_report[[dash_i]]$ssb_offset,
+                             label = reports_labels[i])
         complete_df = rbind(complete_df, temp_df)
       }
     }

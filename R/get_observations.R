@@ -54,7 +54,7 @@
       }
 
     } else {
-      print("multi iteration report found")
+      #print("multi iteration report found")
       multiple_iterations_in_a_report <- TRUE
       if (this_report[[1]]$type != "observation") {
         next;
@@ -179,7 +179,6 @@
       }
 
     } else {
-      print("multi iteration report found")
       multiple_iterations_in_a_report <- TRUE
       if (this_report$'1'$type != "observation") {
         next;
@@ -289,7 +288,7 @@
         next;
       }
     } else {
-      print("multi iteration report found")
+      #print("multi iteration report found")
       multiple_iterations_in_a_report <- TRUE
       if (this_report$'1'$type != "observation") {
         next;

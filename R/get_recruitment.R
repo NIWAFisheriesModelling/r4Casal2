@@ -35,17 +35,10 @@
       if(this_report$type == "process" & this_report$sub_type != "recruitment_beverton_holt")
         next;
       ## only a single trajectory
-      standardised_ycs = this_report$standardised_ycs
-      ycs_values = this_report$recruitment_multipliers
-      ycs_years = this_report$spawn_event_year
-      spawn_event_year = this_report$spawn_event_year
-      model_year = this_report$model_year
-      Recruits = this_report$Recruits
-      true_ycs = this_report$true_ycs
 
-      full_df = data.frame(ycs_years = ycs_years,
-                           model_year = model_year,
-                           spawn_event_year = spawn_event_year,
+      full_df = data.frame(model_year = this_report$model_year,
+                           spawn_event_year = this_report$spawn_event_year,
+                           ycs_years = this_report$spawn_event_year,
                            standardised_recruitment_multipliers = this_report$standardised_recruitment_multipliers,
                            recruitment_multipliers = this_report$recruitment_multipliers,
                            recruits = this_report$recruits,
@@ -53,9 +46,12 @@
                            r0 = this_report$r0,
                            b0 = this_report$b0,
                            par_set = 1,
-                           age = this_report$age,
                            ssb_offset = this_report$ssb_offset,
                            label = reports_labels[i])
+      ## length based models don't have this subcommand
+      if(exists(x = "age", where = this_report))
+        full_df$age = this_report$age
+
       complete_df = rbind(complete_df, full_df)
     } else {
       if(this_report[[1]]$type != "process")
@@ -77,9 +73,13 @@
                              r0 = this_report[[dash_i]]$r0,
                              b0 = this_report[[dash_i]]$b0,
                              par_set = iter_labs[dash_i],
-                             age = this_report[[dash_i]]$age,
+                             #age = this_report[[dash_i]]$age,
                              ssb_offset = this_report[[dash_i]]$ssb_offset,
                              label = reports_labels[i])
+        ## length based models don't have this subcommand
+        if(exists(x = "age", where = this_report[[dash_i]]))
+          temp_df$age = this_report[[dash_i]]$age
+
         complete_df = rbind(complete_df, temp_df)
       }
     }

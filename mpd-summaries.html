@@ -464,9 +464,9 @@ Flexibility using standard ggplot functions</p>
 <div id="plotting-selectivities" class="section level4 hasAnchor" number="4.1.3.1">
 <h4><span class="header-section-number">4.1.3.1</span> Plotting selectivities<a href="mpd-summaries.html#plotting-selectivities" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="mpd-summaries.html#cb20-1" aria-hidden="true" tabindex="-1"></a>selectivity_df <span class="ot">=</span> <span class="fu">get_selectivities</span>(<span class="at">model =</span> mpd)</span>
-<span id="cb20-2"><a href="mpd-summaries.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin, <span class="at">y =</span> selectivity, <span class="at">col =</span> label)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="mpd-summaries.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin, <span class="at">y =</span> selectivity, <span class="at">col =</span> selectivity_label)) <span class="sc">+</span></span>
 <span id="cb20-3"><a href="mpd-summaries.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="mpd-summaries.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>label)</span></code></pre></div>
+<span id="cb20-4"><a href="mpd-summaries.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>selectivity_label)</span></code></pre></div>
 <p><img src="_main_files/figure-html/selectivities_mpd-1.png" width="576" /></p>
 </div>
 </div>
@@ -618,9 +618,9 @@ Flexibility using standard ggplot functions</p>
 <h3>Plotting selectivities<a href="mpd-summaries.html#plotting-selectivities-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="mpd-summaries.html#cb33-1" aria-hidden="true" tabindex="-1"></a>selectivity_df <span class="ot">=</span> <span class="fu">get_selectivities</span>(mpd)</span>
 <span id="cb33-2"><a href="mpd-summaries.html#cb33-2" aria-hidden="true" tabindex="-1"></a>selectivity_df<span class="sc">$</span>par_set <span class="ot">=</span> <span class="fu">factor</span>(selectivity_df<span class="sc">$</span>par_set, <span class="at">ordered =</span> T)</span>
-<span id="cb33-3"><a href="mpd-summaries.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin, <span class="at">y =</span> selectivity, <span class="at">col =</span> report_label, <span class="at">line_type =</span> par_set)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="mpd-summaries.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(selectivity_df, <span class="fu">aes</span>(<span class="at">x =</span> bin, <span class="at">y =</span> selectivity, <span class="at">col =</span> selectivity_label, <span class="at">line_type =</span> par_set)) <span class="sc">+</span></span>
 <span id="cb33-4"><a href="mpd-summaries.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="mpd-summaries.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(par_set<span class="sc">~</span>report_label)</span></code></pre></div>
+<span id="cb33-5"><a href="mpd-summaries.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(par_set <span class="sc">~</span> selectivity_label)</span></code></pre></div>
 <p><img src="_main_files/figure-html/selectivities_multi-1.png" width="768" /></p>
 </div>
 <div id="plotting-fits-1" class="section level3 unnumbered hasAnchor">

@@ -34,13 +34,15 @@
         return(this_report$values);
       }
     } else {
+      if(tolower(this_report[[1]]$type) != "objective_function")
+        next;
       ## Multiple parameter inputs
       n_runs = length(this_report)
       iter_labs = names(this_report)
       for(dash_i in 1:n_runs) {
         this_par_set = NULL
         if(aggregate) {
-          this_par_set = aggregate_single_objective_report(objective_report[[dash_i]]$values)
+          this_par_set = aggregate_single_objective_report(this_report[[dash_i]]$values)
           if(dash_i == 1) {
             full_df = this_par_set
           } else {

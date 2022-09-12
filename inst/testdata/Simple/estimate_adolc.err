@@ -47,6 +47,7 @@
 [INFO] Creating default report for selectivity chatTANSel
 [INFO] Creating default report for selectivity One
 [INFO] Initiating point estimate run mode
+[INFO] Estimation_phase 1
 [INFO] Estimation with the adolc minimiser
 [INFO] Convergence check value = 0.763832. Convergence tolerance   = 1e-06
 [INFO] Convergence check value = 1.18927. Convergence tolerance   = 1e-06
@@ -107,4 +108,4 @@
 [WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2011}' was within 0.001 of upper bound 3
 [WARNING] estimated parameter 'process[Recruitment].recruitment_multipliers{2012}' was within 0.001 of upper bound 3
 [INFO] Completed
-[INFO] Total elapsed time: 2 seconds
+[INFO] Total elapsed time: 4 seconds

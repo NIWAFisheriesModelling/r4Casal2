@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -e -g 20 -c config_betadiff.csl2 
-Date: Tue Aug 23 17:26:03 2022
+Date: Mon Sep 12 12:37:59 2022
 Seed: 20
-Version: v22.08 (2022-08-17)
+Version: v22.09 (2022-09-12)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=22048
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=23260
 
 
 *estimate_value[estimate_value]
@@ -8655,38 +8655,7 @@ Creating default report for selectivity tag_1996_3_female.one
 Creating default report for selectivity tag_1997_1_male.one
 Creating default report for selectivity tag_1997_1_female.one
 Initiating point estimate run mode
-Equilibrium_state ran for '0' iterations.
+Estimation_phase 1
 Estimation with the betadiff minimiser
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
-Equilibrium_state ran for '0' iterations.
 *end
 

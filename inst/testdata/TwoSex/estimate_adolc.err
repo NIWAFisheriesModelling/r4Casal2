@@ -62,6 +62,7 @@
 [INFO] Creating default report for selectivity lineFSel
 [INFO] Creating default report for selectivity One
 [INFO] Initiating point estimate run mode
+[INFO] Estimation_phase 1
 [INFO] Estimation with the adolc minimiser
 [INFO] Convergence check value = 1.46865. Convergence tolerance   = 1e-06
 [INFO] Convergence check value = 0.445137. Convergence tolerance   = 1e-06
@@ -142,4 +143,4 @@
 [INFO] Convergence check value = 2.57678e-07. Convergence tolerance   = 1e-06
 [WARNING] estimated parameter 'selectivity[chatTANSel_m].sigma_r' was within 0.001 of upper bound 200
 [INFO] Completed
-[INFO] Total elapsed time: 4 seconds
+[INFO] Total elapsed time: 7 seconds

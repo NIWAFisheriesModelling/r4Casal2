@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -e -g 20 -c config_betadiff.csl2 
-Date: Thu Sep 08 10:08:16 2022
+Date: Mon Sep 12 12:40:33 2022
 Seed: 20
-Version: v22.09 (2022-09-07)
+Version: v22.09 (2022-09-12)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=22284
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=16264
 
 
 *process[Recruitment]
@@ -377,6 +377,7 @@ Values {string}
 Setting the random number seed to 20
 Estimable parameters were loaded from the free parameter file: 
 Initiating point estimate run mode
+Estimation_phase 1
 Estimation with the betadiff minimiser
 *end
 

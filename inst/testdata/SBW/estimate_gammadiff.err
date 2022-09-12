@@ -30,6 +30,7 @@
 [WARNING] obs sum total (1.0001) for year (2013) doesn't sum to 1.0
 [WARNING] Estimates were removed because of matching lower and upper bounds. Originally had 70 estimates, now have 68
 [INFO] Initiating point estimate run mode
+[INFO] Estimation_phase 1
 [INFO] Estimation with the gammadiff minimiser
 [INFO] Convergence check value = 9.46302. Convergence tolerance   = 1e-06
 [INFO] Convergence check value = 1.5004. Convergence tolerance   = 1e-06
@@ -370,4 +371,4 @@
 [WARNING] estimated parameter 'observation[TangaroaAcousticMature].process_error' was within 0.001 of lower bound 0.0001
 [WARNING] estimated parameter 'observation[TangaroaAcousticImmature].process_error' was within 0.001 of lower bound 0.0001
 [INFO] Completed
-[INFO] Total elapsed time: 42 seconds
+[INFO] Total elapsed time: 1.25 minutes

@@ -1,5 +1,5 @@
 
-[INFO] Setting the random number seed to 88491
+[INFO] Setting the random number seed to 43074
 [INFO] Estimable parameters were loaded from the free parameter file: 
 [WARNING] obs sum total (1) for year (1989) doesn't sum to 1.0
 [WARNING] obs sum total (1) for year (1990) doesn't sum to 1.0
@@ -151,4 +151,4 @@
 [WARNING] estimated parameter 'selectivity[SAsl].sigma_l' was within 0.001 of upper bound 44
 [WARNING] estimated parameter 'selectivity[SAsl].sigma_r' was within 0.001 of upper bound 44
 [INFO] Completed
-[INFO] Total elapsed time: 1 seconds
+[INFO] Total elapsed time: 1 second

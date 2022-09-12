@@ -48,62 +48,31 @@
 [INFO] Creating default report for selectivity tag_1997_1_male.one
 [INFO] Creating default report for selectivity tag_1997_1_female.one
 [INFO] Initiating point estimate run mode
-[INFO] Equilibrium_state ran for '0' iterations.
+[INFO] Estimation_phase 1
 [INFO] Estimation with the adolc minimiser
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 3.10416. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
-[INFO] Equilibrium_state ran for '0' iterations.
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 2.26913. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
-[INFO] Equilibrium_state ran for '0' iterations.
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.919139. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.96767. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.450542. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.311526. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.101028. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0863387. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0276992. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0221265. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0334071. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0320036. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0536203. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0552634. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0566497. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0397775. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0353428. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0889752. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0654402. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0520225. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.118213. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0583823. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0372473. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Convergence check value = 0.0163213. Convergence tolerance   = 0.02
-[INFO] Equilibrium_state ran for '0' iterations.
-[INFO] Equilibrium_state ran for '0' iterations.
 [INFO] Completed
-[INFO] Total elapsed time: 34 seconds
+[INFO] Total elapsed time: 1.2 minutes

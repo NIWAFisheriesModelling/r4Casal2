@@ -65,6 +65,7 @@
 resizing from 40000 to 44000
 resizing from 44000 to 48400
 resizing from 48400 to 53240
+[INFO] Estimation_phase 1
 [INFO] Estimation with the betadiff minimiser
 about to evaluate function with x = 125000 0.0867659 0.146334 9 3 10 4.9226 1.50132 200 9 3 10 9 3 10 11.1 3.4 0.98 1.57 2.05 1.02 1.86 1.17 1.15 0.95 0.57 0.71 0.8 0.67 0.54 0.57 0.84 1.08 0.76 0.71 0.57 0.54 0.69 1.19 2.1 1.48 1.5 1 1 1 1 1 1 1 1 1 1 1 1 1 
 finished objective call: f = 2033.47
@@ -1254,4 +1255,4 @@ finished main minimiser loop
 Successful convergence in optimise
 [WARNING] estimated parameter 'selectivity[chatTANSel_m].sigma_r' was within 0.001 of upper bound 200
 [INFO] Completed
-[INFO] Total elapsed time: 3 seconds
+[INFO] Total elapsed time: 5 seconds

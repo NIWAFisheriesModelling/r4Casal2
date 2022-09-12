@@ -201,6 +201,7 @@ resizing from 844500 to 928950
 [WARNING] The categories M.2001, M.2002, M.2003, M.2004, M.2005, M.2006, M.2007, M.2008, M.2009, M.2010, M.2011, M.2012, M.2013, M.2014, M.2015, F.2001, F.2002, F.2003, F.2004, F.2005, F.2006, F.2007, F.2008, F.2009, F.2010, F.2011, F.2012, F.2013, F.2014, F.2015 were not used in @process[type=recruitment]. This may be expected for models that have categories that are not used at the beginning of the model e.g. tagged categories.
 [INFO] Initiating point estimate run mode
 resizing from 928950 to 1021845
+[INFO] Estimation_phase 1
 [INFO] Estimation with the betadiff minimiser
 about to evaluate function with x = 11.2898 0 0 0 0 0 0 0 0 0 0 0 8 4 10 8 4 10 1 8 4 10 8 4 10 1 8 4 10 8 4 10 1 8 4 10 8 4 10 1 
 finished objective call: f = 2507.17
@@ -1162,4 +1163,4 @@ Successful convergence in optimise
 [WARNING] estimated parameter 'selectivity[AreaEM].sigma_l' was within 0.001 of lower bound 1
 [WARNING] estimated parameter 'selectivity[AreaEF].sigma_l' was within 0.001 of lower bound 1
 [INFO] Completed
-[INFO] Total elapsed time: 1.267 minutes
+[INFO] Total elapsed time: 1.617 minutes

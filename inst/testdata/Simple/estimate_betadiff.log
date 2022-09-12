@@ -1,10 +1,10 @@
 Casal2
 Call: C:\Software\CASAL2\BuildSystem/Casal2/casal2.exe -e -g 20 -c config_betadiff.csl2 
-Date: Thu Sep 08 10:08:27 2022
+Date: Mon Sep 12 12:41:43 2022
 Seed: 20
-Version: v22.09 (2022-09-07)
+Version: v22.09 (2022-09-12)
 Copyright (c) 2017-2022, NIWA (www.niwa.co.nz)
-Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=33276
+Environment: User=marshc Machine=NIWA-1008960 OS=Windows_NT PID=24372
 
 
 *partition[partition_step1]
@@ -1628,6 +1628,7 @@ Creating default report for selectivity eastFSel
 Creating default report for selectivity chatTANSel
 Creating default report for selectivity One
 Initiating point estimate run mode
+Estimation_phase 1
 Estimation with the betadiff minimiser
 *end
 

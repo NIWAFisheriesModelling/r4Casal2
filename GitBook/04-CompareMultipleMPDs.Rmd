@@ -21,7 +21,7 @@ models = list("M = 0.22" = low_m_mpd, "M = 0.44" = high_m_mpd)
 selectivity_df = get_selectivities(models)
 ggplot(selectivity_df, aes(x = bin, y = selectivity, col = model_label, linetype = model_label)) +
   geom_line(size = 1.5) +
-  facet_wrap(~label) +
+  facet_wrap(~selectivity_label) +
   labs(x = "Age", y = "Ogive", col = "Model", linetype = "Model")
 ```
 

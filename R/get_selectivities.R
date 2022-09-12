@@ -36,7 +36,6 @@
       }
       ## add it to full df
       this_selectivity = data.frame(selectivity = as.numeric(this_report$Values), bin = names(this_report$Values))
-      this_selectivity$label = reports_labels[i]
       this_selectivity$selectivity_label = reports_labels[i]
       this_selectivity$par_set = 1 ## so compatible with -i runs
       ## check col compatibility some reports will print residuals and some wont
@@ -62,7 +61,7 @@
       for(dash_i in 1:n_runs) {
         ## add it to full df
         this_selectivity = data.frame(selectivity = as.numeric(this_report[[dash_i]]$Values), bin = names(this_report[[dash_i]]$Values))
-        this_selectivity$report_label = reports_labels[i]
+        this_selectivity$selectivity_label = reports_labels[i]
         this_selectivity$par_set = iter_labs[dash_i]
         ## check col compatibility some reports will print residuals and some wont
         if(!is.null(complete_df)) {

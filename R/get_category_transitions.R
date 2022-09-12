@@ -49,7 +49,7 @@
       for(dash_i in 1:n_runs) {
         ## only a single trajectory
         temp_df = data.frame(par_set = iter_labs[dash_i], label = reports_labels[i], from = this_report[[dash_i]]$from, to = this_report[[dash_i]]$to, proportions = this_report[[dash_i]]$proportions, selectivity = this_report[[dash_i]]$selectivities)
-        complete_df = rbind(complete_df, full_df)
+        complete_df = rbind(complete_df, temp_df)
       }
     }
   }

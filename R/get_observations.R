@@ -65,7 +65,7 @@
           ## add it to full df
           this_ob = this_report[[dash_i]]$Values
           this_ob$observation_label = reports_labels[i]
-          this_ob$observation_type = this_report$observation_type
+          this_ob$observation_type = this_report[[dash_i]]$observation_type
           this_ob$likelihood = this_report[[dash_i]]$likelihood
           this_ob$par_set = dash_i
           ## check col compatibility some reports will print residuals and some wont
@@ -299,7 +299,7 @@
           ## add it to full df
           this_ob = this_report[[dash_i]]$Values
           this_ob$observation_label = reports_labels[i]
-          this_ob$observation_type = this_report$observation_type
+          this_ob$observation_type = this_report[[dash_i]]$observation_type
           this_ob$likelihood = this_report[[dash_i]]$likelihood
           this_ob$par_set = dash_i
           ## check col compatibility some reports will print residuals and some wont

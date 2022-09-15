@@ -9,7 +9,6 @@
 #' @rdname get_covariance
 #' @export get_covariance
 
-
 "get_covariance" <-
   function(model) {
     UseMethod("get_covariance", model)

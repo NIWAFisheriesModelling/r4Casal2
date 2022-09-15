@@ -9,7 +9,8 @@ plot_profile(
   mpd = NULL,
   objective_function_components = "all",
   ask_for_obj_labels = FALSE,
-  likelihood_cut_off = 100
+  likelihood_cut_off = 100,
+  plot_style = "individual"
 )
 }
 \arguments{
@@ -22,6 +23,12 @@ plot_profile(
 \item{ask_for_obj_labels}{boolean if True the function will print the values available for objective_function_components}
 
 \item{likelihood_cut_off}{ylim for likelihood to remove large values obscuring the trend of the profile}
+
+\item{plot_style}{a character specifying the plot type
+ \itemize{
+  \item individual: separate plots for each component, with filled lines underneath
+  \item classic: All components on a single plot with lines.
+}}
 }
 \description{
 plot_profile

@@ -3,19 +3,28 @@
 #' @author C Marsh
 #' @param profile the profile Casal2 output read in from extract.mpd()
 #' @param mpd the mpd Casal2 output read in by extract.mpd()
+#' @param plot_style a character specifying the plot type
+#'  \itemize{
+#'   \item individual: separate plots for each component, with filled lines underneath
+#'   \item classic: All components on a single plot with lines.
+#' }
 #' @param objective_function_components either specify 'all' which will plot all likelihood contributions, or a vector of characters for the contirbutions you want. If not sure how to specify these see ask_for_obj_labels
 #' @param ask_for_obj_labels boolean if True the function will print the values available for objective_function_components
 #' @param likelihood_cut_off ylim for likelihood to remove large values obscuring the trend of the profile
 #' @rdname plot_profile
 #' @export plot_profile
 
-plot_profile <- function(profile, mpd = NULL, objective_function_components = 'all', ask_for_obj_labels = FALSE, likelihood_cut_off = 100) {
+plot_profile <- function(profile, mpd = NULL, objective_function_components = 'all', ask_for_obj_labels = FALSE, likelihood_cut_off = 100, plot_style = "individual") {
   if(class(profile) != "casal2MPD")
     stop("profile not of the expected 'class'. We expect 'casal2MPD'")
   if(!is.null(mpd)) {
     if(class(mpd) != "casal2MPD")
       stop("mpd not of the expected 'class'. We expect 'casal2MPD'")
   }
+
+  if(!plot_style %in% c("individual", "classic"))
+    stop("plot_style needs to be 'individual', or 'classic'")
+
   this_profile = get_profile(profile_mpd)
   this_param = unique(this_profile$parameter)
 
@@ -39,12 +48,30 @@ plot_profile <- function(profile, mpd = NULL, objective_function_components = 'a
   this_profile$rescaled_negative_loglikelihood[this_profile$rescaled_negative_loglikelihood > likelihood_cut_off] = likelihood_cut_off
 
   ##
-  plt = ggplot(data = this_profile %>% filter(component %in% vars_of_interest), aes(x = parameter_values, y = rescaled_negative_loglikelihood)) +
-    geom_area(stat = "identity", col = "#56B4E9", fill = "#56B4E9")+
-    xlab(this_param) +
-    ylab("obj - min(obj)") +
-    theme_bw() +
-    facet_wrap(~component , ncol = 1, scale = "fixed")
+  plt = NULL
+  if(plot_style == "individual") {
+    plt = ggplot(data = this_profile %>% filter(component %in% vars_of_interest), aes(x = parameter_values, y = rescaled_negative_loglikelihood)) +
+      geom_area(stat = "identity", col = "#56B4E9", fill = "#56B4E9")+
+      xlab(this_param) +
+      ylab("obj - min(obj)") +
+      theme_bw() +
+      facet_wrap(~component , ncol = 1, scale = "fixed")
+  } else {
+    plt = ggplot(data = this_profile %>% filter(component %in% vars_of_interest), aes(x = parameter_values, y = rescaled_negative_loglikelihood)) +
+      geom_line(aes(col = component, linetype = component), size = 1.2)+
+      labs(x = this_param, y = "obj - min(obj)", col = "") +
+      theme_bw() +
+      theme(legend.position = "right",
+            axis.text = element_text(size = 14),
+            axis.title = element_text(size = 16),
+            strip.text = element_text(size=16),
+            title = element_blank(),
+            legend.text = element_text(size=12),
+            axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))  +
+      guides(linetype = "none")
+
+  }
+
   ## get MPD value if
   if(!is.null(mpd)) {
     est_values = get_estimated_values(mpd)

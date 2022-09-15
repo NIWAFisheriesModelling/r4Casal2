@@ -40,6 +40,10 @@
 
 * `get_projections` will return a data frame of all `projection` reports from a model output.
 
+* `get_growth` will return a data frame of all `age_length` report from a model output.
+
+* `get_covariance` will return a data frame of all `covariance_matrix` report from a model output.
+
 ## Other useful functions
 * `aggregate_objective_report` This reformats an objective function report to be "similar" to CASALs output.
 

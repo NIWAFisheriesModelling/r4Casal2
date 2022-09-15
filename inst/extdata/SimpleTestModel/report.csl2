@@ -1,3 +1,6 @@
+@assert obj
+type objective_function
+value 682.978401796
 
 @report obj
 type objective_function
@@ -14,18 +17,15 @@ selectivities true
 type partition
 time_step step1
 
+@report age_length_step1
+type age_length
+age_length age_size
+time_step step1
+
+@report age_length_step2
+type age_length
+age_length age_size
+time_step step2
 
 @report estimate_value
 type estimate_value
-
-@report estimate_summary
-type estimate_summary
-
-@report hessian_matrix
-type hessian_matrix
-
-@report covariance_matrix
-type covariance_matrix
-
-@report correlation_matrix
-type correlation_matrix

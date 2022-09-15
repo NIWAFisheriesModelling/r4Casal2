@@ -205,6 +205,36 @@ ggplot(selectivity_df, aes(x = bin, y = selectivity, col = selectivity_label)) +
   facet_wrap(~selectivity_label)
 
 ```
+#### Growth {-}
+```{r growth_df, fig.width=6, fig.height=4}
+growth_df = get_growth(mpd)
+head(growth_df)
+## if time-varying or type data summaris mean length and weight by year
+avg_summarises = growth_df %>% group_by(year) %>% summarise(
+  mean_length = mean(mean_length_at_age), 
+  mean_weight = mean(mean_weight_at_age))
+
+ggplot(avg_summarises, aes(x = year, y = mean_length)) +
+  geom_point(size =2) +
+  geom_line(col = "gray60", linetype = "dashed") +
+  ylab("Mean length (cm)") +
+  theme_classic()
+
+ggplot(avg_summarises, aes(x = year, y = mean_weight * 1000)) +
+  geom_point(size =2) +
+  geom_line(col = "gray60", linetype = "dashed") +
+  ylab("Mean weight (kg)") +
+  theme_classic() 
+```
+
+```{r growth_by_time_step_df, fig.width=6, fig.height=4}
+## if not time-varying just pick one year to plot
+ggplot(growth_df %>% filter(year == 1990)) +
+  geom_line(aes(x = age, y = mean_length_at_age, col = time_step, linetype = time_step), size = 1.2) +
+  labs(x = "Age", y = "Length (cm)", col = "Time-step")
+
+```
+
 
 
 ### Plotting Fits

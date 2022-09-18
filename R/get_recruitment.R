@@ -136,8 +136,15 @@
     non_multi_col_labs = multi_col_labs = "iteration"
     non_multi_column_df = cbind(non_multi_column_df)
     multi_column_df = cbind(multi_column_df)
+    cols_saved = vector()
     for(j in 1:length(components)) {
       col_ndx = grepl(collabs, pattern = components[j])
+      ## drop cols that have been saved. Problems with recruitment_multipliers and standardised_recruitment_multipliers
+      if(any(which(col_ndx) %in% cols_saved)) {
+        col_ndx[which(col_ndx) %in% cols_saved] = FALSE
+      }
+      cols_saved = c(cols_saved, which(col_ndx))
+
       if(sum(col_ndx, na.rm = T) == 1) {
         if(is.null(non_multi_column_df)) {
           non_multi_column_df = cbind(as.numeric(rownames(this_report$values)))

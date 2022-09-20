@@ -226,8 +226,10 @@
       stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
     }
     this_abundance = get_composition_observations(model[[i]])
-    this_abundance$model_label = run_labs[i]
-    full_DF = rbind(full_DF, this_abundance);
+    if(!is.null(this_abundance)) {
+      this_abundance$model_label = run_labs[i]
+      full_DF = rbind(full_DF, this_abundance);
+    }
   }
   return(full_DF)
   invisible()

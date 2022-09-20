@@ -6,6 +6,7 @@
 #' @author Craig Marsh
 #' @param model <casal2MPD> object that are generated from one of the extract.mpd() and extract.tabular() functions.
 #' @return A data frame with profile_values and likelihood components
+#' @importFrom dplyr bind_cols
 #' @rdname get_transformed_parameters
 #' @export get_transformed_parameters
 
@@ -93,4 +94,31 @@ get_transformed_parameters.casal2MPD <- function(model) {
   }
   return(full_DF)
   invisible()
+}
+
+
+#'
+#' @rdname get_transformed_parameters
+#' @method get_transformed_parameters casal2TAB
+#' @export
+get_transformed_parameters.casal2TAB <- function(model) {
+  cat("this can take a few minutes for large models and big mcmc chains. Please be patient :~) \n")
+
+  reports_labels = reformat_default_labels(names(model))
+  complete_df = NULL
+
+  for(i in 1:length(reports_labels)) {
+    this_report = model[[i]]
+    if(this_report$type != "parameter_transformations") {
+      next;
+    }
+    colnames(this_report$values) = paste0(reports_labels[i], "-", colnames(this_report$values))
+    if(is.null(complete_df)) {
+      complete_df = this_report$values
+    } else {
+      complete_df = bind_cols(complete_df, this_report$values)
+    }
+  }
+  complete_df$sample = 1:nrow(complete_df)
+  return(complete_df)
 }

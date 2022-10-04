@@ -10,7 +10,8 @@ plot_profile(
   objective_function_components = "all",
   ask_for_obj_labels = FALSE,
   likelihood_cut_off = 100,
-  plot_style = "individual"
+  plot_style = "individual",
+  aggregate_obs = TRUE
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ plot_profile(
   \item individual: separate plots for each component, with filled lines underneath
   \item classic: All components on a single plot with lines.
 }}
+
+\item{aggregate_obs}{bool, whether aggregate_obs observations log-likelihoods over all years}
 }
 \description{
 plot_profile

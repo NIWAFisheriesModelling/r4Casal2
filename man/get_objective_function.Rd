@@ -6,16 +6,16 @@
 \alias{get_objective_function.list}
 \title{get_objective_function}
 \usage{
-get_objective_function(model, aggregate = T)
+get_objective_function(model, aggregate_obs = T)
 
-\method{get_objective_function}{casal2MPD}(model, aggregate = T)
+\method{get_objective_function}{casal2MPD}(model, aggregate_obs = T)
 
 \method{get_objective_function}{list}(model)
 }
 \arguments{
 \item{model}{casal2 model or a list of model}
 
-\item{aggregate}{<bool> whether to aggretate over observations, if false will report objective function by year and observation.}
+\item{aggregate_obs}{<bool> whether to aggretate over observations, if false will report objective function by year and observation.}
 }
 \value{
 data frame of objective function negative log-likelihood components

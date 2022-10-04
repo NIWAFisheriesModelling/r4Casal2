@@ -18,7 +18,8 @@ Imports: dplyr,
     Rdpack,
     bookdown,
     stats,
-    randtests
+    randtests,
+    RColorBrewer
 RoxygenNote: 7.2.0
 Suggests: 
     Casal2

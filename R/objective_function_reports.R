@@ -3,20 +3,20 @@
 #' take a Casal2 objective_function report and aggregrate components so easier to handle with
 #' visualising likelihood components
 #' @param model casal2 model or a list of model
-#' @param aggregate <bool> whether to aggretate over observations, if false will report objective function by year and observation.
+#' @param aggregate_obs <bool> whether to aggretate over observations, if false will report objective function by year and observation.
 #' @return data frame of objective function negative log-likelihood components
 #' @rdname get_objective_function
 #' @export get_objective_function
 #'
 
-"get_objective_function" <- function(model, aggregate = T) {
+"get_objective_function" <- function(model, aggregate_obs = T) {
   UseMethod("get_objective_function", model)
 }
 #'
 #' @rdname get_objective_function
 #' @method get_objective_function casal2MPD
 #' @export
-"get_objective_function.casal2MPD" = function(model, aggregate = T) {
+"get_objective_function.casal2MPD" = function(model, aggregate_obs = T) {
   # can be -r or -r -i
   multiple_iterations_in_a_report = FALSE
   full_df = NULL
@@ -28,7 +28,7 @@
     if(exists(x = "type", where = this_report)) {
       if(tolower(this_report$type) != "objective_function")
         next;
-      if(aggregate) {
+      if(aggregate_obs) {
         return(aggregate_single_objective_report(this_report$values));
       } else {
         return(this_report$values);
@@ -41,7 +41,7 @@
       iter_labs = names(this_report)
       for(dash_i in 1:n_runs) {
         this_par_set = NULL
-        if(aggregate) {
+        if(aggregate_obs) {
           this_par_set = aggregate_single_objective_report(this_report[[dash_i]]$values)
           if(dash_i == 1) {
             full_df = this_par_set
@@ -49,8 +49,11 @@
             full_df = cbind(full_df, this_par_set$negative_loglik)
           }
         } else {
-          this_par_set = objective_report[[dash_i]]$values
-          full_df = cbind(full_df, this_par_set)
+          if(dash_i == 1) {
+            full_df = data.frame(components = names(this_report[[dash_i]]$values), val = as.numeric(this_report[[dash_i]]$values))
+          } else {
+            full_df = cbind(full_df, as.numeric(this_report[[dash_i]]$values))
+          }
         }
 
       }
@@ -102,7 +105,7 @@ aggregate_objective_report <- function(objective_report) {
       stop("objective_report must be of type  'objective_function'")
     multi_parameter_input = T
   } else if(objective_report$type != "objective_function") {
-      stop("objective_report must be of type  'objective_function'")
+    stop("objective_report must be of type  'objective_function'")
   }
 
   if(!multi_parameter_input) {

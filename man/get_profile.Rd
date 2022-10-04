@@ -5,12 +5,14 @@
 \alias{get_profile.casal2MPD}
 \title{get_profile}
 \usage{
-get_profile(model)
+get_profile(model, aggregate_obs = T)
 
-\method{get_profile}{casal2MPD}(model)
+\method{get_profile}{casal2MPD}(model, aggregate_obs = T)
 }
 \arguments{
 \item{model}{<casal2MPD> object that are generated from one of the extract.mpd() and extract.tabular() functions.}
+
+\item{aggregate_obs}{bool, whether aggregate_obs observations log-likelihoods over all years}
 }
 \value{
 A data frame with profile_values and likelihood components

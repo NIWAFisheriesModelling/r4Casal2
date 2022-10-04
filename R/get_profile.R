@@ -5,12 +5,13 @@
 #'
 #' @author Craig Marsh
 #' @param model <casal2MPD> object that are generated from one of the extract.mpd() and extract.tabular() functions.
+#' @param aggregate_obs bool, whether aggregate_obs observations log-likelihoods over all years
 #' @return A data frame with profile_values and likelihood components
 #' @rdname get_profile
 #' @export get_profile
 
 "get_profile" <-
-  function(model) {
+  function(model, aggregate_obs = T) {
     UseMethod("get_profile", model)
   }
 
@@ -18,7 +19,7 @@
 #' @rdname get_profile
 #' @method get_profile casal2MPD
 #' @export
-get_profile.casal2MPD <- function(model) {
+get_profile.casal2MPD <- function(model, aggregate_obs = T) {
   reports_labels = reformat_default_labels(names(model))
   parameter_df = NULL
   objective_function_df = NULL
@@ -36,13 +37,10 @@ get_profile.casal2MPD <- function(model) {
         ## we are in a profile class
         parameter_df = data.frame(label =this_report[[1]]$profile, parameter = this_report[[1]]$parameter,  parameter_values = this_report[[1]]$values)
       }
-      if(this_report[[1]]$type == "objective_function") {
-        ## found an objective function class
-        objective_function_df = aggregate_objective_report(objective_report = this_report)
-      }
     }
   }
   ## merge and massage the data into a nicer format
+  objective_function_df = get_objective_function(model, aggregate_obs = aggregate_obs)
   colnames(objective_function_df) = c("component", parameter_df$parameter_values)
   ##
   molten_profile = melt(objective_function_df, id.vars = "component")

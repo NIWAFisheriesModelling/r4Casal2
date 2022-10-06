@@ -49,8 +49,11 @@
                            ssb_offset = this_report$ssb_offset,
                            label = reports_labels[i])
       ## length based models don't have this subcommand
-      if(exists(x = "age", where = this_report))
+      if(exists(x = "age", where = this_report)) {
         full_df$age = this_report$age
+      } else {
+        full_df$age = NA
+      }
 
       complete_df = rbind(complete_df, full_df)
     } else {
@@ -77,9 +80,11 @@
                              ssb_offset = this_report[[dash_i]]$ssb_offset,
                              label = reports_labels[i])
         ## length based models don't have this subcommand
-        if(exists(x = "age", where = this_report[[dash_i]]))
+        if(exists(x = "age", where = this_report[[dash_i]])) {
           temp_df$age = this_report[[dash_i]]$age
-
+        } else {
+          full_df$age = NA
+        }
         complete_df = rbind(complete_df, temp_df)
       }
     }

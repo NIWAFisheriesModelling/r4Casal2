@@ -182,9 +182,9 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
       category_df = rbind(category_df, this_cat_df)
       full_category_df = rbind(full_category_df, this_cat_full_df)
       if(is.null(age_length_time_step_growth))
-        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(GrowthIncrement = category_growth_increments[i], time_step_proportions = this_growth$time_step_proportions$value))
+        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(GrowthIncrement = category_growth_increments[i]))
       if(!category_growth_increments[i] %in% age_length_time_step_growth$GrowthIncrement)
-        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(GrowthIncrement = category_growth_increments[i], time_step_proportions = this_growth$time_step_proportions$value))
+        age_length_time_step_growth = rbind(age_length_time_step_growth, data.frame(GrowthIncrement = category_growth_increments[i]))
 
     }
   }
@@ -235,16 +235,6 @@ summarise_config <- function(config_dir = "", config_file = "config.csl2", quiet
     age_length_labs = unique(age_length_time_step_growth$AgeLength)
     for(i in 1:length(age_length_labs)) {
       this_growth = age_length_time_step_growth[which(age_length_time_step_growth$AgeLength == age_length_labs[i]),]
-      time_step_df = cbind(time_step_df, this_growth$time_step_proportions)
-      time_step_df_just_lab = cbind(time_step_df_just_lab, this_growth$time_step_proportions)
-    }
-    age_length_labs = paste0(age_length_labs, " (assumed growth)")
-    colnames(time_step_df_just_lab) = c("Time-step", "Processes", age_length_labs)
-    colnames(time_step_df) = c("Time-step", "Processes (type)", age_length_labs)
-  } else {
-    age_length_labs = unique(age_length_time_step_growth$GrowthIncrement)
-    for(i in 1:length(age_length_labs)) {
-      this_growth = age_length_time_step_growth[which(age_length_time_step_growth$GrowthIncrement == age_length_labs[i]),]
       time_step_df = cbind(time_step_df, this_growth$time_step_proportions)
       time_step_df_just_lab = cbind(time_step_df_just_lab, this_growth$time_step_proportions)
     }

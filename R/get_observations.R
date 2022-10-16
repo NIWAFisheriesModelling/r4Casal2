@@ -115,8 +115,10 @@
       stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
     }
     this_abundance = get_abundance_observations(model[[i]])
-    this_abundance$model_label = run_labs[i]
-    full_DF = rbind(full_DF, this_abundance);
+    if(!is.null(this_abundance)) {
+      this_abundance$model_label = run_labs[i]
+      full_DF = rbind(full_DF, this_abundance);
+    }
   }
   return(full_DF)
   invisible()
@@ -337,8 +339,10 @@
       stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
     }
     this_abundance = get_tag_recapture_observations(model[[i]])
-    this_abundance$model_label = run_labs[i]
-    full_DF = rbind(full_DF, this_abundance);
+    if(!is.null(this_abundance)) {
+      this_abundance$model_label = run_labs[i]
+      full_DF = rbind(full_DF, this_abundance);
+    }
   }
   return(full_DF)
   invisible()
@@ -421,8 +425,10 @@ get_composition_mean_bin.casal2MPD <- function(model, ignore_plus_group = FALSE)
       stop(paste0("This function only works on a named list with elements of class = 'casal2MPD'"))
     }
     this_abundance = get_composition_mean_bin(model[[i]])
-    this_abundance$model_label = run_labs[i]
-    full_DF = rbind(full_DF, this_abundance);
+    if(!is.null(this_abundance)) {
+      this_abundance$model_label = run_labs[i]
+      full_DF = rbind(full_DF, this_abundance);
+    }
   }
   return(full_DF)
   invisible()

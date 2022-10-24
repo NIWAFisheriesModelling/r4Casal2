@@ -97,7 +97,7 @@ summarise_estimated_parameters.casal2MPD <- function(model, plot_it = F, ignore_
           stop(paste0("Bad bounds on Beta prior ", temp_df$parameter, "\n"))
         Bm <- new.t * new.mu
         Bn <- new.t * (1 - new.mu)
-        res <- (1 - Bm) * log(param_value - hyper_param_values[3]) + (1 - Bn) * log(hyper_param_values[4] - p)
+        res <- (1 - Bm) * log(param_value - hyper_param_values[3]) + (1 - Bn) * log(hyper_param_values[4] - param_value)
         res <- exp(-res)
       } else {
         cat(paste0("Unknown prior type skipping ", temp_df$parameter, "\n"))

@@ -22,6 +22,16 @@
 is_matrix_invertable <- function(m) {
   any("matrix" %in% class(try(solve(m),silent=TRUE)))
 }
+
+#' every_nth
+#' @description return a vector of boolean that has every nth value = true
+#' @param n every 'n' values will equal TRUE
+#' @export
+#' @return vector<bool>
+every_nth = function(n) {
+  return(function(x) {x[c(TRUE, rep(FALSE, n - 1))]})
+}
+
 ## A function to check if the covariance matrix is positive definite
 #' is_positive_definite
 #' @description helper function to see if a matrix is positive definite

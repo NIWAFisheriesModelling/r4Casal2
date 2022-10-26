@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-10-24" />
+<meta name="date" content="2022-10-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -92,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -485,7 +485,7 @@ div.csl-indent {
 <p>Pearson residuals for multinomial distributed random variables can be difficult to intepret for a lot of reasons, data-weighting for mean age to standardised residuals = 1 <span class="citation">(<a href="#ref-francis2011data" role="doc-biblioref">Francis 2011</a>)</span>, sparsity can create funny patterns etc. An alternative is to use randomised quantile PIT residuals <span class="citation">(<a href="#ref-warton2017pit" role="doc-biblioref">Warton, Thibaut, and Wang 2017</a>; <a href="#ref-dunn1996randomized" role="doc-biblioref">Dunn and Smyth 1996</a>)</span></p>
 <p>Assuming we have data denoted by <span class="math inline">\(y\)</span> which has cumulative distribution function <span class="math inline">\(F(y; \theta), u = F(y; \theta) \sim Uniform(0,1)\)</span>. For discrete variables the following adjustment can be made
 <span class="math display">\[\begin{align}
-u_i = q_i F(y; \theta) + (1 - q_i) F(y^{-}; \theta) 
+u_i = q_i F(y; \theta) + (1 - q_i) F(y^{-}; \theta)
 \end{align}\]</span>
 where, <span class="math inline">\(q_i\)</span> is a standard uniform random variable and <span class="math inline">\(y^{-}\)</span> is the previous allowable value for <span class="math inline">\(y\)</span>.
 they do not behave like residuals in the usual sense they are centred around a value of 0.5 rather than a value of 0, and are bounded between 0 and 1.</p>

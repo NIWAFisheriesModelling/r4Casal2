@@ -8,9 +8,9 @@
 \usage{
 get_aggregated_composition_values_by_blocks(model, n_year_blocks = 5)
 
-\method{get_aggregated_composition_values_by_blocks}{casal2MPD}(model, n_year_blocks)
+\method{get_aggregated_composition_values_by_blocks}{casal2MPD}(model, n_year_blocks = 5)
 
-\method{get_aggregated_composition_values_by_blocks}{list}(model, n_year_blocks)
+\method{get_aggregated_composition_values_by_blocks}{list}(model, n_year_blocks = 5)
 }
 \arguments{
 \item{model}{<casal2MPD, casal2TAB, list> object that are generated from one of the extract() functions. If list then we expect multiple mpd runs (should be a named list )}

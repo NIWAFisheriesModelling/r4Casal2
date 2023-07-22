@@ -37,6 +37,9 @@ get_timevarying_parameters.casal2MPD <- function(model) {
       complete_df = rbind(complete_df, this_df)
 
     } else {
+      if(this_report[[1]]$type != "time_varying") {
+        next;
+      }
       ## Multiple parameter inputs
       n_runs = length(this_report)
       iter_labs = names(this_report)
@@ -45,7 +48,7 @@ get_timevarying_parameters.casal2MPD <- function(model) {
         temp_df = this_report[[dash_i]]$values
         temp_df$label = reports_labels[i]
         temp_df$par_set = iter_labs[dash_i]
-        complete_df = rbind(complete_df, full_df)
+        complete_df = rbind(complete_df, temp_df)
       }
     }
   }

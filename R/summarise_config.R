@@ -1,13 +1,29 @@
+#' Summarise config file
+#'
+#' @param config_dir Directory for the config file.
+#' @param config_file Name of config file.
+#' @param quiet Whether to print information to console.
+#'
+#' @return A list of summaries from the Casal2 config file.
+#' @export
+#'
+#' @importFrom stringr str_split
+#' @importFrom dplyr rename as_tibble left_join arrange mutate
+#' @importFrom tidyr pivot_longer
+#'
+#' @examples
+#' summary = summarise_config(config_dir = 'inst/testdata/Simple/', config_file = "config_betadiff.csl2", quiet = T)
+#'
+#'
+
+
 summarise_config <-
-function (config_dir = "", config_file = "config.csl2", quiet = T,
-          fileEncoding = "")
+function (config_dir = "", config_file = "config.csl2", quiet = T)
 {
   if (!file.exists(file.path(config_dir, config_file)))
     stop(paste0("Could not find ", config_file, " at ", config_dir))
   config_file_in = scan(file = file.path(config_dir, config_file),
                         what = "", sep = "\n", quiet = T)
-
-  ###################################################
 
   config_file_in <- StripComments(config_file_in)
   include_lines = grepl(pattern = "!include", config_file_in)
@@ -120,7 +136,7 @@ function (config_dir = "", config_file = "config.csl2", quiet = T,
           category_format = this_file[[j]]$format$value
           category_format <- str_split(category_format, "\\.") %>% unlist()
           category_labels_withFormat <- as_tibble(category_labels) %>%
-            rename(label = value) %>%
+            dplyr::rename(label = value) %>%
             separate(label,  into =category_format, remove = FALSE)
         }
       }
@@ -303,8 +319,7 @@ function (config_dir = "", config_file = "config.csl2", quiet = T,
       time_prop = NULL
       if (is.null(this_process$time_step_proportions$value)) {
         time_prop = rep(1, nrow(time_step_df))
-      }
-      else {
+      } else {
         time_prop = this_process$time_step_proportions$value
       }
       M_time_steps = rbind(M_time_steps, data.frame(process = names(process_blocks)[i],
@@ -321,7 +336,7 @@ function (config_dir = "", config_file = "config.csl2", quiet = T,
         ## CHANGED from using melt as it's no longer a supported function
         molten_catch <- this_catch %>%
           pivot_longer(cols = -c(year, process)) %>%
-          rename(catch = value, fishery = name) %>%
+          dplyr::rename(catch = value, fishery = name) %>%
           mutate(fishery = as.factor(fishery)) %>%
           arrange(fishery, year)
         ##

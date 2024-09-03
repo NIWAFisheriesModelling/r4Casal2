@@ -2,44 +2,25 @@
 % Please edit documentation in R/summarise_config.R
 \name{summarise_config}
 \alias{summarise_config}
-\title{summarise_config}
+\title{Summarise config file}
 \usage{
-summarise_config(
-  config_dir = "",
-  config_file = "config.csl2",
-  quiet = T,
-  fileEncoding = ""
-)
+summarise_config(config_dir = "", config_file = "config.csl2", quiet = T)
 }
 \arguments{
-\item{config_dir}{path directory}
+\item{config_dir}{Directory for the config file.}
 
-\item{config_file}{the starting config that starts a Casal2 model default config.csl2, but can be overridden with casal2 -c my_config. in the later case it should be the my_config name}
+\item{config_file}{Name of config file.}
 
-\item{quiet}{<bool> print out additional information to console. Useful for debugging}
-
-\item{fileEncoding}{<string> for different utf encodings}
+\item{quiet}{Whether to print information to console.}
 }
 \value{
-data.frame with different Casal2 input values
+A list of summaries from the Casal2 config file.
 }
 \description{
-utility function that reads in config.csl2 file and summarises a model in table formats and plots
+Summarise config file
 }
 \examples{
-\dontrun{
-library(r4Casal2)
-library(ggplot2)
-config_dir = system.file("extdata", "TestModelComplex", package = "r4Casal2", mustWork = TRUE)
-summary = summarise_config(config_dir, config_file = "config.csl2", quiet = T)
-names(summary)
-# visualise observations in model
-ggplot(summary$obs_year_df, aes(x = year, y = observation, col = observation, size = active)) +
-geom_point() +
-guides(colour = "none", size = "none")
-config_dir = "C:\\\\Users\\\\marshc\\\\OneDrive - NIWA\\\\22_23\\\\SNA1\\\\csl\\\\P30 Base HGBP\\\\Casal2"
-}
-}
-\author{
-Craig Marsh
+summary = summarise_config(config_dir = 'inst/testdata/Simple/', config_file = "config_betadiff.csl2", quiet = T)
+
+
 }

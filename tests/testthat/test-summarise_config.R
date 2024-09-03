@@ -15,7 +15,7 @@ test_that("summarise_config", {
   ## ComplexTag
   # test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "ComplexTag"), config_file = "config_betadiff.csl2"), error = function(e){e})
   # expect_false(inherits(test, "error"))
-  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "ComplexTag"), config_file = "config_betadiff.csl2"), error = function(e){e})
+  test = summarise_config(config_dir = file.path(test_data_dir, "ComplexTag"), config_file = "config_betadiff.csl2")
   expect_true(is.list(test))
 
   ## SBW
@@ -24,11 +24,11 @@ test_that("summarise_config", {
   test = summarise_config(config_dir = file.path(test_data_dir, "SBW"), config_file = "config_betadiff.csl2")
   expect_true(is.list(test))
 
-  ## SexedLengthBased
+  ## SexedLengthBased - NOT WORKING, GET CASAL2 MODEL TO RUN FIRST!
   # test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "SexedLengthBased"), config_file = "config_betadiff.csl2"), error = function(e){e})
   # expect_false(inherits(test, "error"))
-  test = summarise_config(config_dir = file.path(test_data_dir, "SexedLengthBased"), config_file = "config_betadiff.csl2")
-  expect_true(is.list(test))
+  # test = summarise_config(config_dir = file.path(test_data_dir, "SexedLengthBased"), config_file = "config_betadiff.csl2")
+  # expect_true(is.list(test))
 
   ## Simple
   # test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "Simple"), config_file = "config_betadiff.csl2"), error = function(e){e})

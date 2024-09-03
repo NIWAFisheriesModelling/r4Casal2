@@ -17,9 +17,8 @@
 #'
 
 
-summarise_config <-
-function (config_dir = "", config_file = "config.csl2", quiet = T)
-{
+summarise_config <- function (config_dir = "", config_file = "config.csl2", quiet = T) {
+
   if (!file.exists(file.path(config_dir, config_file)))
     stop(paste0("Could not find ", config_file, " at ", config_dir))
   config_file_in = scan(file = file.path(config_dir, config_file),

@@ -7,30 +7,30 @@
 test_that("summarise_config", {
   test_data_dir = file.path("..","..","inst","testdata")
   ## Complex
-  summarise_config = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "Complex"), config_file = "config.csl2"), error = function(e){e})
-  expect_false(inherits(summarise_config, "error"))
+  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "Complex"), config_file = "config.csl2"), error = function(e){e})
+  expect_false(inherits(test, "error"))
 
   ## ComplexTag
-  summarise_config = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "ComplexTag"), config_file = "config_betadiff.csl2"), error = function(e){e})
-  expect_false(inherits(summarise_config, "error"))
+  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "ComplexTag"), config_file = "config_betadiff.csl2"), error = function(e){e})
+  expect_false(inherits(test, "error"))
 
   ## SBW
-  summarise_config = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "SBW"), config_file = "config_betadiff.csl2"), error = function(e){e})
-  expect_false(inherits(summarise_config, "error"))
+  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "SBW"), config_file = "config_betadiff.csl2"), error = function(e){e})
+  expect_false(inherits(test, "error"))
 
   ## SexedLengthBased
-  summarise_config = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "SexedLengthBased"), config_file = "config_betadiff.csl2"), error = function(e){e})
-  expect_false(inherits(summarise_config, "error"))
+  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "SexedLengthBased"), config_file = "config_betadiff.csl2"), error = function(e){e})
+  expect_false(inherits(test, "error"))
 
   ## Simple
-  summarise_config = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "Simple"), config_file = "config_betadiff.csl2"), error = function(e){e})
-  expect_false(inherits(summarise_config, "error"))
+  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "Simple"), config_file = "config_betadiff.csl2"), error = function(e){e})
+  expect_false(inherits(test, "error"))
 
   ## SingleSexTagByLength_input
-  summarise_config = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "SingleSexTagByLength_input"), config_file = "config.csl2"), error = function(e){e})
-  expect_false(inherits(summarise_config, "error"))
+  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "SingleSexTagByLength_input"), config_file = "config.csl2"), error = function(e){e})
+  expect_false(inherits(test, "error"))
 
   ## TwoSex
-  summarise_config = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "TwoSex"), config_file = "config_betadiff.csl2"), error = function(e){e})
-  expect_false(inherits(summarise_config, "error"))
+  test = tryCatch(expr = summarise_config(config_dir = file.path(test_data_dir, "TwoSex"), config_file = "config_betadiff.csl2"), error = function(e){e})
+  expect_false(inherits(test, "error"))
 })

@@ -268,8 +268,7 @@ function (config_dir = "", config_file = "config.csl2", quiet = T,
                                         age_length_labs)
     colnames(time_step_df) = c("Time-step", "Processes (type)",
                                age_length_labs)
-  }
-  else {
+  } else {
     age_length_labs = unique(age_length_time_step_growth$GrowthIncrement)
     for (i in 1:length(age_length_labs)) {
       this_growth = age_length_time_step_growth[which(age_length_time_step_growth$GrowthIncrement ==

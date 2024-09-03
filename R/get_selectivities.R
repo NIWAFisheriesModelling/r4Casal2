@@ -38,6 +38,7 @@
       this_selectivity = data.frame(selectivity = as.numeric(this_report$Values), bin = names(this_report$Values))
       this_selectivity$selectivity_label = reports_labels[i]
       this_selectivity$par_set = 1 ## so compatible with -i runs
+      this_selectivity$sub_type = this_report$sub_type # used to identify logistic_producing for example
       ## check col compatibility some reports will print residuals and some wont
       if(!is.null(complete_df)) {
         if(any(!colnames(complete_df) %in% colnames(this_selectivity))) {

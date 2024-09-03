@@ -46,6 +46,11 @@
       dq_df = NULL
       for(dq_iter in 1:length(DQ_types)) {
         temp_df = data.frame(par_set = 1, years = names(this_report[[DQ_types[dq_iter]]]$values), values = this_report[[DQ_types[dq_iter]]]$values, initialisation_value = this_report[[DQ_types[dq_iter]]]$`initialisation_phase[1]`, dq_label = DQ_types[dq_iter]);
+        if(exists("initialisation_phase[2]", this_report[[DQ_types[dq_iter]]])) {
+          temp_df$initialisation_value_2 = this_report[[DQ_types[dq_iter]]]$`initialisation_phase[2]`
+        } else {
+          temp_df$initialisation_value_2 = NA
+        }
         dq_df = rbind(dq_df, temp_df)
       }
       dq_df$par_set = 1
@@ -63,6 +68,12 @@
         dq_df = NULL
         for(dq_iter in 1:length(DQ_types)) {
           temp_df = data.frame(par_set = iter_labs[dash_i], years = names(this_report[[dash_i]][[DQ_types[dq_iter]]]$values), initialisation_value = this_report[[dash_i]][[DQ_types[dq_iter]]]$`initialisation_phase[1]`, values = this_report[[dash_i]][[DQ_types[dq_iter]]]$values, dq_label = DQ_types[dq_iter], label = reports_labels[i]);
+          if(exists("initialisation_phase[2]", this_report[[dash_i]][[DQ_types[dq_iter]]])) {
+            temp_df$initialisation_value_2 = this_report[[dash_i]][[DQ_types[dq_iter]]]$`initialisation_phase[2]`
+          } else {
+            temp_df$initialisation_value_2 = NA
+          }
+
           dq_df = rbind(dq_df, temp_df)
         }
         complete_df = rbind(complete_df, dq_df)

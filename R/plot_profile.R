@@ -28,7 +28,7 @@ plot_profile <- function(profile, mpd = NULL, objective_function_components = 'a
   if(!plot_style %in% c("individual", "classic"))
     stop("plot_style needs to be 'individual', or 'classic'")
 
-  this_profile = get_profile(profile_mpd, aggregate_obs)
+  this_profile = get_profile(profile, aggregate_obs)
   this_param = unique(this_profile$parameter)
 
   ## reformat labels to help with readability

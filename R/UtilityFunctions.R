@@ -22,6 +22,16 @@
 is_matrix_invertable <- function(m) {
   any("matrix" %in% class(try(solve(m),silent=TRUE)))
 }
+
+#' every_nth
+#' @description return a vector of boolean that has every nth value = true
+#' @param n every 'n' values will equal TRUE
+#' @export
+#' @return vector<bool>
+every_nth = function(n) {
+  return(function(x) {x[c(TRUE, rep(FALSE, n - 1))]})
+}
+
 ## A function to check if the covariance matrix is positive definite
 #' is_positive_definite
 #' @description helper function to see if a matrix is positive definite
@@ -292,47 +302,52 @@ expand_shorthand_syntax <- function(syntax) {
 #' @export
 #' @import stats
 StripComments <- function(file) {
-  file <- file[substring(file, 1, 1) != "#"]
-  file <- ifelse(regexpr("#", file) > 0, substring(file, 1, regexpr("#", file) - 1), file)
-  file <- file[file != ""]
-  ## remove lines that have /* */ partway through them
-  ## probably a little inefficient
-  for(i in 1:length(file)) {
-    index1 = regexpr(pattern = "//*", file[i])
-    first_section = substring(file[i], first = 1, last = index1 - 1)
-    second_section = substring(file[i], first = index1 +2)
-    index2 = regexpr(pattern = "*/", second_section)
-    if(index2 > 0) ## otherwise its a multiline comment
-      file[i] = paste0(first_section, substring(second_section, first = index2 + 1))
-  }
-  ## we have stripped multiline comments that are on the same line
-  possible_multiline_comment = gregexpr('\\*', file)
-  in_comment = FALSE;
-  for(i in 1:length(file)) {
-    if(in_comment) {
-      # check line for laggin comment otherwise delete
-      if(possible_multiline_comment[[i]][1] > 0) {
-        # double check it is */
-        if(substring(file[i], first = possible_multiline_comment[[i]], last =  possible_multiline_comment[[i]] + 1) == "*/") {
-          file[i] = substring(file[i],first = possible_multiline_comment[[i]] + 2)
-          in_comment = FALSE
-        }
-      } else {
-        # clear line
-        file[i] = ""
-      }
-    } else {
-      if(possible_multiline_comment[[i]][1] > 0) {
-        # double check it is /*
-        if(substring(file[i], first = possible_multiline_comment[[i]] - 1, last =  possible_multiline_comment[[i]]) == "/*") {
-          in_comment = T
-          file[i] = substring(file[i], first = 0, last = possible_multiline_comment[[i]] - 2)
-        }
-      }
+     file <- file[substring(file, 1, 1) != "#"]
+    file <- ifelse(regexpr("#", file) > 0, substring(file, 1, 
+        regexpr("#", file) - 1), file)
+    file <- file[file != ""]
+    for (i in 1:length(file)) {
+        index1 = regexpr(pattern = "//*", file[i])
+        first_section = substring(file[i], first = 1, last = index1 - 
+            1)
+        second_section = substring(file[i], first = index1 + 
+            2)
+        index2 = regexpr(pattern = "\\*/", second_section)
+        if (index2 > 0) 
+            file[i] = paste0(first_section, substring(second_section, 
+                first = index2 + 1))
     }
-  }
-  file <- file[file != ""]
-  return(file)
+    possible_multiline_comment = gregexpr("\\*", file)
+    in_comment = FALSE
+    for (i in 1:length(file)) {
+        if (in_comment) {
+            if (possible_multiline_comment[[i]][1] > 0) {
+                if (substring(file[i], first = possible_multiline_comment[[i]], 
+                  last = possible_multiline_comment[[i]] + 1) == 
+                  "\\*/") {
+                  file[i] = substring(file[i], first = possible_multiline_comment[[i]] + 
+                    2)
+                  in_comment = FALSE
+                }
+            }
+            else {
+                file[i] = ""
+            }
+        }
+        else {
+            if (possible_multiline_comment[[i]][1] > 0) {
+                if (substring(file[i], first = possible_multiline_comment[[i]] - 
+                  1, last = possible_multiline_comment[[i]]) == 
+                  "/\\*") {
+                  in_comment = T
+                  file[i] = substring(file[i], first = 0, last = possible_multiline_comment[[i]] - 
+                    2)
+                }
+            }
+        }
+    }
+    file <- file[file != ""]
+    return(file)
 }
 
 #' drop_runs_from_multi_input_mpd

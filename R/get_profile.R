@@ -35,7 +35,10 @@ get_profile.casal2MPD <- function(model, aggregate_obs = T) {
     if(exists(x = "type", where = this_report[[1]])) {
       if(this_report[[1]]$type == "profile") {
         ## we are in a profile class
-        parameter_df = data.frame(label =this_report[[1]]$profile, parameter = this_report[[1]]$parameter,  parameter_values = this_report[[1]]$values)
+        profile_lab = this_report[[1]]$profile
+        if(length(this_report[[1]]$profile) == 0)
+          profile_lab = "Profile"
+        parameter_df = data.frame(label = profile_lab, parameter = this_report[[1]]$parameter,  parameter_values = this_report[[1]]$values)
       }
     }
   }

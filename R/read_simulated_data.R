@@ -7,14 +7,18 @@
 #' @param dir path directory to a folder containing simulated observation from a casal2 -s run
 #' @param mean_age <bool> if data is composition. True will return mean age/length for each year and data set. Otherwise False will return a list. each element will be a year which will contain a matrix of simulations x bin simulated values.
 #' @param verbose true print out statements throught function to help debug
+#' @param model_type "age" or "length"
 #' @return a list of all the simulated data sets. in each element there is a matrix with rows = year, col = simulation reps
 #' @export
 #' @rdname read_simulated_data
 #' @export read_simulated_data
 
-read_simulated_data <- function(dir, verbose = FALSE, mean_age = TRUE) {
+read_simulated_data <- function(dir, verbose = FALSE, mean_age = TRUE, model_type = "age") {
   ## add to this as the function grows
-  currently_implemented_obs = c("biomass", "abundance", "process_removals_by_length", "proportions_at_length", "process_removals_by_age", "proportions_at_age", "process_proportions_migrating", "tag_recapture_by_length")
+  currently_implemented_obs = c("proportions_by_category", "biomass", "abundance", "process_removals_by_length", "proportions_at_length", "process_removals_by_age", "proportions_at_age", "process_proportions_migrating", "tag_recapture_by_length")
+
+  if(!model_type %in% c("age", "length"))
+    stop("model_type needs to be 'age' or 'length'")
 
   if(verbose)
     cat("enter: read_simulated_data\n")
@@ -77,7 +81,7 @@ read_simulated_data <- function(dir, verbose = FALSE, mean_age = TRUE) {
           obs_table = matrix(obs_table, nrow = 1)
         rownames(obs_table) = NULL
         sim_obs[n][[1]] = cbind(sim_obs[n][[1]], obs_table[,1])
-      } else if (this_ob$type$value %in% c("process_removals_by_length", "proportions_at_length")) {
+      } else if (this_ob$type$value %in% c("process_removals_by_length", "proportions_at_length") & model_type == "age") {
         comp = Reduce(rbind, this_ob$Table$obs[this_ob$years$value])
         class(comp) = "numeric"
         rownames(comp) = NULL
@@ -85,11 +89,45 @@ read_simulated_data <- function(dir, verbose = FALSE, mean_age = TRUE) {
           comp = matrix(comp, nrow = 1)
         }
         bins = this_ob$length_bins$value
-        if(!is.null(this_ob$length_plus$value) | this_ob$length_plus$value %in% c("False", "FALSE", "F", "no", "0"))
+        if(!is.null(this_ob$length_plus$value) | this_ob$length_plus$value %in% c("False", "FALSE", "F", "no", "0", "false"))
           bins = bins[-length(bins)]
         if(mean_age) {
-          if(is.null(this_ob$simulated_data_sum_to_one) || this_ob$simulated_data_sum_to_one %in% c("True", "TRUE", "T", "yes", "1"))
-            stop(paste0("file ", sim_file_names[n],".",extensions[i], " doesn't sum = 1. If mean_age = T then re-simulate data with simulated_data_sum_to_one = true in Casal2 observation block"))
+          if(is.null(this_ob$simulated_data_sum_to_one$value))
+            this_ob$simulated_data_sum_to_one$value = "true"
+          if(!this_ob$simulated_data_sum_to_one$value %in% c("True", "TRUE", "T", "yes", "1", "true"))
+            warning(paste0("file ", sim_file_names[n],".",extensions[i], " doesn't sum = 1. If mean_age = T then re-simulate data with simulated_data_sum_to_one = true in Casal2 observation block"))
+          mean_bin =  comp  %*% as.numeric(bins)
+          sim_obs[n][[1]] = cbind(sim_obs[n][[1]], mean_bin)
+        } else {
+          if(i == 1) {
+            temp_list = list()
+            for(y in 1:length(this_ob$years$value)) {
+              temp_list[[this_ob$years$value[y]]] = matrix(NA, nrow = ncol(comp), ncol = length(extensions))
+            }
+            sim_obs[[n]] = temp_list
+          }
+          for(y in 1:length(this_ob$years$value)) {
+            sim_obs[n][[1]][[this_ob$years$value[y]]][,i] = comp[y,]
+          }
+        }
+
+      } else if (this_ob$type$value %in% c("process_removals_by_length", "proportions_at_length") & model_type == "length") {
+        comp = Reduce(rbind, this_ob$Table$obs[this_ob$years$value])
+        class(comp) = "numeric"
+        rownames(comp) = NULL
+        if(is.null(dim(comp))) {
+          comp = matrix(comp, nrow = 1)
+        }
+        if(is.null(this_ob$plus_group$value))
+          this_ob$plus_group$value = "true"
+        bins = this_ob$length_bins$value
+        if(this_ob$plus_group$value %in% c("False", "FALSE", "F", "f", "no", "0", "false"))
+          bins = bins[-length(bins)]
+        if(mean_age) {
+          if(is.null(this_ob$simulated_data_sum_to_one$value))
+            this_ob$simulated_data_sum_to_one$value = "true"
+          if(!this_ob$simulated_data_sum_to_one$value %in% c("True", "TRUE", "T", "t", "yes", "1", "true"))
+            warning(paste0("file ", sim_file_names[n],".",extensions[i], " doesn't sum = 1. If mean_age = T then re-simulate data with simulated_data_sum_to_one = true in Casal2 observation block"))
           mean_bin =  comp  %*% as.numeric(bins)
           sim_obs[n][[1]] = cbind(sim_obs[n][[1]], mean_bin)
         } else {
@@ -114,8 +152,10 @@ read_simulated_data <- function(dir, verbose = FALSE, mean_age = TRUE) {
         }
         bins = as.numeric(this_ob$min_age):as.numeric(this_ob$max_age$value)
         if(mean_age) {
-          if(is.null(this_ob$simulated_data_sum_to_one) || this_ob$simulated_data_sum_to_one$value %in% c("True", "TRUE", "T", "yes", "1"))
-            stop(paste0("file ", sim_file_names[n],".",extensions[i], " doesn't sum = 1. If mean_age = T then re-simulate data with simulated_data_sum_to_one = true in Casal2 observation block"))
+          if(is.null(this_ob$simulated_data_sum_to_one$value))
+            this_ob$simulated_data_sum_to_one$value = "true"
+          if(!this_ob$simulated_data_sum_to_one$value %in% c("True", "TRUE", "T", "yes", "1", "true"))
+            warning(paste0("file ", sim_file_names[n],".",extensions[i], " doesn't sum = 1. If mean_age = T then re-simulate data with simulated_data_sum_to_one = true in Casal2 observation block"))
           mean_bin =  comp  %*% as.numeric(bins)
           sim_obs[n][[1]] = cbind(sim_obs[n][[1]], mean_bin)
         } else {
@@ -138,6 +178,30 @@ read_simulated_data <- function(dir, verbose = FALSE, mean_age = TRUE) {
         if(is.null(dim(sim_mat))) {
           sim_mat = matrix(sim_mat, nrow = 1)
         }
+        colnames(sim_mat) = bins
+        rownames(sim_mat) = this_ob$years$value
+        if(i == 1) {
+          temp_list = list()
+          for(y in 1:length(this_ob$years$value)) {
+            temp_list[[this_ob$years$value[y]]] = matrix(NA, nrow = ncol(sim_mat), ncol = length(extensions))
+          }
+          sim_obs[[n]] = temp_list
+        }
+        for(y in 1:length(this_ob$years$value)) {
+          sim_obs[n][[1]][[this_ob$years$value[y]]][,i] = sim_mat[y,]
+        }
+      } else if (this_ob$type$value %in% "proportions_by_category") {
+        sim_mat = Reduce(rbind, this_ob$Table$obs[this_ob$years$value])
+        class(sim_mat) = "numeric"
+        rownames(sim_mat) = NULL
+        if(is.null(dim(sim_mat))) {
+          sim_mat = matrix(sim_mat, nrow = 1)
+        }
+        if(is.null(this_ob$plus_group$value))
+          this_ob$plus_group$value = "true"
+        bins = this_ob$length_bins$value
+        if(this_ob$plus_group$value %in% c("False", "FALSE", "F", "f", "no", "0", "false"))
+          bins = bins[-length(bins)]
         colnames(sim_mat) = bins
         rownames(sim_mat) = this_ob$years$value
         if(i == 1) {

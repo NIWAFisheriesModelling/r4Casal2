@@ -312,7 +312,7 @@ StripComments <- function(file) {
             1)
         second_section = substring(file[i], first = index1 + 
             2)
-        index2 = regexpr(pattern = "\\*/", second_section)
+        index2 = regexpr(pattern = "*/", second_section)
         if (index2 > 0) 
             file[i] = paste0(first_section, substring(second_section, 
                 first = index2 + 1))
@@ -324,7 +324,7 @@ StripComments <- function(file) {
             if (possible_multiline_comment[[i]][1] > 0) {
                 if (substring(file[i], first = possible_multiline_comment[[i]], 
                   last = possible_multiline_comment[[i]] + 1) == 
-                  "\\*/") {
+                  "*/") {
                   file[i] = substring(file[i], first = possible_multiline_comment[[i]] + 
                     2)
                   in_comment = FALSE
@@ -338,7 +338,7 @@ StripComments <- function(file) {
             if (possible_multiline_comment[[i]][1] > 0) {
                 if (substring(file[i], first = possible_multiline_comment[[i]] - 
                   1, last = possible_multiline_comment[[i]]) == 
-                  "/\\*") {
+                  "/*") {
                   in_comment = T
                   file[i] = substring(file[i], first = 0, last = possible_multiline_comment[[i]] - 
                     2)

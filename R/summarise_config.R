@@ -196,12 +196,12 @@ function (config_dir = "", config_file = "config.csl2", quiet = T,
       category_df = rbind(category_df, this_cat_df)
       full_category_df = rbind(full_category_df, this_cat_full_df)
 	if (is.null(age_length_time_step_growth)) # edit for is.null timestep proportions for growth increment. defaulting to 1
-        age_length_time_step_growth = rbind(age_length_time_step_growth, 
-                                            data.frame(GrowthIncrement = category_growth_increments[i], 
+        age_length_time_step_growth = rbind(age_length_time_step_growth,
+                                            data.frame(GrowthIncrement = category_growth_increments[i],
                                                        time_step_proportions = ifelse(is.null(this_growth$time_step_proportions$value), 1, this_growth$time_step_proportions$value)))
       if (!category_growth_increments[i] %in% age_length_time_step_growth$GrowthIncrement) # edit for is.null timestep proportions for growth increment. defaulting to 1
-        age_length_time_step_growth = rbind(age_length_time_step_growth, 
-                                            data.frame(GrowthIncrement = category_growth_increments[i], 
+        age_length_time_step_growth = rbind(age_length_time_step_growth,
+                                            data.frame(GrowthIncrement = category_growth_increments[i],
                                                        time_step_proportions = ifelse(is.null(this_growth$time_step_proportions$value), 1, this_growth$time_step_proportions$value)))
     }
   }
@@ -321,7 +321,7 @@ function (config_dir = "", config_file = "config.csl2", quiet = T,
 
         ## CHANGED from using melt as it's no longer a supported function
         molten_catch <- this_catch %>%
-          pivot_longer(cols = contains("Fishery")) %>%
+          pivot_longer(cols = -c(year, process)) %>%
           rename(catch = value, fishery = name) %>%
           mutate(fishery = as.factor(fishery)) %>%
           arrange(fishery, year)

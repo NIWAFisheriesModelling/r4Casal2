@@ -8,8 +8,6 @@
 #' @return A data frame with all selectivity reports from Casal2 model output
 #' @rdname get_selectivities
 #' @export get_selectivities
-#' @importFrom reshape2 melt
-
 
 "get_selectivities" <-
   function(model) {
@@ -119,7 +117,11 @@
       next;
     }
     sel_df = this_report$values
-    sel_molten = suppressMessages({melt((sel_df), variable.name = "colname", value.name = "selectivity", factorsAsStrings = F)})
+    # sel_molten = suppressMessages({melt((sel_df), variable.name = "colname", value.name = "selectivity", factorsAsStrings = F)})
+    sel_molten = sel_df %>%
+      pivot_longer(cols = everything(), names_to = 'colname', values_to = 'selectivity') %>%
+      mutate(colname = factor(colname, levels = names(sel_df))) %>%
+      arrange(colname) # alternative using dplyr - test this!
     bin_labs = unlist(lapply(strsplit(as.character(sel_molten$colname), split = ".", fixed = T), FUN = function(x){x[2]}))
     selectivity_lab = unlist(lapply(strsplit(as.character(sel_molten$colname), split = ".", fixed = T), FUN = function(x){x[1]}))
     ## cut out selectivity

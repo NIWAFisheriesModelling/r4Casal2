@@ -196,7 +196,7 @@ summarise_config <- function (config_dir = "", config_file = "config.csl2", quie
     else {
       this_growth = growth_list[[category_growth_increments[i]]]
       this_length_weight = length_weight_list[[this_growth$length_weight$value]]
-      distribution = list(value = "normal")
+      distribution = "normal"
       if (!is.null(this_growth$distribution))
         distribution = this_growth$distribution$value # edit to return value
       this_cat_df = data.frame(Category = category_labels[i],
